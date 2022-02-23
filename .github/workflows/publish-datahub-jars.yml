@@ -11,7 +11,6 @@ jobs:
 
   check-secret:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     outputs:
       publish-enabled: ${{ steps.publish-enabled.outputs.publish }}
     steps:
