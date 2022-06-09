@@ -1,0 +1,7 @@
+namespace com.linkedin.datapolicy
+/**
+Special resource i.e "ALL" for policy, where permission need to be applied on all resources
+*/
+enum SpecialResource {
+  ALL
+}

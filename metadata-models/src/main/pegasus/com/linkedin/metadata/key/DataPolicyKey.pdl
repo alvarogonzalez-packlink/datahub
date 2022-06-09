@@ -1,0 +1,17 @@
+namespace com.linkedin.metadata.key
+
+/**
+ * Key for a DataPolicy
+ */
+@Aspect = {
+  "name": "dataPolicyKey"
+}
+record DataPolicyKey {
+  /**
+  * The URL-encoded name of the dataPolicy. Serves as a globally unique identifier within DataHub.
+  */
+  @Searchable = {
+    "fieldType": "TEXT_PARTIAL"
+  }
+  name: string
+}

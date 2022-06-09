@@ -1,0 +1,23 @@
+namespace com.linkedin.datapolicy
+
+/**
+ * Properties associated with a DataPolicy
+ */
+@Aspect = {
+   "name": "dataPolicyInfo"
+}
+
+@Aspect.EntityUrns = [ "com.linkedin.common.DataPolicyUrn" ]
+record DataPolicyInfo {
+  /**
+   * The display name of the group.
+   */
+  @Searchable = {
+    "fieldType": "TEXT_PARTIAL"
+  }
+  displayName: optional string
+
+  policyType: DataPolicyType
+
+  policy: ResourcePrincipalPolicy
+}
