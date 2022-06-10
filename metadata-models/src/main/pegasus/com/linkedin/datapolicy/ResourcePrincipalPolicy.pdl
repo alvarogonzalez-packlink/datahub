@@ -20,11 +20,11 @@ record ResourcePrincipalPolicy {
   principal: Urn
 
   /**
-  * It is either ALL or urn of some other resources
+  * Reference to resource on which permission is granted to principal
   */
   resourceRef: ResourceReference
 
-  // Put max length constraint
+  // TODO: Put max length constraint
   permission: string
 
   /**
