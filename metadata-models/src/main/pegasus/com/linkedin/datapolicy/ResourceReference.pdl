@@ -1,0 +1,14 @@
+namespace com.linkedin.datapolicy
+
+import com.linkedin.common.Urn
+
+record ResourceReference {
+  type: ResourceIdentifierType
+  resourceUrn: optional Urn
+  special: optional SpecialResource
+
+  /*
+  Below type is out-of-scope as per data-governance M1
+  policyTag: optional Urn
+  */
+}

@@ -26,19 +26,4 @@ record CorpRoleInfo {
     "fieldType": "TEXT_PARTIAL"
   }
   description: optional string
-
-  /**
-   * Parent node of the corpRole
-   */
-  @Relationship = {
-    "name": "IsPartOf",
-    "entityTypes": [ "corpRole" ],
-  }
-  @Searchable = {
-    "fieldName": "parentNode",
-    "fieldType": "URN",
-    "hasValuesFieldName": "hasParentNode"
-  }
-  parentNode: optional CorpRoleUrn
-
 }

@@ -9,6 +9,10 @@ namespace com.linkedin.datapolicy
 
 @Aspect.EntityUrns = [ "com.linkedin.common.DataPolicyUrn" ]
 record DataPolicyInfo {
+  type: DataPolicyType
+
+  resourcePrincipalPolicy: ResourcePrincipalPolicy
+
   /**
    * The display name of the group.
    */
@@ -16,8 +20,4 @@ record DataPolicyInfo {
     "fieldType": "TEXT_PARTIAL"
   }
   displayName: optional string
-
-  policyType: DataPolicyType
-
-  policy: ResourcePrincipalPolicy
 }

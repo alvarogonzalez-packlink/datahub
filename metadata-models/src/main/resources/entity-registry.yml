@@ -87,6 +87,7 @@ entities:
       - corpUserStatus
       - groupMembership
       - globalTags
+      - roleMembership
       - status
   - name: corpGroup
     doc: CorpGroup represents an identity of a group of users in the enterprise.
@@ -96,6 +97,7 @@ entities:
       - corpGroupEditableInfo
       - globalTags
       - ownership
+      - roleMembership
       - status
   - name: domain
     doc: A data domain within an organization.
@@ -232,4 +234,16 @@ entities:
     aspects:
       - dataHubUpgradeRequest
       - dataHubUpgradeResult
+  - name: corpRole
+    doc: CorpRole represents an role define in a database.
+    keyAspect: corpRoleKey
+    aspects:
+      - corpRoleInfo
+      - status
+  - name: dataPolicy
+    doc: DataPolicy of a database.
+    keyAspect: dataPolicyKey
+    aspects:
+      - dataPolicyInfo
+      - status
 events:

@@ -168,6 +168,14 @@ def make_user_urn(username: str) -> str:
     return f"urn:li:corpuser:{username}"
 
 
+def make_role_urn(rolename: str) -> str:
+    return f"urn:li:corpRole:{rolename}"
+
+
+def make_data_policy_urn(data_policy_name: str):
+    return f"urn:li:dataPolicy:{data_policy_name}"
+
+
 def make_group_urn(groupname: str) -> str:
     return f"urn:li:corpGroup:{groupname}"
 

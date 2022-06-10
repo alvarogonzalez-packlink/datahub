@@ -1,11 +1,5 @@
 namespace com.linkedin.datapolicy
 
-/** In future enhancement we need to enable below type as well
-* DataMaskingPolicy
-* DataRetentionPolicy
-* RowAccessPolicy
- */
-
 enum DataPolicyType {
   ResourcePrincipalPolicy
 }

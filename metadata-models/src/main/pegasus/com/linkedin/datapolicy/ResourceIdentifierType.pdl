@@ -1,0 +1,11 @@
+namespace com.linkedin.datapolicy
+
+
+enum ResourceIdentifierType {
+RESOURCE_URN
+  /*
+  Out-of-scope as per data-governance M1
+  POLICY_TAG,
+  SPECIAL
+  */
+}
