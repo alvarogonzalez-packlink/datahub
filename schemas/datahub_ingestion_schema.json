@@ -5143,7 +5143,7 @@
                 },
                 "node_type_pattern": {
                     "title": "Node Type Pattern",
-                    "description": "regex patterns for dbt nodes to filter in ingestion.",
+                    "description": "Deprecated: use entities_enabled instead. Regex patterns for dbt nodes to filter in ingestion.",
                     "default": {
                         "allow": [
                             ".*"
@@ -5155,6 +5155,22 @@
                     "allOf": [
                         {
                             "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
+                "entities_enabled": {
+                    "title": "Entities Enabled",
+                    "description": "Controls for enabling / disabling metadata emission for different dbt entities (models, test definitions, test results, etc.)",
+                    "default": {
+                        "models": "YES",
+                        "sources": "YES",
+                        "seeds": "YES",
+                        "test_definitions": "YES",
+                        "test_results": "YES"
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DBTEntitiesEnabled"
                         }
                     ]
                 },
@@ -6997,6 +7013,31 @@
                         "deny": [
                             "^_.*",
                             "^ilm-history.*"
+                        ],
+                        "ignoreCase": true,
+                        "alphabet": "[A-Za-z0-9 _.-]"
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
+                "ingest_index_templates": {
+                    "title": "Ingest Index Templates",
+                    "description": "Ingests ES index templates if enabled.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "index_template_pattern": {
+                    "title": "Index Template Pattern",
+                    "description": "The regex patterns for filtering index templates to ingest.",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [
+                            "^_.*"
                         ],
                         "ignoreCase": true,
                         "alphabet": "[A-Za-z0-9 _.-]"
@@ -9341,6 +9382,12 @@
                         }
                     ]
                 },
+                "version_history_lookback": {
+                    "title": "Version History Lookback",
+                    "description": "Number of previous version histories to be ingested. Defaults to 1. If set to -1 all version history will be ingested.",
+                    "default": 1,
+                    "type": "integer"
+                },
                 "s3": {
                     "$ref": "#/definitions/S3"
                 }
@@ -10624,6 +10671,67 @@
                 }
             },
             "additionalProperties": false
+        },
+        "EmitDirective": {
+            "title": "EmitDirective",
+            "description": "A holder for directives for emission for specific types of entities",
+            "enum": [
+                "YES",
+                "NO",
+                "ONLY"
+            ]
+        },
+        "DBTEntitiesEnabled": {
+            "title": "DBTEntitiesEnabled",
+            "description": "Controls which dbt entities are going to be emitted by this source",
+            "type": "object",
+            "properties": {
+                "models": {
+                    "description": "Emit metadata for dbt models when set to Yes or Only",
+                    "default": "Yes",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/EmitDirective"
+                        }
+                    ]
+                },
+                "sources": {
+                    "description": "Emit metadata for dbt sources when set to Yes or Only",
+                    "default": "Yes",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/EmitDirective"
+                        }
+                    ]
+                },
+                "seeds": {
+                    "description": "Emit metadata for dbt seeds when set to Yes or Only",
+                    "default": "Yes",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/EmitDirective"
+                        }
+                    ]
+                },
+                "test_definitions": {
+                    "description": "Emit metadata for test definitions when enabled when set to Yes or Only",
+                    "default": "Yes",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/EmitDirective"
+                        }
+                    ]
+                },
+                "test_results": {
+                    "description": "Emit metadata for test results when set to Yes or Only",
+                    "default": "Yes",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/EmitDirective"
+                        }
+                    ]
+                }
+            }
         },
         "AwsConnectionConfig": {
             "title": "AwsConnectionConfig",
