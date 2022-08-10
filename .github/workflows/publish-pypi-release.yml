@@ -2,6 +2,7 @@ name: pypi-release metadata-ingestion
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   setup:
