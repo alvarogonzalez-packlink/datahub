@@ -1664,8 +1664,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-08-30T10:00:28.443712+00:00",
-                        "start_time": "2022-08-29T00:00:00+00:00",
+                        "end_time": "2022-08-31T23:10:43.245627+00:00",
+                        "start_time": "2022-08-30T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -9249,7 +9249,7 @@
                 },
                 "github_info": {
                     "title": "Github Info",
-                    "description": "Reference to your github location to enable easy navigation from DataHub to your LookML files",
+                    "description": "Reference to your github location. If present, supplies handy links to your lookml on the dataset entity page.",
                     "allOf": [
                         {
                             "$ref": "#/definitions/GitHubInfo"
@@ -10095,7 +10095,7 @@
                 },
                 "github_info": {
                     "title": "Github Info",
-                    "description": "Reference to your github location to enable easy navigation from DataHub to your LookML files",
+                    "description": "Reference to your github location. If present, supplies handy links to your lookml on the dataset entity page.",
                     "allOf": [
                         {
                             "$ref": "#/definitions/GitHubInfo"
@@ -11353,7 +11353,7 @@
                     "title": "Use Certificate",
                     "description": "Do you want to use certificate and private key to authenticate using oauth",
                     "default": false,
-                    "type": "string"
+                    "type": "boolean"
                 },
                 "client_secret": {
                     "title": "Client Secret",
