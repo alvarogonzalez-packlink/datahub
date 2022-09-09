@@ -1664,8 +1664,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-09-08T12:07:51.866389+00:00",
-                        "start_time": "2022-09-07T00:00:00+00:00",
+                        "end_time": "2022-09-09T07:00:34.018478+00:00",
+                        "start_time": "2022-09-08T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -4853,12 +4853,6 @@
                             "$ref": "#/definitions/AwsConnectionConfig"
                         }
                     ]
-                },
-                "delete_tests_as_datasets": {
-                    "title": "Delete Tests As Datasets",
-                    "description": "Prior to version 0.8.38, dbt tests were represented as datasets. If you ingested dbt tests before, set this flag to True (just needed once) to soft-delete tests that were generated as datasets by previous ingestion.",
-                    "default": false,
-                    "type": "boolean"
                 },
                 "backcompat_skip_source_on_lineage_edge": {
                     "title": "Backcompat Skip Source On Lineage Edge",
