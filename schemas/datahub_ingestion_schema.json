@@ -111,7 +111,7 @@
                     "description": "Extra headers which will be added to the request."
                 },
                 "disable_ssl_verification": {
-                    "type": "bool",
+                    "type": "boolean",
                     "description": "Disable SSL verification for HTTPS communications.",
                     "default": false
                 }
@@ -1664,8 +1664,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-09-12T14:35:47.910777+00:00",
-                        "start_time": "2022-09-11T00:00:00+00:00",
+                        "end_time": "2022-09-13T10:38:42.367048+00:00",
+                        "start_time": "2022-09-12T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -10318,7 +10318,7 @@
                 },
                 "report_dropped_profiles": {
                     "title": "Report Dropped Profiles",
-                    "description": "If datasets which were not profiled are reported in source report or not. Set to `True` for debugging purposes.",
+                    "description": "Whether to report datasets or dataset columns which were not profiled. Set to `True` for debugging purposes.",
                     "default": false,
                     "type": "boolean"
                 },
