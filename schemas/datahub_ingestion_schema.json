@@ -1629,8 +1629,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-09-19T17:43:36.783278+00:00",
-                        "start_time": "2022-09-18T00:00:00+00:00",
+                        "end_time": "2022-09-20T01:00:21.165720+00:00",
+                        "start_time": "2022-09-19T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -5047,6 +5047,12 @@
                 "meta_mapping": {
                     "title": "Meta Mapping",
                     "description": "mapping rules that will be executed against dbt meta properties. Refer to the section below on dbt meta automated mappings.",
+                    "default": {},
+                    "type": "object"
+                },
+                "column_meta_mapping": {
+                    "title": "Column Meta Mapping",
+                    "description": "mapping rules that will be executed against dbt column meta properties. Refer to the section below on dbt meta automated mappings.",
                     "default": {},
                     "type": "object"
                 },
@@ -9448,7 +9454,7 @@
                             "model",
                             "name"
                         ],
-                        "pattern": "/{env}/{platform}/{project}/explores/{model}.{name}",
+                        "pattern": "/{env}/{platform}/{project}/explores",
                         "variables": null
                     },
                     "allOf": [
@@ -9488,7 +9494,7 @@
                             "model",
                             "name"
                         ],
-                        "pattern": "/{env}/{platform}/{project}/views/{name}",
+                        "pattern": "/{env}/{platform}/{project}/views",
                         "variables": null
                     },
                     "allOf": [
@@ -9895,7 +9901,7 @@
                             "model",
                             "name"
                         ],
-                        "pattern": "/{env}/{platform}/{project}/explores/{model}.{name}",
+                        "pattern": "/{env}/{platform}/{project}/explores",
                         "variables": null
                     },
                     "allOf": [
@@ -9935,7 +9941,7 @@
                             "model",
                             "name"
                         ],
-                        "pattern": "/{env}/{platform}/{project}/views/{name}",
+                        "pattern": "/{env}/{platform}/{project}/views",
                         "variables": null
                     },
                     "allOf": [
