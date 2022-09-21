@@ -199,6 +199,9 @@ module.exports = {
             require.resolve("./src/styles/global.scss"),
           ],
         },
+        gtag: {
+          trackingID: "G-2G54RXWD4D",
+        },
       },
     ],
   ],
