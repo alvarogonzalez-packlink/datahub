@@ -1629,8 +1629,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-09-20T01:00:21.165720+00:00",
-                        "start_time": "2022-09-19T00:00:00+00:00",
+                        "end_time": "2022-09-21T00:49:44.851512+00:00",
+                        "start_time": "2022-09-20T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -8065,6 +8065,11 @@
                     "default": "",
                     "type": "string"
                 },
+                "ingestion_job_id": {
+                    "title": "Ingestion Job Id",
+                    "default": "",
+                    "type": "string"
+                },
                 "metastore_db_name": {
                     "title": "Metastore Db Name",
                     "description": "Name of the Hive metastore's database (usually: metastore). For backward compatibility, if this field is not provided, the database field will be used. If both the 'database' and 'metastore_db_name' fields are set then the 'database' field will be used to filter the hive/presto/trino database",
@@ -8078,6 +8083,18 @@
                             "$ref": "#/definitions/PrestoOnHiveConfigMode"
                         }
                     ]
+                },
+                "use_catalog_subtype": {
+                    "title": "Use Catalog Subtype",
+                    "description": "Container Subtype name to be 'Database' or 'Catalog' Valid options: ['True', 'False']",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_dataset_pascalcase_subtype": {
+                    "title": "Use Dataset Pascalcase Subtype",
+                    "description": "Dataset Subtype name to be 'Table' or 'View' Valid options: ['True', 'False']",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
