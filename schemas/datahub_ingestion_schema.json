@@ -837,11 +837,6 @@
                     "description": "Alias to apply to database when ingesting.",
                     "type": "string"
                 },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "trino",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -1111,11 +1106,6 @@
                 "database_alias": {
                     "title": "Database Alias",
                     "description": "Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "mysql+pymysql",
                     "type": "string"
                 },
                 "sqlalchemy_uri": {
@@ -2263,11 +2253,6 @@
                     "description": "Alias to apply to database when ingesting.",
                     "type": "string"
                 },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "redshift+psycopg2",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -2798,11 +2783,6 @@
                 "database_alias": {
                     "title": "Database Alias",
                     "description": "Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "trino",
                     "type": "string"
                 },
                 "sqlalchemy_uri": {
@@ -5740,11 +5720,6 @@
                     "description": "Alias to apply to database when ingesting.",
                     "type": "string"
                 },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "redshift+psycopg2",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -6269,11 +6244,6 @@
                     "description": "Alias to apply to database when ingesting. Ignored when `database` is not set.",
                     "type": "string"
                 },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "mssql+pytds",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -6787,11 +6757,6 @@
                 "database_alias": {
                     "title": "Database Alias",
                     "description": "Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "clickhouse",
                     "type": "string"
                 },
                 "sqlalchemy_uri": {
@@ -7821,11 +7786,6 @@
                     "description": "Alias to apply to database when ingesting.",
                     "type": "string"
                 },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "clickhouse",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -8089,10 +8049,6 @@
                     "description": "[deprecated] Use project_id_pattern instead.",
                     "type": "string"
                 },
-                "storage_project_id": {
-                    "title": "Storage Project Id",
-                    "type": "null"
-                },
                 "log_page_size": {
                     "title": "Log Page Size",
                     "description": "The number of log item will be queried per page for lineage collection",
@@ -8181,8 +8137,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-10-10T15:15:18.891861+00:00",
-                        "start_time": "2022-10-09T00:00:00+00:00",
+                        "end_time": "2022-10-11T06:03:30.311111+00:00",
+                        "start_time": "2022-10-10T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -8243,6 +8199,18 @@
                     "description": "Number of table queried in batch when getting metadata. This is a low leve config propert which should be touched with care. This restriction needed because we query partitions system view which throws error if we try to touch too many tables.",
                     "default": 50,
                     "type": "integer"
+                },
+                "column_limit": {
+                    "title": "Column Limit",
+                    "description": "Maximum number of columns to process in a table",
+                    "default": 1000,
+                    "type": "integer"
+                },
+                "lineage_use_sql_parser": {
+                    "title": "Lineage Use Sql Parser",
+                    "description": "Experimental. Use sql parser to resolve view/table lineage. If there is a view being referenced then bigquery sends both the view as well as underlying tablein the references. There is no distinction between direct/base objects accessed. So doing sql parsing to ensure we only use direct objects accessed for lineage.",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -8580,12 +8548,6 @@
                         "$ref": "#/definitions/AllowDenyPattern"
                     }
                 },
-                "include_views": {
-                    "title": "Include Views",
-                    "description": "Hive SQLAlchemy connector returns views as tables. See https://github.com/dropbox/PyHive/blob/b21c507a24ed2f2b0cf15b0b6abb1c43f31d3ee0/pyhive/sqlalchemy_hive.py#L270-L273. Disabling views helps us prevent this duplication.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "include_tables": {
                     "title": "Include Tables",
                     "description": "Whether tables should be ingested.",
@@ -8653,11 +8615,6 @@
                 "database_alias": {
                     "title": "Database Alias",
                     "description": "Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "hive",
                     "type": "string"
                 },
                 "sqlalchemy_uri": {
@@ -9167,20 +9124,6 @@
             "description": "Any non-Dataset source that produces lineage to Datasets should inherit this class.\ne.g. Orchestrators, Pipelines, BI Tools etc.",
             "type": "object",
             "properties": {
-                "env": {
-                    "title": "Env",
-                    "description": "Environment to use in namespace when constructing URNs.",
-                    "default": "PROD",
-                    "type": "string"
-                },
-                "platform_instance_map": {
-                    "title": "Platform Instance Map",
-                    "description": "A holder for platform -> platform_instance mappings to generate correct dataset urns",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
                 "connect_uri": {
                     "title": "Connect Uri",
                     "description": "Tableau host URL.",
@@ -9208,9 +9151,23 @@
                 },
                 "site": {
                     "title": "Site",
-                    "description": "Tableau Site. Always required for Tableau Online. Use emptystring  to connect with Default site on Tableau Server.",
+                    "description": "Tableau Site. Always required for Tableau Online. Use emptystring to connect with Default site on Tableau Server.",
                     "default": "",
                     "type": "string"
+                },
+                "env": {
+                    "title": "Env",
+                    "description": "Environment to use in namespace when constructing URNs.",
+                    "default": "PROD",
+                    "type": "string"
+                },
+                "platform_instance_map": {
+                    "title": "Platform Instance Map",
+                    "description": "A holder for platform -> platform_instance mappings to generate correct dataset urns",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "projects": {
                     "title": "Projects",
@@ -9246,11 +9203,6 @@
                     "description": "Ingest details for tables external to (not embedded in) tableau as entities.",
                     "default": false,
                     "type": "boolean"
-                },
-                "workbooks_page_size": {
-                    "title": "Workbooks Page Size",
-                    "description": "@deprecated(use page_size instead) Number of workbooks to query at a time using Tableau api.",
-                    "type": "integer"
                 },
                 "page_size": {
                     "title": "Page Size",
