@@ -1161,6 +1161,12 @@
                     "description": "Dataset Subtype name to be 'Table' or 'View' Valid options: ['True', 'False']",
                     "default": false,
                     "type": "boolean"
+                },
+                "include_catalog_name_in_ids": {
+                    "title": "Include Catalog Name In Ids",
+                    "description": "Add the Presto catalog name (e.g. hive) to the generated dataset urns. `urn:li:dataset:(urn:li:dataPlatform:hive,hive.user.logging_events,PROD)` versus `urn:li:dataset:(urn:li:dataPlatform:hive,user.logging_events,PROD)`",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -8137,7 +8143,7 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-10-19T12:56:35.805343+00:00",
+                        "end_time": "2022-10-19T16:37:33.687291+00:00",
                         "start_time": "2022-10-18T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
