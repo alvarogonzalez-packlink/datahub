@@ -875,7 +875,7 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-11-29T01:01:45.697919+00:00",
+                        "end_time": "2022-11-29T11:34:19.665077+00:00",
                         "start_time": "2022-11-28T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -5299,7 +5299,13 @@
                     "type": "boolean"
                 },
                 "classification": {
-                    "$ref": "#/definitions/ClassificationConfig"
+                    "title": "Classification",
+                    "description": "For details, refer [Classification](../../../../metadata-ingestion/docs/dev_guides/classification.md).",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/ClassificationConfig"
+                        }
+                    ]
                 }
             },
             "additionalProperties": false
