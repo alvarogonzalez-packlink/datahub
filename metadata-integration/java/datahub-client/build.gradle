@@ -42,7 +42,6 @@ dependencies {
     implementation externalDependency.swaggerAnnotations
     
     compileOnly externalDependency.lombok
-    annotationProcessor externalDependency.lombok
     testCompile externalDependency.mockito
     testCompile externalDependency.mockServer
     testCompile externalDependency.mockServerClient
@@ -51,6 +50,7 @@ dependencies {
 
     testCompile(externalDependency.kafkaAvroSerializer) {
       exclude group: "org.apache.avro"
+      exclude group: "org.projectlombok"
     }
 
     swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
