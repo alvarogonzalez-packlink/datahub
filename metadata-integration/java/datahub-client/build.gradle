@@ -34,26 +34,27 @@ dependencies {
         because 'Vulnerability Issue'
       }
     }
-    compileOnly externalDependency.httpAsyncClient
-    implementation externalDependency.jacksonDataBind
-    implementation externalDependency.javaxValidation
-    runtimeOnly externalDependency.jna
-    implementation externalDependency.springContext
-    implementation externalDependency.swaggerAnnotations
+  implementation externalDependency.logbackClassic
+  compileOnly externalDependency.httpAsyncClient
+  implementation externalDependency.jacksonDataBind
+  implementation externalDependency.javaxValidation
+  runtimeOnly externalDependency.jna
+  implementation externalDependency.springContext
+  implementation externalDependency.swaggerAnnotations
     
-    compileOnly externalDependency.lombok
-    testCompile externalDependency.mockito
-    testCompile externalDependency.mockServer
-    testCompile externalDependency.mockServerClient
-    testCompile externalDependency.testContainers
-    testCompile externalDependency.httpAsyncClient
+  compileOnly externalDependency.lombok
+  testCompile externalDependency.mockito
+  testCompile externalDependency.mockServer
+  testCompile externalDependency.mockServerClient
+  testCompile externalDependency.testContainers
+  testCompile externalDependency.httpAsyncClient
 
-    testCompile(externalDependency.kafkaAvroSerializer) {
-      exclude group: "org.apache.avro"
-      exclude group: "org.projectlombok"
-    }
+  testCompile(externalDependency.kafkaAvroSerializer) {
+    exclude group: "org.apache.avro"
+    exclude group: "org.projectlombok"
+  }
 
-    swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
+  swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
 }
 
 task copyAvroSchemas {
@@ -125,10 +126,6 @@ shadowJar {
   relocate 'org.I0Itec.zkclient', 'datahub.shaded.org.I0Itec.zkclient'
   relocate 'net.jpountz', 'datahub.shaded.net.jpountz'
   relocate 'com.github.luben', 'datahub.shaded.com.github.luben'
-  relocate 'common.message', 'datahub.shaded.common.message'
-  relocate 'com.zwitserloot.cmdreader', 'datahub.shaded.com.zwitserloot.cmdreader'
-  relocate 'lombok', 'datahub.shaded.lombok'
-  relocate 'org.objectweb', 'datahub.shaded.org.objectweb'
   finalizedBy checkShadowJar
 }
 
