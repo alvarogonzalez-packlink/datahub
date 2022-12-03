@@ -34,20 +34,26 @@ dependencies {
         because 'Vulnerability Issue'
       }
     }
-  implementation externalDependency.logbackClassic
-  compileOnly externalDependency.httpAsyncClient
-  implementation externalDependency.jacksonDataBind
-  implementation externalDependency.javaxValidation
-  runtimeOnly externalDependency.jna
-  implementation externalDependency.springContext
-  implementation externalDependency.swaggerAnnotations
-    
-  compileOnly externalDependency.lombok
-  testCompile externalDependency.mockito
-  testCompile externalDependency.mockServer
-  testCompile externalDependency.mockServerClient
-  testCompile externalDependency.testContainers
-  testCompile externalDependency.httpAsyncClient
+
+    implementation externalDependency.logbackClassic
+    compileOnly externalDependency.httpAsyncClient
+    implementation externalDependency.jacksonDataBind
+    implementation externalDependency.javaxValidation
+    runtimeOnly externalDependency.jna
+    implementation externalDependency.springContext
+    implementation externalDependency.swaggerAnnotations
+    implementation(externalDependency.kafkaAvroSerializer) {
+      exclude group: "org.apache.avro"
+    }
+
+    implementation externalDependency.slf4jApi
+    compileOnly externalDependency.lombok
+    annotationProcessor externalDependency.lombok
+    testCompile externalDependency.mockito
+    testCompile externalDependency.mockServer
+    testCompile externalDependency.mockServerClient
+    testCompile externalDependency.testContainers
+    testCompile externalDependency.httpAsyncClient
 
   testCompile(externalDependency.kafkaAvroSerializer) {
     exclude group: "org.apache.avro"
