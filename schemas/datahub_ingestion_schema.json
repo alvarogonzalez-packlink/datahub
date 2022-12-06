@@ -1080,14 +1080,19 @@
                     "writeOnly": true,
                     "format": "password"
                 },
+                "private_key": {
+                    "title": "Private Key",
+                    "description": "Private key in a form of '-----BEGIN PRIVATE KEY-----\\nprivate-key\\n-----END PRIVATE KEY-----\\n' if using key pair authentication. Encrypted version of private key will be in a form of '-----BEGIN ENCRYPTED PRIVATE KEY-----\\nencrypted-private-key\\n-----END ECNCRYPTED PRIVATE KEY-----\\n' See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "type": "string"
+                },
                 "private_key_path": {
                     "title": "Private Key Path",
-                    "description": "The path to the private key if using key pair authentication. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "description": "The path to the private key if using key pair authentication. Ignored if `private_key` is set. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
                     "type": "string"
                 },
                 "private_key_password": {
                     "title": "Private Key Password",
-                    "description": "Password for your private key if using key pair authentication.",
+                    "description": "Password for your private key. Required if using key pair authentication with encrypted private key.",
                     "type": "string",
                     "writeOnly": true,
                     "format": "password"
@@ -2503,14 +2508,19 @@
                     "writeOnly": true,
                     "format": "password"
                 },
+                "private_key": {
+                    "title": "Private Key",
+                    "description": "Private key in a form of '-----BEGIN PRIVATE KEY-----\\nprivate-key\\n-----END PRIVATE KEY-----\\n' if using key pair authentication. Encrypted version of private key will be in a form of '-----BEGIN ENCRYPTED PRIVATE KEY-----\\nencrypted-private-key\\n-----END ECNCRYPTED PRIVATE KEY-----\\n' See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "type": "string"
+                },
                 "private_key_path": {
                     "title": "Private Key Path",
-                    "description": "The path to the private key if using key pair authentication. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "description": "The path to the private key if using key pair authentication. Ignored if `private_key` is set. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
                     "type": "string"
                 },
                 "private_key_password": {
                     "title": "Private Key Password",
-                    "description": "Password for your private key if using key pair authentication.",
+                    "description": "Password for your private key. Required if using key pair authentication with encrypted private key.",
                     "type": "string",
                     "writeOnly": true,
                     "format": "password"
@@ -4306,7 +4316,7 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-12-06T05:29:53.369918+00:00",
+                        "end_time": "2022-12-06T13:37:42.496937+00:00",
                         "start_time": "2022-12-05T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4851,7 +4861,7 @@
                 },
                 "generic_connectors": {
                     "title": "Generic Connectors",
-                    "description": "Provide lineage graph for sources connectors other than Confluent JDBC Source Connector or Debezium Source Connector",
+                    "description": "Provide lineage graph for sources connectors other than Confluent JDBC Source Connector, Debezium Source Connector, and Mongo Source Connector",
                     "default": [],
                     "type": "array",
                     "items": {
@@ -7607,6 +7617,30 @@
             ],
             "additionalProperties": false
         },
+        "dummy-data": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "dummy-data"
+                    ]
+                },
+                "config": {
+                    "$ref": "#/definitions/dummy-data_config"
+                }
+            },
+            "required": [
+                "type",
+                "config"
+            ]
+        },
+        "dummy-data_config": {
+            "title": "ConfigModel",
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+        },
         "vertica": {
             "type": "object",
             "properties": {
@@ -8136,7 +8170,7 @@
             "properties": {
                 "filename": {
                     "title": "Filename",
-                    "description": "[deprecated in favor or `path`] The file to ingest.",
+                    "description": "[deprecated in favor of `path`] The file to ingest.",
                     "type": "string"
                 },
                 "path": {
@@ -9653,14 +9687,19 @@
                     "writeOnly": true,
                     "format": "password"
                 },
+                "private_key": {
+                    "title": "Private Key",
+                    "description": "Private key in a form of '-----BEGIN PRIVATE KEY-----\\nprivate-key\\n-----END PRIVATE KEY-----\\n' if using key pair authentication. Encrypted version of private key will be in a form of '-----BEGIN ENCRYPTED PRIVATE KEY-----\\nencrypted-private-key\\n-----END ECNCRYPTED PRIVATE KEY-----\\n' See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "type": "string"
+                },
                 "private_key_path": {
                     "title": "Private Key Path",
-                    "description": "The path to the private key if using key pair authentication. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "description": "The path to the private key if using key pair authentication. Ignored if `private_key` is set. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
                     "type": "string"
                 },
                 "private_key_password": {
                     "title": "Private Key Password",
-                    "description": "Password for your private key if using key pair authentication.",
+                    "description": "Password for your private key. Required if using key pair authentication with encrypted private key.",
                     "type": "string",
                     "writeOnly": true,
                     "format": "password"
@@ -9928,6 +9967,18 @@
                     "title": "Include External Url",
                     "description": "Whether to populate Snowsight url for Snowflake Objects",
                     "default": true,
+                    "type": "boolean"
+                },
+                "match_fully_qualified_names": {
+                    "title": "Match Fully Qualified Names",
+                    "description": "Whether `schema_pattern` is matched against fully qualified schema name `<catalog>.<schema>`.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "bool": {
+                    "title": "Bool",
+                    "description": "Whether `schema_pattern` is matched against fully qualified schema name `<catalog>.<schema>`.",
+                    "default": false,
                     "type": "boolean"
                 }
             },
@@ -12501,6 +12552,9 @@
                 },
                 {
                     "$ref": "#/definitions/azure-ad"
+                },
+                {
+                    "$ref": "#/definitions/dummy-data"
                 },
                 {
                     "$ref": "#/definitions/vertica"
