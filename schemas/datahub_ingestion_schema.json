@@ -237,7 +237,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -513,7 +513,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -727,7 +727,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -1072,7 +1072,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -1621,7 +1621,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -1812,18 +1812,6 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
-                "incremental_lineage": {
-                    "title": "Incremental Lineage",
-                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": true,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -1843,9 +1831,39 @@
                 "stateful_ingestion": {
                     "$ref": "#/definitions/StatefulStaleMetadataRemovalConfig"
                 },
+                "store_last_profiling_timestamps": {
+                    "title": "Store Last Profiling Timestamps",
+                    "description": "Enable storing last profile timestamp in store.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "store_last_usage_extraction_timestamp": {
+                    "title": "Store Last Usage Extraction Timestamp",
+                    "description": "Enable checking last usage timestamp in store.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "store_last_lineage_extraction_timestamp": {
+                    "title": "Store Last Lineage Extraction Timestamp",
+                    "description": "Enable checking last lineage extraction date in store.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -2114,8 +2132,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2022-12-28T02:03:40.631943+00:00",
-                        "start_time": "2022-12-27T00:00:00+00:00",
+                        "end_time": "2022-12-29T05:00:03.634775+00:00",
+                        "start_time": "2022-12-28T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -2277,7 +2295,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -2551,7 +2569,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -3273,7 +3291,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -3649,7 +3667,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -3863,7 +3881,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -4072,7 +4090,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -4366,7 +4384,13 @@
                 },
                 "backcompat_skip_source_on_lineage_edge": {
                     "title": "Backcompat Skip Source On Lineage Edge",
-                    "description": "Prior to version 0.8.41, lineage edges to sources were directed to the target platform node rather than the dbt source node. This contradicted the established pattern for other lineage edges to point to upstream dbt nodes. To revert lineage logic to this legacy approach, set this flag to true.",
+                    "description": "[deprecated] Prior to version 0.8.41, lineage edges to sources were directed to the target platform node rather than the dbt source node. This contradicted the established pattern for other lineage edges to point to upstream dbt nodes. To revert lineage logic to this legacy approach, set this flag to true.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "include_env_in_assertion_guid": {
+                    "title": "Include Env In Assertion Guid",
+                    "description": "Prior to version 0.9.4.2, the assertion GUIDs did not include the environment. If you're using multiple dbt ingestion that are only distinguished by env, then you should set this flag to True.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -4467,7 +4491,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -4781,7 +4805,13 @@
                 },
                 "backcompat_skip_source_on_lineage_edge": {
                     "title": "Backcompat Skip Source On Lineage Edge",
-                    "description": "Prior to version 0.8.41, lineage edges to sources were directed to the target platform node rather than the dbt source node. This contradicted the established pattern for other lineage edges to point to upstream dbt nodes. To revert lineage logic to this legacy approach, set this flag to true.",
+                    "description": "[deprecated] Prior to version 0.8.41, lineage edges to sources were directed to the target platform node rather than the dbt source node. This contradicted the established pattern for other lineage edges to point to upstream dbt nodes. To revert lineage logic to this legacy approach, set this flag to true.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "include_env_in_assertion_guid": {
+                    "title": "Include Env In Assertion Guid",
+                    "description": "Prior to version 0.9.4.2, the assertion GUIDs did not include the environment. If you're using multiple dbt ingestion that are only distinguished by env, then you should set this flag to True.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -4916,7 +4946,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -6314,7 +6344,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -7997,7 +8027,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -8488,7 +8518,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -8930,7 +8960,7 @@
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
                 },
                 "schema_pattern": {
@@ -9620,6 +9650,18 @@
                 "stateful_ingestion": {
                     "$ref": "#/definitions/StatefulStaleMetadataRemovalConfig"
                 },
+                "store_last_profiling_timestamps": {
+                    "title": "Store Last Profiling Timestamps",
+                    "description": "Enable storing last profile timestamp in store.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "store_last_usage_extraction_timestamp": {
+                    "title": "Store Last Usage Extraction Timestamp",
+                    "description": "Enable checking last usage timestamp in store.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "bucket_duration": {
                     "description": "Size of the time window to aggregate usage stats.",
                     "default": "DAY",
@@ -9688,126 +9730,21 @@
                     "default": true,
                     "type": "boolean"
                 },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "snowflake",
+                "email_domain": {
+                    "title": "Email Domain",
+                    "description": "Email domain of your organisation so users can be displayed on UI appropriately.",
                     "type": "string"
                 },
-                "username": {
-                    "title": "Username",
-                    "description": "Snowflake username.",
-                    "type": "string"
-                },
-                "password": {
-                    "title": "Password",
-                    "description": "Snowflake password.",
-                    "type": "string",
-                    "writeOnly": true,
-                    "format": "password"
-                },
-                "private_key": {
-                    "title": "Private Key",
-                    "description": "Private key in a form of '-----BEGIN PRIVATE KEY-----\\nprivate-key\\n-----END PRIVATE KEY-----\\n' if using key pair authentication. Encrypted version of private key will be in a form of '-----BEGIN ENCRYPTED PRIVATE KEY-----\\nencrypted-private-key\\n-----END ECNCRYPTED PRIVATE KEY-----\\n' See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
-                    "type": "string"
-                },
-                "private_key_path": {
-                    "title": "Private Key Path",
-                    "description": "The path to the private key if using key pair authentication. Ignored if `private_key` is set. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
-                    "type": "string"
-                },
-                "private_key_password": {
-                    "title": "Private Key Password",
-                    "description": "Password for your private key. Required if using key pair authentication with encrypted private key.",
-                    "type": "string",
-                    "writeOnly": true,
-                    "format": "password"
-                },
-                "oauth_config": {
-                    "title": "Oauth Config",
-                    "description": "oauth configuration - https://docs.snowflake.com/en/user-guide/python-connector-example.html#connecting-with-oauth",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/OauthConfiguration"
-                        }
-                    ]
-                },
-                "authentication_type": {
-                    "title": "Authentication Type",
-                    "description": "The type of authenticator to use when connecting to Snowflake. Supports \"DEFAULT_AUTHENTICATOR\", \"EXTERNAL_BROWSER_AUTHENTICATOR\" and \"KEY_PAIR_AUTHENTICATOR\".",
-                    "default": "DEFAULT_AUTHENTICATOR",
-                    "type": "string"
-                },
-                "host_port": {
-                    "title": "Host Port",
-                    "description": "DEPRECATED: Snowflake account. e.g. abc48144",
-                    "type": "string"
-                },
-                "account_id": {
-                    "title": "Account Id",
-                    "description": "Snowflake account identifier. e.g. xy12345,  xy12345.us-east-2.aws, xy12345.us-central1.gcp, xy12345.central-us.azure, xy12345.us-west-2.privatelink. Refer [Account Identifiers](https://docs.snowflake.com/en/user-guide/admin-account-identifier.html#format-2-legacy-account-locator-in-a-region) for more details.",
-                    "type": "string"
-                },
-                "warehouse": {
-                    "title": "Warehouse",
-                    "description": "Snowflake warehouse.",
-                    "type": "string"
-                },
-                "role": {
-                    "title": "Role",
-                    "description": "Snowflake role.",
-                    "type": "string"
-                },
-                "include_table_lineage": {
-                    "title": "Include Table Lineage",
-                    "description": "If enabled, populates the snowflake table-to-table and s3-to-snowflake table lineage. Requires appropriate grants given to the role.",
-                    "default": true,
-                    "type": "boolean"
-                },
-                "include_view_lineage": {
-                    "title": "Include View Lineage",
-                    "description": "If enabled, populates the snowflake view->table and table->view lineages (no view->view lineage yet). Requires appropriate grants given to the role, and include_table_lineage to be True.",
-                    "default": true,
-                    "type": "boolean"
-                },
-                "connect_args": {
-                    "title": "Connect Args",
-                    "description": "Connect args to pass to Snowflake SqlAlchemy driver",
-                    "type": "object"
-                },
-                "check_role_grants": {
-                    "title": "Check Role Grants",
-                    "description": "Not supported",
+                "apply_view_usage_to_tables": {
+                    "title": "Apply View Usage To Tables",
+                    "description": "Allow/deny patterns for views in snowflake dataset names.",
                     "default": false,
                     "type": "boolean"
                 },
                 "options": {
                     "title": "Options",
-                    "default": {},
+                    "description": "Any options specified here will be passed to SQLAlchemy's create_engine as kwargs. See https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine for details.",
                     "type": "object"
-                },
-                "database_pattern": {
-                    "title": "Database Pattern",
-                    "default": {
-                        "allow": [
-                            ".*"
-                        ],
-                        "deny": [
-                            "^UTIL_DB$",
-                            "^SNOWFLAKE$",
-                            "^SNOWFLAKE_SAMPLE_DATA$"
-                        ],
-                        "ignoreCase": true
-                    },
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/AllowDenyPattern"
-                        }
-                    ]
-                },
-                "email_domain": {
-                    "title": "Email Domain",
-                    "description": "Email domain of your organisation so users can be displayed on UI appropriately.",
-                    "type": "string"
                 },
                 "schema_pattern": {
                     "title": "Schema Pattern",
@@ -9856,12 +9793,6 @@
                             "$ref": "#/definitions/AllowDenyPattern"
                         }
                     ]
-                },
-                "apply_view_usage_to_tables": {
-                    "title": "Apply View Usage To Tables",
-                    "description": "Allow/deny patterns for views in snowflake dataset names.",
-                    "default": false,
-                    "type": "boolean"
                 },
                 "profile_pattern": {
                     "title": "Profile Pattern",
@@ -9937,6 +9868,117 @@
                         }
                     ]
                 },
+                "scheme": {
+                    "title": "Scheme",
+                    "default": "snowflake",
+                    "type": "string"
+                },
+                "username": {
+                    "title": "Username",
+                    "description": "Snowflake username.",
+                    "type": "string"
+                },
+                "password": {
+                    "title": "Password",
+                    "description": "Snowflake password.",
+                    "type": "string",
+                    "writeOnly": true,
+                    "format": "password"
+                },
+                "private_key": {
+                    "title": "Private Key",
+                    "description": "Private key in a form of '-----BEGIN PRIVATE KEY-----\\nprivate-key\\n-----END PRIVATE KEY-----\\n' if using key pair authentication. Encrypted version of private key will be in a form of '-----BEGIN ENCRYPTED PRIVATE KEY-----\\nencrypted-private-key\\n-----END ECNCRYPTED PRIVATE KEY-----\\n' See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "type": "string"
+                },
+                "private_key_path": {
+                    "title": "Private Key Path",
+                    "description": "The path to the private key if using key pair authentication. Ignored if `private_key` is set. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "type": "string"
+                },
+                "private_key_password": {
+                    "title": "Private Key Password",
+                    "description": "Password for your private key. Required if using key pair authentication with encrypted private key.",
+                    "type": "string",
+                    "writeOnly": true,
+                    "format": "password"
+                },
+                "oauth_config": {
+                    "title": "Oauth Config",
+                    "description": "oauth configuration - https://docs.snowflake.com/en/user-guide/python-connector-example.html#connecting-with-oauth",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/OauthConfiguration"
+                        }
+                    ]
+                },
+                "authentication_type": {
+                    "title": "Authentication Type",
+                    "description": "The type of authenticator to use when connecting to Snowflake. Supports \"DEFAULT_AUTHENTICATOR\", \"EXTERNAL_BROWSER_AUTHENTICATOR\" and \"KEY_PAIR_AUTHENTICATOR\".",
+                    "default": "DEFAULT_AUTHENTICATOR",
+                    "type": "string"
+                },
+                "host_port": {
+                    "title": "Host Port",
+                    "description": "DEPRECATED: Snowflake account. e.g. abc48144",
+                    "type": "string"
+                },
+                "account_id": {
+                    "title": "Account Id",
+                    "description": "Snowflake account identifier. e.g. xy12345,  xy12345.us-east-2.aws, xy12345.us-central1.gcp, xy12345.central-us.azure, xy12345.us-west-2.privatelink. Refer [Account Identifiers](https://docs.snowflake.com/en/user-guide/admin-account-identifier.html#format-2-legacy-account-locator-in-a-region) for more details.",
+                    "type": "string"
+                },
+                "warehouse": {
+                    "title": "Warehouse",
+                    "description": "Snowflake warehouse.",
+                    "type": "string"
+                },
+                "role": {
+                    "title": "Role",
+                    "description": "Snowflake role.",
+                    "type": "string"
+                },
+                "include_table_lineage": {
+                    "title": "Include Table Lineage",
+                    "description": "If enabled, populates the snowflake table-to-table and s3-to-snowflake table lineage. Requires appropriate grants given to the role and Snowflake Enterprise Edition or above.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "If enabled, populates the snowflake view->table and table->view lineages (no view->view lineage yet). Requires appropriate grants given to the role, and include_table_lineage to be True. view->table lineage requires Snowflake Enterprise Edition or above.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "connect_args": {
+                    "title": "Connect Args",
+                    "description": "Connect args to pass to Snowflake SqlAlchemy driver",
+                    "type": "object"
+                },
+                "check_role_grants": {
+                    "title": "Check Role Grants",
+                    "description": "Not supported",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "database_pattern": {
+                    "title": "Database Pattern",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [
+                            "^UTIL_DB$",
+                            "^SNOWFLAKE$",
+                            "^SNOWFLAKE_SAMPLE_DATA$"
+                        ],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
                 "provision_role": {
                     "title": "Provision Role",
                     "description": "Not supported",
@@ -9996,12 +10038,6 @@
                 },
                 "match_fully_qualified_names": {
                     "title": "Match Fully Qualified Names",
-                    "description": "Whether `schema_pattern` is matched against fully qualified schema name `<catalog>.<schema>`.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "bool": {
-                    "title": "Bool",
                     "description": "Whether `schema_pattern` is matched against fully qualified schema name `<catalog>.<schema>`.",
                     "default": false,
                     "type": "boolean"
