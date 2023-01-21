@@ -4326,8 +4326,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-01-20T18:21:37.104421+00:00",
-                        "start_time": "2023-01-19T00:00:00+00:00",
+                        "end_time": "2023-01-21T04:43:56.415989+00:00",
+                        "start_time": "2023-01-20T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -6239,7 +6239,9 @@
                 "password": {
                     "title": "Password",
                     "description": "Same detection scheme as username",
-                    "type": "string"
+                    "type": "string",
+                    "writeOnly": true,
+                    "format": "password"
                 },
                 "database": {
                     "title": "Database",
