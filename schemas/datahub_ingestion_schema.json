@@ -1751,6 +1751,12 @@
                     "description": "# Whether or not to create tags in datahub from the s3 object",
                     "type": "boolean"
                 },
+                "update_schema_on_partition_file_updates": {
+                    "title": "Update Schema On Partition File Updates",
+                    "description": "Whether to update the table schema when schema in files within the partitions are updated.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "profile_patterns": {
                     "title": "Profile Patterns",
                     "description": "regex patterns for tables to profile ",
@@ -1967,11 +1973,6 @@
                     "description": "Whether to extract Glue transform jobs.",
                     "default": true,
                     "type": "boolean"
-                },
-                "underlying_platform": {
-                    "title": "Underlying Platform",
-                    "description": "@deprecated(Use `platform`) Override for platform name. Allowed values - `glue`, `athena`",
-                    "type": "string"
                 },
                 "ignore_unsupported_connectors": {
                     "title": "Ignore Unsupported Connectors",
@@ -7675,8 +7676,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-02-28T07:17:03.522735+00:00",
-                        "start_time": "2023-02-27T00:00:00+00:00",
+                        "end_time": "2023-03-01T11:44:57.555951+00:00",
+                        "start_time": "2023-02-28T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
