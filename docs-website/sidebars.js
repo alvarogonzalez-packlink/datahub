@@ -408,9 +408,22 @@ module.exports = {
           ],
         },
         "docs/datahub_lite",
+        {
+          "Getting Started: APIs & SDKs": [
+            "docs/tools/tutorials/advantages",
+            "docs/tools/tutorials/adding-tags",
+            "docs/tools/tutorials/adding-terms",
+            "docs/tools/tutorials/adding-ownerships",
+            {
+              Reference: [
+                "docs/tools/tutorials/references/generate-access-token",
+                "docs/tools/tutorials/references/prepare-datahub",
+              ],
+            },
+          ],
+        },
       ],
     },
-
     {
       "Developer Guides": [
         // The purpose of this section is to provide developers & technical users with
@@ -449,7 +462,6 @@ module.exports = {
         },
         "docs/debugging",
         "docs/plugins",
-
         {
           Advanced: [
             "metadata-ingestion/docs/dev_guides/reporting_telemetry",
