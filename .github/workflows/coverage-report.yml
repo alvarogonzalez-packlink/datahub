@@ -1,0 +1,38 @@
+name: Coverage Upload
+
+on:
+  workflow_run:
+    workflows: ["metadata ingestion"]
+    types:
+      - completed
+
+jobs:
+  upload-coverage:
+    name: Upload coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download and Extract Test Results
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          ls -alh
+          mkdir -p artifacts && cd artifacts
+
+          artifacts_url=${{ github.event.workflow_run.artifacts_url }}
+
+          gh api "$artifacts_url" -q '.artifacts[] | [.name, .archive_download_url] | @tsv' | while read artifact
+          do
+            IFS=$'\t' read name url <<< "$artifact"
+            gh api $url > "$name.zip"
+            unzip -d "$name" "$name.zip"
+          done
+          ls -alh
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: .
+          fail_ci_if_error: true
+          flags: pytests
+          name: codecov-python
+          verbose: true

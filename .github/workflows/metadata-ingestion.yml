@@ -66,6 +66,7 @@ jobs:
         with:
           name: Test Results (metadata ingestion ${{ matrix.python-version }})
           path: |
+            **/coverage*.xml
             **/build/reports/tests/test/**
             **/build/test-results/test/**
             **/junit.*.xml
