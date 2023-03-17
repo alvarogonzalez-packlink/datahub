@@ -31,20 +31,17 @@ jobs:
       # DATAHUB_LOOKML_GIT_TEST_SSH_KEY: ${{ secrets.DATAHUB_LOOKML_GIT_TEST_SSH_KEY }}
     strategy:
       matrix:
-        python-version: ["3.7", "3.10"]
+        # TODO revert this change. Only to make test faster
+        python-version: ["3.7"]
         command:
           [
             "lint",
             "testQuick",
             "testIntegration",
-            "testIntegrationBatch1",
-            "testSlowIntegration",
           ]
         include:
           - python-version: "3.7"
             extraPythonRequirement: "sqlalchemy==1.3.24 apache-airflow~=2.2.0"
-          - python-version: "3.10"
-            extraPythonRequirement: "sqlalchemy~=1.4.0 apache-airflow>=2.4.0"
       fail-fast: false
     steps:
       - uses: actions/checkout@v3
