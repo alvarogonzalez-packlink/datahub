@@ -62,10 +62,18 @@ jobs:
         with:
           name: Test Results (metadata ingestion ${{ matrix.python-version }})
           path: |
-            **/coverage*.xml
             **/build/reports/tests/test/**
             **/build/test-results/test/**
             **/junit.*.xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: .
+          fail_ci_if_error: true
+          flags: pytest
+          name: codecov-${{ matrix.python-version }}
+          verbose: true
       - name: Upload test results to BuildPulse for flaky test detection
         if: '!cancelled()'
         # https://github.com/marketplace/actions/buildpulse
