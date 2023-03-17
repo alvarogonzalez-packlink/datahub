@@ -75,8 +75,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: .
           fail_ci_if_error: true
-          flags: pytest
-          name: codecov-${{ matrix.python-version }}-${{ matrix.command }})
+          flags: pytest-${{ matrix.python-version }}-${{ matrix.command }})
+          name: pytest-${{ matrix.python-version }}-${{ matrix.command }})
           verbose: true
       - name: Upload test results to BuildPulse for flaky test detection
         if: '!cancelled()'
