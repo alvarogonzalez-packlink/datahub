@@ -35,9 +35,8 @@ jobs:
         python-version: ["3.7"]
         command:
           [
-            "lint",
             "testQuick",
-            "testIntegration",
+            "testIntegrationBatch1"
           ]
         include:
           - python-version: "3.7"
