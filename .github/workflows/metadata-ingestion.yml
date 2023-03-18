@@ -79,17 +79,6 @@ jobs:
           flags: pytest-${{ matrix.command }}
           name: pytest-${{ matrix.command }}
           verbose: true
-      - name: Upload test results to BuildPulse for flaky test detection
-        if: '!cancelled()'
-        # https://github.com/marketplace/actions/buildpulse
-        uses: Workshop64/buildpulse-action@main
-        with:
-          account: ${{ secrets.BUILDPULSE_ACCOUNT }}
-          repository: ${{ secrets.BUILDPULSE_REPO }}
-          path: |
-            **/junit*.xml
-          key: ${{ secrets.BUILDPULSE_ACCESS_KEY_ID }}
-          secret: ${{ secrets.BUILDPULSE_SECRET_ACCESS_KEY }}
 
   event-file:
     runs-on: ubuntu-latest
