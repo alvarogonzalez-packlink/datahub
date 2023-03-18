@@ -3,7 +3,6 @@ import sys
 from typing import Any, Dict
 from unittest import mock
 
-import pytest
 from freezegun import freeze_time
 
 from datahub.ingestion.run.pipeline import Pipeline
@@ -458,7 +457,6 @@ def default_source_config():
 
 
 @freeze_time(FROZEN_TIME)
-@pytest.mark.integration
 @mock.patch("msal.ConfidentialClientApplication", side_effect=mock_msal_cca)
 def test_admin_only_apis(mock_msal, pytestconfig, tmp_path, mock_time, requests_mock):
     enable_logging()
