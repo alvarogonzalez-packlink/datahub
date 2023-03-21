@@ -1638,6 +1638,12 @@
                     "default": false,
                     "type": "boolean"
                 },
+                "convert_column_urns_to_lowercase": {
+                    "title": "Convert Column Urns To Lowercase",
+                    "description": "When enabled, converts column URNs to lowercase to ensure cross-platform compatibility. If `target_platform` is Snowflake, the default is True.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "enable_meta_mapping": {
                     "title": "Enable Meta Mapping",
                     "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
@@ -5653,8 +5659,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-03-20T18:17:00.176744+00:00",
-                        "start_time": "2023-03-19T00:00:00+00:00",
+                        "end_time": "2023-03-21T05:21:02.803946+00:00",
+                        "start_time": "2023-03-20T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -8110,6 +8116,12 @@
                     "default": false,
                     "type": "boolean"
                 },
+                "convert_column_urns_to_lowercase": {
+                    "title": "Convert Column Urns To Lowercase",
+                    "description": "When enabled, converts column URNs to lowercase to ensure cross-platform compatibility. If `target_platform` is Snowflake, the default is True.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "enable_meta_mapping": {
                     "title": "Enable Meta Mapping",
                     "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
@@ -9843,7 +9855,7 @@
                 "connect_uri": {
                     "title": "Connect Uri",
                     "description": "Superset host URL.",
-                    "default": "localhost:8088",
+                    "default": "http://localhost:8088",
                     "type": "string"
                 },
                 "display_uri": {
