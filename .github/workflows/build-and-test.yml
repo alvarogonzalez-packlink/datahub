@@ -68,7 +68,7 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=3072"
       - name: Upload coverage to Codecov
-        if: ${{ matrix.command == 'BUILD_JAVA' && matrix.timezone == "UTC" }}
+        if: ${{ matrix.command == 'BUILD_JAVA' && matrix.timezone == 'UTC' }}
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -78,7 +78,7 @@ jobs:
           name: java-${{ matrix.command }}
           verbose: true
       - name: Upload coverage to Codecov
-        if: ${{ matrix.command == 'BUILD_AIRFLOW_PLUGIN' && matrix.timezone == "UTC" }}
+        if: ${{ matrix.command == 'BUILD_AIRFLOW_PLUGIN' && matrix.timezone == 'UTC' }}
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
