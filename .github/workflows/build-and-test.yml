@@ -68,24 +68,24 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=3072"
       - name: Upload coverage to Codecov
-        if: ${{ matrix.command == 'BUILD_JAVA' }}
+        if: ${{ matrix.command == 'BUILD_JAVA' && matrix.timezone == "UTC" }}
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: steps.gradle_step.outputs.files
           fail_ci_if_error: false
-          flags: java-${{ matrix.command }}-${{ matrix.timezone}}
-          name: java-${{ matrix.command }}-${{ matrix.timezone}}
+          flags: java-${{ matrix.command }
+          name: java-${{ matrix.command }}
           verbose: true
       - name: Upload coverage to Codecov
-        if: ${{ matrix.command == 'BUILD_AIRFLOW_PLUGIN' }}
+        if: ${{ matrix.command == 'BUILD_AIRFLOW_PLUGIN' && matrix.timezone == "UTC" }}
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: steps.gradle_step.outputs.files
           fail_ci_if_error: false
-          flags: pytest-airflow-${{ matrix.command }}-${{ matrix.timezone}}
-          name: pytest-airflow-${{ matrix.command }}-${{ matrix.timezone}}
+          flags: pytest-airflow-${{ matrix.command }}
+          name: pytest-airflow-${{ matrix.command }}
           verbose: true
       - uses: actions/upload-artifact@v3
         if: always()
