@@ -7,6 +7,10 @@ ext {
   venv_name = 'venv'
 }
 
+def get_coverage_arg(test_name) {
+  return "--cov-report term --cov-report xml:coverage_${test_name}.xml "
+}
+
 def pip_install_command = "${venv_name}/bin/pip install -e ../../metadata-ingestion"
 
 task checkPythonVersion(type: Exec) {
@@ -58,8 +62,9 @@ task testQuick(type: Exec, dependsOn: installDev) {
   inputs.files(project.fileTree(dir: "src/", include: "**/*.py"))
   inputs.files(project.fileTree(dir: "tests/"))
   outputs.dir("${venv_name}")
+  def cvg_arg = get_coverage_arg("quick")
   commandLine 'bash', '-x', '-c',
-    "source ${venv_name}/bin/activate && pytest -vv --continue-on-collection-errors --junit-xml=junit.quick.xml"
+    "source ${venv_name}/bin/activate && pytest ${cvg_arg} -vv --continue-on-collection-errors --junit-xml=junit.quick.xml"
 }
 
 task installDevTest(type: Exec, dependsOn: [installDev]) {

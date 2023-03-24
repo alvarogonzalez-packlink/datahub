@@ -26,9 +26,9 @@ jobs:
       matrix:
         command:
           [
-            "./gradlew build -x :metadata-ingestion:build -x :metadata-ingestion:check -x docs-website:build -x :metadata-integration:java:spark-lineage:test -x :metadata-io:test -x :metadata-ingestion-modules:airflow-plugin:build -x :datahub-frontend:build -x :datahub-web-react:build --parallel",
-            "./gradlew :datahub-frontend:build :datahub-web-react:build --parallel",
-            "./gradlew :metadata-ingestion-modules:airflow-plugin:build --parallel"
+            "BUILD_JAVA",
+            "BUILD_FRONTEND",
+            "BUILD_AIRFLOW_PLUGIN"
           ]
         timezone:
           [
@@ -53,10 +53,40 @@ jobs:
         with:
           python-version: "3.7"
       - name: Gradle build (and test)
+        id: gradle_step
         run: |
-          ${{ matrix.command }}
+          if [[ "${{ matrix.command }}" == "BUILD_JAVA" ]]; then
+            ./gradlew build -x :metadata-ingestion:build -x :metadata-ingestion:check -x docs-website:build -x :metadata-integration:java:spark-lineage:test -x :metadata-io:test -x :metadata-ingestion-modules:airflow-plugin:build -x :datahub-frontend:build -x :datahub-web-react:build --parallel
+            echo "files=./li-utils/build/reports/jacoco/test/jacocoTestReport.xml" >> $GITHUB_OUTPUT
+          else if [[ "${{ matrix.command }}" == "BUILD_FRONTEND" ]]; then
+            ./gradlew :datahub-frontend:build :datahub-web-react:build --parallel
+            echo "files=." >> $GITHUB_OUTPUT
+          else
+            ./gradlew :metadata-ingestion-modules:airflow-plugin:build --parallel
+            echo "files=." >> $GITHUB_OUTPUT
+          fi
         env:
           NODE_OPTIONS: "--max-old-space-size=3072"
+      - name: Upload coverage to Codecov
+        if: ${{ matrix.command == 'BUILD_JAVA' }}
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: steps.gradle_step.outputs.files
+          fail_ci_if_error: false
+          flags: java-${{ matrix.command }}-${{ matrix.timezone}}
+          name: java-${{ matrix.command }}-${{ matrix.timezone}}
+          verbose: true
+      - name: Upload coverage to Codecov
+        if: ${{ matrix.command == 'BUILD_AIRFLOW_PLUGIN' }}
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: steps.gradle_step.outputs.files
+          fail_ci_if_error: false
+          flags: pytest-airflow-${{ matrix.command }}-${{ matrix.timezone}}
+          name: pytest-airflow-${{ matrix.command }}-${{ matrix.timezone}}
+          verbose: true
       - uses: actions/upload-artifact@v3
         if: always()
         with:
