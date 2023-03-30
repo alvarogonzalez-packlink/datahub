@@ -2695,9 +2695,16 @@
                 },
                 "path": {
                     "title": "Path",
-                    "description": "Path to folder or file to ingest. If pointed to a folder, all files with extension {file_extension} (default json) within that folder will be processed.",
-                    "type": "string",
-                    "format": "path"
+                    "description": "Path to folder or file to ingest. If pointed to a folder, all files with extension {file_extension} (default json) within that folder will be processed. This can also be in the form of a URL containing a single file",
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string",
+                            "format": "path"
+                        }
+                    ]
                 },
                 "file_extension": {
                     "title": "File Extension",
@@ -3045,9 +3052,16 @@
             "properties": {
                 "file": {
                     "title": "File",
-                    "description": "Path to business glossary file to ingest.",
-                    "format": "file-path",
-                    "type": "string"
+                    "description": "Path to business glossary file to ingest. This can be in the form of a URL or local file YAML.",
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string",
+                            "format": "path"
+                        }
+                    ]
                 },
                 "enable_auto_id": {
                     "title": "Enable Auto Id",
@@ -3922,6 +3936,26 @@
             "description": "Config to create a token and connect to Azure AD instance",
             "type": "object",
             "properties": {
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by this connector belong to",
+                    "default": "PROD",
+                    "type": "string"
+                },
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
+                    "type": "string"
+                },
+                "stateful_ingestion": {
+                    "title": "Stateful Ingestion",
+                    "description": "PowerBI Stateful Ingestion Config.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StatefulStaleMetadataRemovalConfig"
+                        }
+                    ]
+                },
                 "client_id": {
                     "title": "Client Id",
                     "description": "Application ID. Found in your app registration on Azure AD Portal",
@@ -5660,8 +5694,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-03-29T14:01:58.384153+00:00",
-                        "start_time": "2023-03-28T00:00:00+00:00",
+                        "end_time": "2023-03-30T12:23:57.324993+00:00",
+                        "start_time": "2023-03-29T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -9320,7 +9354,7 @@
             "properties": {
                 "file": {
                     "title": "File",
-                    "description": "Path to lineage file to ingest.",
+                    "description": "Path to lineage file to ingest. This may also be in the form of a URL.",
                     "type": "string"
                 },
                 "preserve_upstream": {
@@ -9359,7 +9393,7 @@
             "properties": {
                 "filename": {
                     "title": "Filename",
-                    "description": "Path to CSV file to ingest",
+                    "description": "Path to CSV file to ingest. It can also be in the form of a URL.",
                     "type": "string"
                 },
                 "write_semantics": {
