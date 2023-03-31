@@ -56,7 +56,7 @@ jobs:
         id: gradle_step
         run: |
           if [[ "${{ matrix.command }}" == "BUILD_JAVA" ]]; then
-            source ./.github/script/java_build_coverage.sh
+            source ./.github/scripts/java_build_coverage.sh
           elif [[ "${{ matrix.command }}" == "BUILD_FRONTEND" ]]; then
             ./gradlew :datahub-frontend:build :datahub-web-react:build --parallel
             echo "files=$(pwd)" >> $GITHUB_OUTPUT
