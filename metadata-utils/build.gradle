@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 dependencies {
   compile externalDependency.avro_1_7
@@ -36,4 +37,13 @@ dependencies {
   }
   implementation externalDependency.logbackClassic
 
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+      xml.enabled true
+      csv.enabled false
+      html.enabled true
+    }
 }

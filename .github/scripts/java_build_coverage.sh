@@ -7,6 +7,7 @@ java_folders=(
     "li-utils"
     "metadata-io"
     "metadata-models"
+    "metadata-utils"
 )
 command="./gradlew "
 files=""
