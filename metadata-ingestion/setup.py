@@ -55,7 +55,7 @@ framework_common = {
     "click-spinner",
     "requests_file",
     "jsonref",
-    "jsonschema>=3.2.0",
+    "jsonschema",
 }
 
 rest_common = {"requests", "requests_file"}
@@ -406,15 +406,15 @@ base_dev_requirements = {
     # This is pinned only to avoid spurious errors in CI.
     # We should make an effort to keep it up to date.
     "black==22.12.0",
-    "coverage==7.2.2",
-    "flake8==5.0.4",
+    "coverage>=5.1",
+    "flake8>=3.8.3",
     "flake8-tidy-imports>=4.3.0",
-    "isort==5.11.5",
+    "isort>=5.7.0",
     "mypy==1.0.0",
     # pydantic 1.8.2 is incompatible with mypy 0.910.
     # See https://github.com/samuelcolvin/pydantic/pull/3175#issuecomment-995382910.
     "pydantic>=1.9.0",
-    "pytest==7.2.2",
+    "pytest>=6.2.2",
     "pytest-asyncio>=0.16.0",
     "pytest-cov>=2.8.1",
     "pytest-docker>=1.0.1",
