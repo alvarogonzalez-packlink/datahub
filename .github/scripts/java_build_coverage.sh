@@ -1,10 +1,12 @@
 
 java_folders=(
-    "li-utils" 
     "datahub-graphql-core"
     "datahub-upgrade" 
     "entity-registry"
     "ingestion-scheduler"
+    "li-utils"
+    "metadata-io"
+    "metadata-models"
 )
 command="./gradlew "
 files=""

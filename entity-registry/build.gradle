@@ -1,5 +1,5 @@
 apply plugin: 'pegasus'
-apply plugin: 'java'
+apply plugin: 'jacoco'
 
 dependencies {
   compile spec.product.pegasus.data

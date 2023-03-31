@@ -2,6 +2,7 @@ import io.datahubproject.GenerateJsonSchemaTask
 
 
 apply plugin: 'pegasus'
+apply plugin: 'jacoco'
 
 tasks.withType(JavaCompile).configureEach {
   javaCompiler = javaToolchains.compilerFor {
@@ -31,4 +32,13 @@ tasks.register('generateJsonSchema', GenerateJsonSchemaTask) {
   it.setInputDirectory("$projectDir/src/mainGeneratedAvroSchema")
   it.setOutputDirectory("$projectDir/src/generatedJsonSchema")
   dependsOn generateAvroSchema
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+      xml.enabled true
+      csv.enabled false
+      html.enabled true
+    }
 }
