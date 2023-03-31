@@ -1,5 +1,7 @@
 name: build & test
 on:
+  schedule:
+    - cron: '0 0 * * *' # runs every day at midnight UTC
   push:
     branches:
       - master
@@ -75,16 +77,6 @@ jobs:
           fail_ci_if_error: false
           flags: java-${{ matrix.command }}
           name: java-${{ matrix.command }}
-          verbose: true
-      - name: Upload coverage to Codecov
-        if: ${{ matrix.command == 'BUILD_AIRFLOW_PLUGIN' && matrix.timezone == 'UTC' }}
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: steps.gradle_step.outputs.files
-          fail_ci_if_error: false
-          flags: pytest-airflow-${{ matrix.command }}
-          name: pytest-airflow-${{ matrix.command }}
           verbose: true
       - uses: actions/upload-artifact@v3
         if: always()
