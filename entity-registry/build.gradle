@@ -1,4 +1,5 @@
 apply plugin: 'pegasus'
+apply plugin: 'java'
 
 dependencies {
   compile spec.product.pegasus.data
@@ -28,3 +29,12 @@ dependencies {
 
 }
 compileTestJava.dependsOn tasks.getByPath(':entity-registry:custom-test-model:modelDeploy')
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+      xml.enabled true
+      csv.enabled false
+      html.enabled true
+    }
+}

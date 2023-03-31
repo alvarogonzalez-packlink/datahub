@@ -1,5 +1,11 @@
 
-java_folders=("li-utils" "datahub-graphql-core" "datahub-upgrade")
+java_folders=(
+    "li-utils" 
+    "datahub-graphql-core"
+    "datahub-upgrade" 
+    "entity-registry"
+    "ingestion-scheduler"
+)
 command="./gradlew "
 files=""
 

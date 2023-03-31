@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 dependencies {
     compile project(path: ':metadata-models')
@@ -18,5 +19,14 @@ dependencies {
         implementation(externalDependency.log4jApi) {
             because("previous versions are vulnerable to CVE-2021-45105")
         }
+    }
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+      xml.enabled true
+      csv.enabled false
+      html.enabled true
     }
 }
