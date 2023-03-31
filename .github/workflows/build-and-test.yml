@@ -56,8 +56,7 @@ jobs:
         id: gradle_step
         run: |
           if [[ "${{ matrix.command }}" == "BUILD_JAVA" ]]; then
-            ./gradlew build -x :metadata-ingestion:build -x :metadata-ingestion:check -x docs-website:build -x :metadata-integration:java:spark-lineage:test -x :metadata-io:test -x :metadata-ingestion-modules:airflow-plugin:build -x :datahub-frontend:build -x :datahub-web-react:build --parallel
-            echo "files=$(pwd)/li-utils/build/reports/jacoco/test/jacocoTestReport.xml" >> $GITHUB_OUTPUT
+            source ./.github/script/java_build_coverage.sh
           elif [[ "${{ matrix.command }}" == "BUILD_FRONTEND" ]]; then
             ./gradlew :datahub-frontend:build :datahub-web-react:build --parallel
             echo "files=$(pwd)" >> $GITHUB_OUTPUT

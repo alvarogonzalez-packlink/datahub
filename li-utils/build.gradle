@@ -35,10 +35,6 @@ idea {
     }
 }
 
-test {
-    finalizedBy jacocoTestReport
-}
-
 jacocoTestReport {
     dependsOn test
     reports {

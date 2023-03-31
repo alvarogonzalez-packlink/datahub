@@ -2,6 +2,7 @@ plugins {
     id "io.github.kobylynskyi.graphql.codegen" version "4.1.1"
 }
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 dependencies {
     compile project(':metadata-service:restli-client')
@@ -58,3 +59,12 @@ tasks.withType(Checkstyle) {
 
 compileJava.dependsOn 'graphqlCodegen'
 sourceSets.main.java.srcDir "$projectDir/src/mainGeneratedGraphQL/java"
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+      xml.enabled true
+      csv.enabled false
+      html.enabled true
+    }
+}

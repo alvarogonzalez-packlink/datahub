@@ -1,6 +1,7 @@
 plugins {
   id 'org.springframework.boot'
   id 'java'
+  id 'jacoco'
   id 'com.palantir.docker'
 }
 
@@ -94,3 +95,12 @@ task cleanLocalDockerImages {
   }
 }
 dockerClean.finalizedBy(cleanLocalDockerImages)
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+      xml.enabled true
+      csv.enabled false
+      html.enabled true
+    }
+}
