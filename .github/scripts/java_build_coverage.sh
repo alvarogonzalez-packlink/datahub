@@ -15,7 +15,6 @@ files=""
 for folder in "${java_folders[@]}"
 do
     command="$command :$folder:jacocoTestReport"
-    ls -alh "$(pwd)/${folder}/build/reports/jacoco/test/";
     files="${files}$(pwd)/${folder}/build/reports/jacoco/test/,"
 done
 
