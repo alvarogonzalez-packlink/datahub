@@ -5681,8 +5681,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-04-01T04:12:22.136386+00:00",
-                        "start_time": "2023-03-31T00:00:00+00:00",
+                        "end_time": "2023-04-04T02:20:40.078353+00:00",
+                        "start_time": "2023-04-03T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
