@@ -2863,8 +2863,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-05-04T11:44:15.804496+00:00",
-                        "start_time": "2023-05-03T00:00:00+00:00",
+                        "end_time": "2023-05-05T04:58:00.564968+00:00",
+                        "start_time": "2023-05-04T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -2956,7 +2956,7 @@
                 },
                 "project_ids": {
                     "title": "Project Ids",
-                    "description": "Ingests specified project_ids. Use this property if you only want to ingest one project and don't want to give project resourcemanager.projects.list to your service account.",
+                    "description": "Ingests specified project_ids. Use this property if you want to specify what projects to ingest or don't want to give project resourcemanager.projects.list to your service account. Overrides `project_id_pattern`.",
                     "type": "array",
                     "items": {
                         "type": "string"
