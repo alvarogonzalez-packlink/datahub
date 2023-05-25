@@ -325,6 +325,12 @@
                     "description": "Name of the workspace. Default to deployment name present in workspace_url",
                     "type": "string"
                 },
+                "only_ingest_assigned_metastore": {
+                    "title": "Only Ingest Assigned Metastore",
+                    "description": "Only ingest the workspace's currently assigned metastore. Use if you only want to ingest one metastore and do not want to grant your ingestion service account the admin role.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "metastore_id_pattern": {
                     "title": "Metastore Id Pattern",
                     "description": "Regex patterns for metastore id to filter in ingestion.",
@@ -749,7 +755,7 @@
                     "type": "string"
                 },
                 "auth": {
-                    "description": "Nifi authentication. must be one of : NO_AUTH, SINGLE_USER, CLIENT_CERT",
+                    "description": "Nifi authentication. must be one of : NO_AUTH, SINGLE_USER, CLIENT_CERT, KERBEROS",
                     "default": "NO_AUTH",
                     "allOf": [
                         {
@@ -822,7 +828,14 @@
                 "ca_file": {
                     "title": "Ca File",
                     "description": "Path to PEM file containing certs for the root CA(s) for the NiFi",
-                    "type": "string"
+                    "anyOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 }
             },
             "required": [
@@ -3083,6 +3096,12 @@
                     "title": "Extra Client Options",
                     "default": {},
                     "type": "object"
+                },
+                "match_fully_qualified_names": {
+                    "title": "Match Fully Qualified Names",
+                    "description": "Whether `schema_pattern` is matched against fully qualified schema name `<database>.<schema>`.",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -3483,6 +3502,7 @@
                     "description": "For details, refer [Classification](../../../../metadata-ingestion/docs/dev_guides/classification.md).",
                     "default": {
                         "enabled": false,
+                        "sample_size": 100,
                         "table_pattern": {
                             "allow": [
                                 ".*"
@@ -3598,7 +3618,7 @@
                 },
                 "apply_view_usage_to_tables": {
                     "title": "Apply View Usage To Tables",
-                    "description": "Allow/deny patterns for views in snowflake dataset names.",
+                    "description": "Whether to apply view's usage to its base tables. If set to True, usage is applied to base tables only.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -9439,8 +9459,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-05-24T06:35:22.180869+00:00",
-                        "start_time": "2023-05-23T00:00:00+00:00",
+                        "end_time": "2023-05-25T06:56:27.091414+00:00",
+                        "start_time": "2023-05-24T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -9453,7 +9473,8 @@
                         "include_read_operational_stats": false,
                         "format_sql_queries": false,
                         "include_top_n_queries": true,
-                        "max_query_duration": 900.0
+                        "max_query_duration": 900.0,
+                        "apply_view_usage_to_tables": false
                     },
                     "allOf": [
                         {
@@ -11166,7 +11187,8 @@
             "enum": [
                 "NO_AUTH",
                 "SINGLE_USER",
-                "CLIENT_CERT"
+                "CLIENT_CERT",
+                "KERBEROS"
             ]
         },
         "GEProfilingConfig": {
@@ -11653,6 +11675,12 @@
                     "description": "Whether classification should be used to auto-detect glossary terms",
                     "default": false,
                     "type": "boolean"
+                },
+                "sample_size": {
+                    "title": "Sample Size",
+                    "description": "Number of sample values used for classification.",
+                    "default": 100,
+                    "type": "integer"
                 },
                 "table_pattern": {
                     "title": "Table Pattern",
@@ -12243,6 +12271,12 @@
                     "default": 900.0,
                     "type": "number",
                     "format": "time-delta"
+                },
+                "apply_view_usage_to_tables": {
+                    "title": "Apply View Usage To Tables",
+                    "description": "Whether to apply view's usage to its base tables. If set to False, uses sql parser and applies usage to views / tables mentioned in the query. If set to True, usage is applied to base tables only.",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
