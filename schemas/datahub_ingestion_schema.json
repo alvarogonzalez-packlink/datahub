@@ -1458,8 +1458,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-06-23T12:25:09.241136+00:00",
-                        "start_time": "2023-06-22T00:00:00+00:00",
+                        "end_time": "2023-06-28T06:42:56.600612+00:00",
+                        "start_time": "2023-06-27T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -3227,7 +3227,7 @@
                 "ingest_embed_url": {
                     "title": "Ingest Embed Url",
                     "description": "Ingest a URL to render an embedded Preview of assets within Tableau.",
-                    "default": true,
+                    "default": false,
                     "type": "boolean"
                 },
                 "extract_project_hierarchy": {
