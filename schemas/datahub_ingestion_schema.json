@@ -5308,8 +5308,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-07-11T18:23:35.689029+00:00",
-                        "start_time": "2023-07-10T00:00:00+00:00",
+                        "end_time": "2023-07-12T03:02:49.179728+00:00",
+                        "start_time": "2023-07-11T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
