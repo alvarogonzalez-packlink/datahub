@@ -4870,15 +4870,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "extra_properties": {
-                    "title": "Extra Properties",
-                    "description": "By default, the connector extracts a specific set of properties from the metastore tables with a sql query. Use this list of keys to provide additional properties that you would like to extract. You have to make sure the column name returned by the sql query is the same as the key you provide here.",
-                    "default": [],
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
                 "enable_properties_merge": {
                     "title": "Enable Properties Merge",
                     "description": "By default, the connector overwrites properties every time. Set this to True to enable merging of properties with what exists on the server.",
@@ -5308,8 +5299,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-07-12T03:02:49.179728+00:00",
-                        "start_time": "2023-07-11T00:00:00+00:00",
+                        "end_time": "2023-07-14T23:36:09.528730+00:00",
+                        "start_time": "2023-07-13T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -6514,7 +6505,13 @@
                 "connect_to_platform_map": {
                     "title": "Connect To Platform Map",
                     "description": "Platform instance mapping when multiple instances for a platform is available. Entry for a platform should be in either `platform_instance_map` or `connect_to_platform_map`. e.g.`connect_to_platform_map: { \"postgres-connector-finance-db\": \"postgres\": \"core_finance_instance\" }`",
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "generic_connectors": {
                     "title": "Generic Connectors",
@@ -9320,7 +9317,7 @@
                 },
                 "include_view_lineage": {
                     "title": "Include View Lineage",
-                    "description": "If enabled, populates the snowflake view->table and table->view lineages (no view->view lineage yet). Requires appropriate grants given to the role, and include_table_lineage to be True. view->table lineage requires Snowflake Enterprise Edition or above.",
+                    "description": "If enabled, populates the snowflake view->table and table->view lineages. Requires appropriate grants given to the role, and include_table_lineage to be True. view->table lineage requires Snowflake Enterprise Edition or above.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -9377,8 +9374,14 @@
                 },
                 "include_column_lineage": {
                     "title": "Include Column Lineage",
-                    "description": "If enabled, populates the column lineage. Supported only for snowflake table-to-table and view-to-table lineage edge (not supported in table-to-view or view-to-view lineage edge yet). Requires appropriate grants given to the role.",
+                    "description": "Populates table->table and view->table column lineage. Requires appropriate grants given to the role and the Snowflake Enterprise Edition or above.",
                     "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates view->view and table->view column lineage.",
+                    "default": false,
                     "type": "boolean"
                 },
                 "extract_tags": {
@@ -9404,7 +9407,7 @@
                 },
                 "use_legacy_lineage_method": {
                     "title": "Use Legacy Lineage Method",
-                    "description": "Whether to use the legacy lineage computation method. If set to False, ingestion uses new optimised lineage extraction method that requires less ingestion process memory.",
+                    "description": "Whether to use the legacy lineage computation method. By default, uses new optimised lineage extraction method that requires less ingestion process memory. Table-to-view and view-to-view column-level lineage are not supported with the legacy method.",
                     "default": false,
                     "type": "boolean"
                 },
