@@ -2307,6 +2307,12 @@
                             "$ref": "#/definitions/AllowDenyPattern"
                         }
                     ]
+                },
+                "profiling": {
+                    "$ref": "#/definitions/ElasticProfiling"
+                },
+                "collapse_urns": {
+                    "$ref": "#/definitions/CollapseUrns"
                 }
             },
             "additionalProperties": false
@@ -5299,8 +5305,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-07-15T01:40:42.168528+00:00",
-                        "start_time": "2023-07-14T00:00:00+00:00",
+                        "end_time": "2023-07-20T18:09:21.484195+00:00",
+                        "start_time": "2023-07-19T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -11047,18 +11053,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "ignore_old_state": {
-                    "title": "Ignore Old State",
-                    "description": "If set to True, ignores the previous checkpoint state.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "ignore_new_state": {
-                    "title": "Ignore New State",
-                    "description": "If set to True, ignores the current checkpoint state.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "remove_stale_metadata": {
                     "title": "Remove Stale Metadata",
                     "description": "Soft-deletes the entities present in the last successful run but missing in the current run with stateful_ingestion enabled.",
@@ -11450,7 +11444,7 @@
                 },
                 "profile_table_row_count_estimate_only": {
                     "title": "Profile Table Row Count Estimate Only",
-                    "description": "Use an approximate query for row count. This will be much faster but slightly less accurate. Only supported for Postgres. ",
+                    "description": "Use an approximate query for row count. This will be much faster but slightly less accurate. Only supported for Postgres and MySQL. ",
                     "default": false,
                     "type": "boolean"
                 },
@@ -11518,6 +11512,34 @@
                     "description": "# Whether or not to create tags in datahub from the s3 object",
                     "default": false,
                     "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ElasticProfiling": {
+            "title": "ElasticProfiling",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "title": "Enabled",
+                    "description": "Whether to enable profiling for the elastic search source.",
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "CollapseUrns": {
+            "title": "CollapseUrns",
+            "type": "object",
+            "properties": {
+                "urns_suffix_regex": {
+                    "title": "Urns Suffix Regex",
+                    "description": "List of regex patterns to remove from the name of the URN. All of the indices before removal of URNs are considered as the same dataset. These are applied in order for each URN.\n        The main case where you would want to have multiple of these if the name where you are trying to remove suffix from have different formats.\n        e.g. ending with -YYYY-MM-DD as well as ending -epochtime would require you to have 2 regex patterns to remove the suffixes across all URNs.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "additionalProperties": false
