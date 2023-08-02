@@ -5305,8 +5305,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-08-01T22:07:04.604513+00:00",
-                        "start_time": "2023-07-31T00:00:00+00:00",
+                        "end_time": "2023-08-02T07:54:39.376354+00:00",
+                        "start_time": "2023-08-01T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -8984,6 +8984,7 @@
                     "default": {
                         "enabled": false,
                         "sample_size": 100,
+                        "max_workers": 2,
                         "table_pattern": {
                             "allow": [
                                 ".*"
@@ -10745,6 +10746,14 @@
                         "type": "string"
                     }
                 },
+                "database_id_to_instance_map": {
+                    "title": "Database Id To Instance Map",
+                    "description": "Custom mappings between metabase database id and DataHub platform instance",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "default_schema": {
                     "title": "Default Schema",
                     "description": "Default schema name to use when schema is not provided in an SQL query",
@@ -12466,6 +12475,12 @@
                     "title": "Sample Size",
                     "description": "Number of sample values used for classification.",
                     "default": 100,
+                    "type": "integer"
+                },
+                "max_workers": {
+                    "title": "Max Workers",
+                    "description": "Number of worker threads to use for classification. Set to 1 to disable.",
+                    "default": 2,
                     "type": "integer"
                 },
                 "table_pattern": {
