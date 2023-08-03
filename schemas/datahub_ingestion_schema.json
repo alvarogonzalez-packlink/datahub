@@ -3130,6 +3130,12 @@
                             "$ref": "#/definitions/AllowDenyPattern"
                         }
                     ]
+                },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Enable to convert the SQL Server assets urns to lowercase",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -5305,8 +5311,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-08-02T19:58:48.227253+00:00",
-                        "start_time": "2023-08-01T00:00:00+00:00",
+                        "end_time": "2023-08-03T03:14:28.136172+00:00",
+                        "start_time": "2023-08-02T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -9453,6 +9459,12 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "email_as_user_identifier": {
+                    "title": "Email As User Identifier",
+                    "description": "Format user urns as an email, if the snowflake user's email is set. If `email_domain` is provided, generates email addresses for snowflake users with unset emails, based on their username.",
+                    "default": true,
+                    "type": "boolean"
                 }
             },
             "required": [
