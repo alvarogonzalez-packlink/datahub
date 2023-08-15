@@ -73,7 +73,11 @@
             "properties": {
                 "ca_certificate_path": {
                     "type": "string",
-                    "description": "Path to CA certificate for HTTPS communications."
+                    "description": "Path to server's CA certificate for verification of HTTPS communications"
+                },
+                "client_certificate_path": {
+                    "type": "string",
+                    "descritption": "Path to client's CA certificate for HTTPS communications"
                 },
                 "max_threads": {
                     "type": "number",
@@ -790,6 +794,120 @@
             ],
             "additionalProperties": false
         },
+        "datahub": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "datahub"
+                    ]
+                },
+                "config": {
+                    "$ref": "#/definitions/datahub_config"
+                }
+            },
+            "required": [
+                "type",
+                "config"
+            ]
+        },
+        "datahub_config": {
+            "title": "DataHubSourceConfig",
+            "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
+            "type": "object",
+            "properties": {
+                "stateful_ingestion": {
+                    "title": "Stateful Ingestion",
+                    "description": "Stateful Ingestion Config",
+                    "default": {
+                        "enabled": true,
+                        "max_checkpoint_state_size": 16777216,
+                        "state_provider": {
+                            "type": "datahub",
+                            "config": null
+                        },
+                        "ignore_old_state": false,
+                        "ignore_new_state": false
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StatefulIngestionConfig"
+                        }
+                    ]
+                },
+                "mysql_connection": {
+                    "title": "Mysql Connection",
+                    "description": "MySQL connection config",
+                    "default": {
+                        "username": null,
+                        "host_port": "localhost:3306",
+                        "database": null,
+                        "database_alias": null,
+                        "scheme": "mysql+pymysql",
+                        "sqlalchemy_uri": null,
+                        "options": {}
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/MySQLConnectionConfig"
+                        }
+                    ]
+                },
+                "kafka_connection": {
+                    "title": "Kafka Connection",
+                    "description": "Kafka connection config",
+                    "default": {
+                        "bootstrap": "localhost:9092",
+                        "schema_registry_url": "http://localhost:8080/schema-registry/api/",
+                        "schema_registry_config": {},
+                        "client_timeout_seconds": 60,
+                        "consumer_config": {}
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/KafkaConsumerConnectionConfig"
+                        }
+                    ]
+                },
+                "include_all_versions": {
+                    "title": "Include All Versions",
+                    "description": "If enabled, include all versions of each aspect. Otherwise, only include the latest version of each aspect.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "mysql_batch_size": {
+                    "title": "Mysql Batch Size",
+                    "description": "Number of records to fetch from MySQL at a time",
+                    "default": 10000,
+                    "type": "integer"
+                },
+                "mysql_table_name": {
+                    "title": "Mysql Table Name",
+                    "description": "Name of MySQL table containing all versioned aspects",
+                    "default": "metadata_aspect_v2",
+                    "type": "string"
+                },
+                "kafka_topic_name": {
+                    "title": "Kafka Topic Name",
+                    "description": "Name of kafka topic containing timeseries MCLs",
+                    "default": "MetadataChangeLog_Timeseries_v1",
+                    "type": "string"
+                },
+                "commit_state_interval": {
+                    "title": "Commit State Interval",
+                    "description": "Number of records to process before committing state",
+                    "default": 1000,
+                    "type": "integer"
+                },
+                "commit_with_parse_errors": {
+                    "title": "Commit With Parse Errors",
+                    "description": "Whether to update createdon timestamp and kafka offset despite parse errors. Enable if you want to ignore the errors.",
+                    "default": false,
+                    "type": "boolean"
+                }
+            }
+        },
         "bigquery": {
             "type": "object",
             "properties": {
@@ -848,13 +966,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -1063,8 +1181,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-08-09T12:33:21.266171+00:00",
-                        "start_time": "2023-08-08T00:00:00+00:00",
+                        "end_time": "2023-08-15T22:02:13.573606+00:00",
+                        "start_time": "2023-08-14T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -1726,13 +1844,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -2111,13 +2229,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -3774,13 +3892,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -4348,13 +4466,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -7473,7 +7591,13 @@
                 },
                 "manager_pagination_enabled": {
                     "title": "Manager Pagination Enabled",
-                    "description": "Use pagination while search for managers (enabled by default).",
+                    "description": "[deprecated] Use pagination_enabled ",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "pagination_enabled": {
+                    "title": "Pagination Enabled",
+                    "description": "Use pagination while do search query (enabled by default).",
                     "default": true,
                     "type": "boolean"
                 },
@@ -7890,6 +8014,12 @@
                     "description": "Max amount of memory to grant Spark.",
                     "default": "4g",
                     "type": "string"
+                },
+                "spark_config": {
+                    "title": "Spark Config",
+                    "description": "Spark configuration properties to set on the SparkSession. Put config property names into quotes. For example: '\"spark.executor.memory\": \"2g\"'",
+                    "default": {},
+                    "type": "object"
                 },
                 "max_rows": {
                     "title": "Max Rows",
@@ -8812,13 +8942,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -8837,7 +8967,7 @@
                 },
                 "schema_pattern": {
                     "title": "Schema Pattern",
-                    "description": "Regex patterns for schemas to filter in ingestion. Specify regex to only match the schema name. e.g. to match all tables in schema analytics, use the regex 'analytics'",
+                    "description": "Deprecated in favour of database_pattern.",
                     "default": {
                         "allow": [
                             ".*"
@@ -9003,6 +9133,22 @@
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
                     "type": "string"
                 },
+                "database_pattern": {
+                    "title": "Database Pattern",
+                    "description": "Regex patterns for databases to filter in ingestion.",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
                 "secure": {
                     "title": "Secure",
                     "type": "boolean"
@@ -9010,6 +9156,15 @@
                 "protocol": {
                     "title": "Protocol",
                     "type": "string"
+                },
+                "uri_opts": {
+                    "title": "Uri Opts",
+                    "description": "The part of the URI and it's used to provide additional configuration options or parameters for the database connection.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "include_table_lineage": {
                     "title": "Include Table Lineage",
@@ -9550,13 +9705,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -10533,13 +10688,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -10613,7 +10768,7 @@
                 },
                 "schema_pattern": {
                     "title": "Schema Pattern",
-                    "description": "Regex patterns for schemas to filter in ingestion. Specify regex to only match the schema name. e.g. to match all tables in schema analytics, use the regex 'analytics'",
+                    "description": "Deprecated in favour of database_pattern.",
                     "default": {
                         "allow": [
                             ".*"
@@ -10779,6 +10934,22 @@
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
                     "type": "string"
                 },
+                "database_pattern": {
+                    "title": "Database Pattern",
+                    "description": "Regex patterns for databases to filter in ingestion.",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
                 "secure": {
                     "title": "Secure",
                     "type": "boolean"
@@ -10786,6 +10957,15 @@
                 "protocol": {
                     "title": "Protocol",
                     "type": "string"
+                },
+                "uri_opts": {
+                    "title": "Uri Opts",
+                    "description": "The part of the URI and it's used to provide additional configuration options or parameters for the database connection.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "include_table_lineage": {
                     "title": "Include Table Lineage",
@@ -10847,13 +11027,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -11390,6 +11570,104 @@
             },
             "additionalProperties": false
         },
+        "StatefulIngestionConfig": {
+            "title": "StatefulIngestionConfig",
+            "description": "Basic Stateful Ingestion Specific Configuration for any source.",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "title": "Enabled",
+                    "description": "The type of the ingestion state provider registered with datahub.",
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MySQLConnectionConfig": {
+            "title": "MySQLConnectionConfig",
+            "type": "object",
+            "properties": {
+                "username": {
+                    "title": "Username",
+                    "description": "username",
+                    "type": "string"
+                },
+                "password": {
+                    "title": "Password",
+                    "description": "password",
+                    "type": "string",
+                    "writeOnly": true,
+                    "format": "password"
+                },
+                "host_port": {
+                    "title": "Host Port",
+                    "description": "MySQL host URL.",
+                    "default": "localhost:3306",
+                    "type": "string"
+                },
+                "database": {
+                    "title": "Database",
+                    "description": "database (catalog)",
+                    "type": "string"
+                },
+                "database_alias": {
+                    "title": "Database Alias",
+                    "description": "[Deprecated] Alias to apply to database when ingesting.",
+                    "type": "string"
+                },
+                "scheme": {
+                    "title": "Scheme",
+                    "default": "mysql+pymysql",
+                    "type": "string"
+                },
+                "sqlalchemy_uri": {
+                    "title": "Sqlalchemy Uri",
+                    "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
+                    "type": "string"
+                },
+                "options": {
+                    "title": "Options",
+                    "description": "Any options specified here will be passed to [SQLAlchemy.create_engine](https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine) as kwargs.",
+                    "type": "object"
+                }
+            },
+            "additionalProperties": false
+        },
+        "KafkaConsumerConnectionConfig": {
+            "title": "KafkaConsumerConnectionConfig",
+            "description": "Configuration class for holding connectivity information for Kafka consumers",
+            "type": "object",
+            "properties": {
+                "bootstrap": {
+                    "title": "Bootstrap",
+                    "default": "localhost:9092",
+                    "type": "string"
+                },
+                "schema_registry_url": {
+                    "title": "Schema Registry Url",
+                    "default": "http://localhost:8080/schema-registry/api/",
+                    "type": "string"
+                },
+                "schema_registry_config": {
+                    "title": "Schema Registry Config",
+                    "description": "Extra schema registry config serialized as JSON. These options will be passed into Kafka's SchemaRegistryClient. https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html?#schemaregistryclient",
+                    "type": "object"
+                },
+                "client_timeout_seconds": {
+                    "title": "Client Timeout Seconds",
+                    "description": "The request timeout used when interacting with the Kafka APIs.",
+                    "default": 60,
+                    "type": "integer"
+                },
+                "consumer_config": {
+                    "title": "Consumer Config",
+                    "description": "Extra consumer config serialized as JSON. These options will be passed into Kafka's DeserializingConsumer. See https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html#deserializingconsumer and https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md .",
+                    "type": "object"
+                }
+            },
+            "additionalProperties": false
+        },
         "BucketDuration": {
             "title": "BucketDuration",
             "description": "An enumeration.",
@@ -11414,13 +11692,13 @@
                 },
                 "end_time": {
                     "title": "End Time",
-                    "description": "Latest date of usage to consider. Default: Current time in UTC",
+                    "description": "Latest date of lineage/usage to consider. Default: Current time in UTC",
                     "type": "string",
                     "format": "date-time"
                 },
                 "start_time": {
                     "title": "Start Time",
-                    "description": "Earliest date of usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`)",
+                    "description": "Earliest date of lineage/usage to consider. Default: Last full day in UTC (or hour, depending on `bucket_duration`). You can also specify relative time with respect to end_time such as '-7 days' Or '-7d'.",
                     "type": "string",
                     "format": "date-time"
                 },
@@ -12491,40 +12769,6 @@
             },
             "additionalProperties": false
         },
-        "KafkaConsumerConnectionConfig": {
-            "title": "KafkaConsumerConnectionConfig",
-            "description": "Configuration class for holding connectivity information for Kafka consumers",
-            "type": "object",
-            "properties": {
-                "bootstrap": {
-                    "title": "Bootstrap",
-                    "default": "localhost:9092",
-                    "type": "string"
-                },
-                "schema_registry_url": {
-                    "title": "Schema Registry Url",
-                    "default": "http://localhost:8080/schema-registry/api/",
-                    "type": "string"
-                },
-                "schema_registry_config": {
-                    "title": "Schema Registry Config",
-                    "description": "Extra schema registry config serialized as JSON. These options will be passed into Kafka's SchemaRegistryClient. https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html?#schemaregistryclient",
-                    "type": "object"
-                },
-                "client_timeout_seconds": {
-                    "title": "Client Timeout Seconds",
-                    "description": "The request timeout used when interacting with the Kafka APIs.",
-                    "default": 60,
-                    "type": "integer"
-                },
-                "consumer_config": {
-                    "title": "Consumer Config",
-                    "description": "Extra consumer config serialized as JSON. These options will be passed into Kafka's DeserializingConsumer. See https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html#deserializingconsumer and https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md .",
-                    "type": "object"
-                }
-            },
-            "additionalProperties": false
-        },
         "HMACKey": {
             "title": "HMACKey",
             "type": "object",
@@ -12885,6 +13129,9 @@
                 },
                 {
                     "$ref": "#/definitions/powerbi-report-server"
+                },
+                {
+                    "$ref": "#/definitions/datahub"
                 },
                 {
                     "$ref": "#/definitions/bigquery"
