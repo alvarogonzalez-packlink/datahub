@@ -6303,8 +6303,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-08-29T20:25:51.374979+00:00",
-                        "start_time": "2023-08-28T00:00:00+00:00",
+                        "end_time": "2023-08-30T02:34:04.729242+00:00",
+                        "start_time": "2023-08-29T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -11127,8 +11127,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-08-29T20:25:43.415895+00:00",
-                        "start_time": "2023-08-28T00:00:00+00:00",
+                        "end_time": "2023-08-30T02:33:54.218036+00:00",
+                        "start_time": "2023-08-29T00:00:00+00:00",
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
