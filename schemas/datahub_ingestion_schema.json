@@ -6303,8 +6303,9 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-08-30T02:34:04.729242+00:00",
-                        "start_time": "2023-08-29T00:00:00+00:00",
+                        "end_time": "2023-09-01T08:52:55.025172+00:00",
+                        "start_time": "2023-08-31T00:00:00+00:00",
+                        "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -8610,25 +8611,14 @@
                         }
                     ]
                 },
-                "adls": {
-                    "title": "Adls",
-                    "description": "[Azure Data Lake Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) to crawl for Iceberg tables.  This is one filesystem type supported by this source and **only one can be configured**.",
+                "catalog": {
+                    "title": "Catalog",
+                    "description": "Catalog configuration where to find Iceberg tables.  See [pyiceberg's catalog configuration details](https://py.iceberg.apache.org/configuration/).",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/AdlsSourceConfig"
+                            "$ref": "#/definitions/IcebergCatalogConfig"
                         }
                     ]
-                },
-                "localfs": {
-                    "title": "Localfs",
-                    "description": "Local path to crawl for Iceberg tables. This is one filesystem type supported by this source and **only one can be configured**.",
-                    "type": "string"
-                },
-                "max_path_depth": {
-                    "title": "Max Path Depth",
-                    "description": "Maximum folder depth to crawl for Iceberg tables.  Folders deeper than this value will be silently ignored.",
-                    "default": 2,
-                    "type": "integer"
                 },
                 "table_pattern": {
                     "title": "Table Pattern",
@@ -8677,6 +8667,9 @@
                     ]
                 }
             },
+            "required": [
+                "catalog"
+            ],
             "additionalProperties": false
         },
         "postgres": {
@@ -11127,8 +11120,9 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-08-30T02:33:54.218036+00:00",
-                        "start_time": "2023-08-29T00:00:00+00:00",
+                        "end_time": "2023-09-01T08:52:44.284550+00:00",
+                        "start_time": "2023-08-31T00:00:00+00:00",
+                        "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
                             "allow": [
@@ -13008,56 +13002,34 @@
             ],
             "additionalProperties": false
         },
-        "AdlsSourceConfig": {
-            "title": "AdlsSourceConfig",
-            "description": "Common Azure credentials config.\n\nhttps://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-directory-file-acl-python",
+        "IcebergCatalogConfig": {
+            "title": "IcebergCatalogConfig",
+            "description": "Iceberg catalog config.\n\nhttps://py.iceberg.apache.org/configuration/",
             "type": "object",
             "properties": {
-                "base_path": {
-                    "title": "Base Path",
-                    "description": "Base folder in hierarchical namespaces to start from.",
-                    "default": "/",
+                "name": {
+                    "title": "Name",
+                    "description": "Name of catalog",
+                    "default": "default",
                     "type": "string"
                 },
-                "container_name": {
-                    "title": "Container Name",
-                    "description": "Azure storage account container name.",
+                "type": {
+                    "title": "Type",
+                    "description": "Type of catalog.  See [PyIceberg](https://py.iceberg.apache.org/configuration/) for list of possible values.",
                     "type": "string"
                 },
-                "account_name": {
-                    "title": "Account Name",
-                    "description": "Name of the Azure storage account.  See [Microsoft official documentation on how to create a storage account.](https://docs.microsoft.com/en-us/azure/storage/blobs/create-data-lake-storage-account)",
-                    "type": "string"
-                },
-                "account_key": {
-                    "title": "Account Key",
-                    "description": "Azure storage account access key that can be used as a credential. **An account key, a SAS token or a client secret is required for authentication.**",
-                    "type": "string"
-                },
-                "sas_token": {
-                    "title": "Sas Token",
-                    "description": "Azure storage account Shared Access Signature (SAS) token that can be used as a credential. **An account key, a SAS token or a client secret is required for authentication.**",
-                    "type": "string"
-                },
-                "client_secret": {
-                    "title": "Client Secret",
-                    "description": "Azure client secret that can be used as a credential. **An account key, a SAS token or a client secret is required for authentication.**",
-                    "type": "string"
-                },
-                "client_id": {
-                    "title": "Client Id",
-                    "description": "Azure client (Application) ID required when a `client_secret` is used as a credential.",
-                    "type": "string"
-                },
-                "tenant_id": {
-                    "title": "Tenant Id",
-                    "description": "Azure tenant (Directory) ID required when a `client_secret` is used as a credential.",
-                    "type": "string"
+                "config": {
+                    "title": "Config",
+                    "description": "Catalog specific configuration.  See [PyIceberg documentation](https://py.iceberg.apache.org/configuration/) for details.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
-                "container_name",
-                "account_name"
+                "type",
+                "config"
             ],
             "additionalProperties": false
         },
