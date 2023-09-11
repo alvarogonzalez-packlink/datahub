@@ -3082,25 +3082,25 @@
                 },
                 "view_naming_pattern": {
                     "title": "View Naming Pattern",
-                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name']",
+                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
                     "default": {
                         "pattern": "{project}.view.{name}"
                     },
                     "allOf": [
                         {
-                            "$ref": "#/definitions/LookerNamingPattern"
+                            "$ref": "#/definitions/LookerViewNamingPattern"
                         }
                     ]
                 },
                 "view_browse_pattern": {
                     "title": "View Browse Pattern",
-                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name']",
+                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
                     "default": {
                         "pattern": "/{env}/{platform}/{project}/views"
                     },
                     "allOf": [
                         {
-                            "$ref": "#/definitions/LookerNamingPattern"
+                            "$ref": "#/definitions/LookerViewNamingPattern"
                         }
                     ]
                 },
@@ -6303,8 +6303,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-09-08T14:39:05.615072+00:00",
-                        "start_time": "2023-09-07T00:00:00+00:00",
+                        "end_time": "2023-09-11T20:44:53.563741+00:00",
+                        "start_time": "2023-09-10T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9104,25 +9104,25 @@
                 },
                 "view_naming_pattern": {
                     "title": "View Naming Pattern",
-                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name']",
+                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
                     "default": {
                         "pattern": "{project}.view.{name}"
                     },
                     "allOf": [
                         {
-                            "$ref": "#/definitions/LookerNamingPattern"
+                            "$ref": "#/definitions/LookerViewNamingPattern"
                         }
                     ]
                 },
                 "view_browse_pattern": {
                     "title": "View Browse Pattern",
-                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name']",
+                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
                     "default": {
                         "pattern": "/{env}/{platform}/{project}/views"
                     },
                     "allOf": [
                         {
-                            "$ref": "#/definitions/LookerNamingPattern"
+                            "$ref": "#/definitions/LookerViewNamingPattern"
                         }
                     ]
                 },
@@ -11120,8 +11120,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-09-08T14:38:54.394125+00:00",
-                        "start_time": "2023-09-07T00:00:00+00:00",
+                        "end_time": "2023-09-11T20:44:44.891827+00:00",
+                        "start_time": "2023-09-10T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -12037,6 +12037,20 @@
         },
         "LookerNamingPattern": {
             "title": "LookerNamingPattern",
+            "type": "object",
+            "properties": {
+                "pattern": {
+                    "title": "Pattern",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "pattern"
+            ],
+            "additionalProperties": false
+        },
+        "LookerViewNamingPattern": {
+            "title": "LookerViewNamingPattern",
             "type": "object",
             "properties": {
                 "pattern": {
