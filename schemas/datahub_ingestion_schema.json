@@ -727,8 +727,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-09-22T06:03:45.085471+00:00",
-                        "start_time": "2023-09-21T00:00:00+00:00",
+                        "end_time": "2023-09-26T19:46:32.155501+00:00",
+                        "start_time": "2023-09-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -1414,6 +1414,54 @@
             "required": [
                 "base_path"
             ],
+            "additionalProperties": false
+        },
+        "mlflow": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "mlflow"
+                    ]
+                },
+                "config": {
+                    "$ref": "#/definitions/mlflow_config"
+                }
+            },
+            "required": [
+                "type",
+                "config"
+            ]
+        },
+        "mlflow_config": {
+            "title": "MLflowConfig",
+            "description": "Any source that produces dataset urns in a single environment should inherit this class",
+            "type": "object",
+            "properties": {
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by this connector belong to",
+                    "default": "PROD",
+                    "type": "string"
+                },
+                "tracking_uri": {
+                    "title": "Tracking Uri",
+                    "description": "Tracking server URI. If not set, an MLflow default tracking_uri is used (local `mlruns/` directory or `MLFLOW_TRACKING_URI` environment variable)",
+                    "type": "string"
+                },
+                "registry_uri": {
+                    "title": "Registry Uri",
+                    "description": "Registry server URI. If not set, an MLflow default registry_uri is used (value of tracking_uri or `MLFLOW_REGISTRY_URI` environment variable)",
+                    "type": "string"
+                },
+                "model_name_separator": {
+                    "title": "Model Name Separator",
+                    "description": "A string which separates model name from its version (e.g. model_1 or model-1)",
+                    "default": "_",
+                    "type": "string"
+                }
+            },
             "additionalProperties": false
         },
         "nifi": {
@@ -3424,6 +3472,30 @@
                     "default": "datahub.ingestion.source.confluent_schema_registry.ConfluentSchemaRegistry",
                     "type": "string"
                 },
+                "meta_mapping": {
+                    "title": "Meta Mapping",
+                    "description": "mapping rules that will be executed against top-level schema properties. Refer to the section below on meta automated mappings.",
+                    "default": {},
+                    "type": "object"
+                },
+                "field_meta_mapping": {
+                    "title": "Field Meta Mapping",
+                    "description": "mapping rules that will be executed against field-level schema properties. Refer to the section below on meta automated mappings.",
+                    "default": {},
+                    "type": "object"
+                },
+                "strip_user_ids_from_email": {
+                    "title": "Strip User Ids From Email",
+                    "description": "Whether or not to strip email id while adding owners using meta mappings.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "tag_prefix": {
+                    "title": "Tag Prefix",
+                    "description": "Prefix added to tags during ingestion.",
+                    "default": "",
+                    "type": "string"
+                },
                 "ignore_warnings_on_schema_type": {
                     "title": "Ignore Warnings On Schema Type",
                     "description": "Disables warnings reported for non-AVRO/Protobuf value or key schemas if set.",
@@ -3434,6 +3506,18 @@
                     "title": "Disable Topic Record Naming Strategy",
                     "description": "Disables the utilization of the TopicRecordNameStrategy for Schema Registry subjects. For more information, visit: https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#handling-differences-between-preregistered-and-client-derived-schemas:~:text=io.confluent.kafka.serializers.subject.TopicRecordNameStrategy",
                     "default": false,
+                    "type": "boolean"
+                },
+                "schema_tags_field": {
+                    "title": "Schema Tags Field",
+                    "description": "The field name in the schema metadata that contains the tags to be added to the dataset.",
+                    "default": "tags",
+                    "type": "string"
+                },
+                "enable_meta_mapping": {
+                    "title": "Enable Meta Mapping",
+                    "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
+                    "default": true,
                     "type": "boolean"
                 }
             },
@@ -9395,8 +9479,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-09-22T06:03:36.395998+00:00",
-                        "start_time": "2023-09-21T00:00:00+00:00",
+                        "end_time": "2023-09-26T19:46:22.068740+00:00",
+                        "start_time": "2023-09-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -12569,8 +12653,7 @@
                 }
             },
             "required": [
-                "database",
-                "platform_instance"
+                "database"
             ],
             "additionalProperties": false
         },
@@ -12600,7 +12683,6 @@
             },
             "required": [
                 "database",
-                "platform_instance",
                 "consumers"
             ],
             "additionalProperties": false
@@ -13540,6 +13622,9 @@
                 },
                 {
                     "$ref": "#/definitions/delta-lake"
+                },
+                {
+                    "$ref": "#/definitions/mlflow"
                 },
                 {
                     "$ref": "#/definitions/nifi"
