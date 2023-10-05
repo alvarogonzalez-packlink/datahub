@@ -3081,6 +3081,12 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "include_notebooks": {
+                    "title": "Include Notebooks",
+                    "description": "Ingest notebooks, represented as DataHub datasets.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "include_ownership": {
                     "title": "Include Ownership",
                     "description": "Option to enable/disable ownership generation for metastores, catalogs, schemas, and tables.",
@@ -3928,8 +3934,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-04T11:07:54.201118+00:00",
-                        "start_time": "2023-10-03T00:00:00+00:00",
+                        "end_time": "2023-10-05T04:11:34.890584+00:00",
+                        "start_time": "2023-10-04T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4667,8 +4673,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-04T11:07:45.489503+00:00",
-                        "start_time": "2023-10-03T00:00:00+00:00",
+                        "end_time": "2023-10-05T04:11:25.723417+00:00",
+                        "start_time": "2023-10-04T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4864,6 +4870,12 @@
                 "upstream_lineage_in_report": {
                     "title": "Upstream Lineage In Report",
                     "description": "Useful for debugging lineage information. Set to True to see the raw lineage created internally.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "exclude_empty_projects": {
+                    "title": "Exclude Empty Projects",
+                    "description": "Option to exclude empty projects from being ingested.",
                     "default": false,
                     "type": "boolean"
                 }
