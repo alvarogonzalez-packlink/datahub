@@ -367,7 +367,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -1063,7 +1063,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -1606,6 +1606,18 @@
                     "default": false,
                     "type": "boolean"
                 },
+                "use_compiled_code": {
+                    "title": "Use Compiled Code",
+                    "description": "When enabled, uses the compiled dbt code instead of the raw dbt node definition.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "test_warnings_are_errors": {
+                    "title": "Test Warnings Are Errors",
+                    "description": "When enabled, dbt test warnings will be treated as failures.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "enable_meta_mapping": {
                     "title": "Enable Meta Mapping",
                     "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
@@ -1829,7 +1841,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -2280,7 +2292,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -2580,7 +2592,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -2815,7 +2827,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -3012,6 +3024,12 @@
                     "description": "Name of the workspace. Default to deployment name present in workspace_url",
                     "type": "string"
                 },
+                "include_metastore": {
+                    "title": "Include Metastore",
+                    "description": "Whether to ingest the workspace's metastore as a container and include it in all urns. Changing this will affect the urns of all entities in the workspace. This will be disabled by default in the future, so it is recommended to set this to `False` for new ingestions. If you have an existing unity catalog ingestion, you'll want to avoid duplicates by soft deleting existing data. If stateful ingestion is enabled, running with `include_metastore: false` should be sufficient. Otherwise, we recommend deleting via the cli: `datahub delete --platform databricks` and re-ingesting with `include_metastore: false`.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "ingest_data_platform_instance_aspect": {
                     "title": "Ingest Data Platform Instance Aspect",
                     "description": "Option to enable/disable ingestion of the data platform instance aspect. The default data platform instance id for a dataset is workspace_name",
@@ -3066,6 +3084,22 @@
                         }
                     ]
                 },
+                "notebook_pattern": {
+                    "title": "Notebook Pattern",
+                    "description": "Regex patterns for notebooks to filter in ingestion, based on notebook *path*. Specify regex to match the entire notebook path in `/<dir>/.../<name>` format. e.g. to match all notebooks in the root Shared directory, use the regex `/Shared/.*`.",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
                 "domain": {
                     "title": "Domain",
                     "description": "Attach domains to catalogs, schemas or tables during ingestion using regex patterns. Domain key can be a guid like *urn:li:domain:ec428203-ce86-4db3-985d-5a8ee6df32ba* or a string like \"Marketing\".) If you provide strings, then datahub will attempt to resolve this name to a guid, and will error out if this fails. There can be multiple domain keys specified.",
@@ -3098,6 +3132,12 @@
                     "description": "Option to enable/disable lineage generation. Currently we have to call a rest call per column to get column level lineage due to the Databrick api which can slow down ingestion. ",
                     "default": true,
                     "type": "boolean"
+                },
+                "column_lineage_column_limit": {
+                    "title": "Column Lineage Column Limit",
+                    "description": "Limit the number of columns to get column level lineage. ",
+                    "default": 300,
+                    "type": "integer"
                 },
                 "include_usage_statistics": {
                     "title": "Include Usage Statistics",
@@ -3561,7 +3601,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -3822,7 +3862,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -3934,8 +3974,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-05T04:11:34.890584+00:00",
-                        "start_time": "2023-10-04T00:00:00+00:00",
+                        "end_time": "2023-10-06T15:58:34.992786+00:00",
+                        "start_time": "2023-10-05T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4268,7 +4308,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -4599,7 +4639,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -4673,8 +4713,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-05T04:11:25.723417+00:00",
-                        "start_time": "2023-10-04T00:00:00+00:00",
+                        "end_time": "2023-10-06T15:58:23.022568+00:00",
+                        "start_time": "2023-10-05T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -5042,6 +5082,18 @@
                 "convert_column_urns_to_lowercase": {
                     "title": "Convert Column Urns To Lowercase",
                     "description": "When enabled, converts column URNs to lowercase to ensure cross-platform compatibility. If `target_platform` is Snowflake, the default is True.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "use_compiled_code": {
+                    "title": "Use Compiled Code",
+                    "description": "When enabled, uses the compiled dbt code instead of the raw dbt node definition.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "test_warnings_are_errors": {
+                    "title": "Test Warnings Are Errors",
+                    "description": "When enabled, dbt test warnings will be treated as failures.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -5677,7 +5729,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -5843,7 +5895,7 @@
                 },
                 "table_pattern": {
                     "title": "Table Pattern",
-                    "description": "regex patterns for tables to filter in ingestion.",
+                    "description": "Regex patterns for tables to filter in ingestion. The table name format is 'region.table'",
                     "default": {
                         "allow": [
                             ".*"
@@ -6373,7 +6425,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -6628,7 +6680,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -6846,7 +6898,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -7442,7 +7494,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -7838,7 +7890,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -8267,7 +8319,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -8715,7 +8767,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -9500,7 +9552,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -10396,7 +10448,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -10793,7 +10845,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -11591,7 +11643,7 @@
                         "partition_profiling_enabled": true,
                         "partition_datetime": null,
                         "use_sampling": true,
-                        "sample_size": 1000
+                        "sample_size": 10000
                     },
                     "allOf": [
                         {
@@ -11932,14 +11984,14 @@
                 },
                 "use_sampling": {
                     "title": "Use Sampling",
-                    "description": "Whether to profile column level stats on sample of table. Only BigQuery supports this. If enabled, profiling is done on rows sampled from table. Sampling is not done for smaller tables. ",
+                    "description": "Whether to profile column level stats on sample of table. Only BigQuery and Snowflake support this. If enabled, profiling is done on rows sampled from table. Sampling is not done for smaller tables. ",
                     "default": true,
                     "type": "boolean"
                 },
                 "sample_size": {
                     "title": "Sample Size",
                     "description": "Number of rows to be sampled from table for column level profiling.Applicable only if `use_sampling` is set to True.",
-                    "default": 1000,
+                    "default": 10000,
                     "type": "integer"
                 }
             },
