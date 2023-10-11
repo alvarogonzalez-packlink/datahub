@@ -3974,8 +3974,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-10T21:45:10.418078+00:00",
-                        "start_time": "2023-10-09T00:00:00+00:00",
+                        "end_time": "2023-10-11T21:48:42.724021+00:00",
+                        "start_time": "2023-10-10T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4411,6 +4411,12 @@
                     "description": "Whether `schema_pattern` is matched against fully qualified schema name `<database>.<schema>`.",
                     "default": false,
                     "type": "boolean"
+                },
+                "extract_column_level_lineage": {
+                    "title": "Extract Column Level Lineage",
+                    "description": "Whether to extract column level lineage.",
+                    "default": true,
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -4713,8 +4719,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-10T21:45:02.233508+00:00",
-                        "start_time": "2023-10-09T00:00:00+00:00",
+                        "end_time": "2023-10-11T21:48:34.628995+00:00",
+                        "start_time": "2023-10-10T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
