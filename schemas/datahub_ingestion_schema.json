@@ -220,6 +220,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -916,6 +922,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Enable to convert the SQL Server assets urns to lowercase",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -1158,12 +1170,6 @@
                             "$ref": "#/definitions/AllowDenyPattern"
                         }
                     ]
-                },
-                "convert_urns_to_lowercase": {
-                    "title": "Convert Urns To Lowercase",
-                    "description": "Enable to convert the SQL Server assets urns to lowercase",
-                    "default": false,
-                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -1694,6 +1700,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -2151,6 +2163,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -2445,6 +2463,12 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -2680,6 +2704,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -2915,6 +2945,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "enable_stateful_profiling": {
                     "title": "Enable Stateful Profiling",
                     "description": "Enable stateful profiling. This will store profiling timestamps per dataset after successful profiling. and will not run profiling again in subsequent run if table has not been updated. ",
@@ -3454,6 +3490,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -3715,6 +3757,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -3974,8 +4022,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-11T21:48:42.724021+00:00",
-                        "start_time": "2023-10-10T00:00:00+00:00",
+                        "end_time": "2023-10-12T13:12:47.305671+00:00",
+                        "start_time": "2023-10-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4165,6 +4213,12 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "platform_instance": {
                     "title": "Platform Instance",
@@ -4498,6 +4552,12 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -4674,7 +4734,7 @@
                 "sharded_table_pattern": {
                     "title": "Sharded Table Pattern",
                     "description": "The regex pattern to match sharded tables and group as one table. This is a very low level config parameter, only change if you know what you are doing, ",
-                    "default": "((.+)[_$])?(\\d{8})$",
+                    "default": "((.+\\D)[_$]?)?(\\d\\d\\d\\d(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01]))$",
                     "deprecated": true,
                     "type": "string"
                 },
@@ -4719,8 +4779,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-11T21:48:34.628995+00:00",
-                        "start_time": "2023-10-10T00:00:00+00:00",
+                        "end_time": "2023-10-12T13:12:38.619209+00:00",
+                        "start_time": "2023-10-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4853,12 +4913,6 @@
                 "extract_lineage_from_catalog": {
                     "title": "Extract Lineage From Catalog",
                     "description": "This flag enables the data lineage extraction from Data Lineage API exposed by Google Data Catalog. NOTE: This extractor can't build views lineage. It's recommended to enable the view's DDL parsing. Read the docs to have more information about: https://cloud.google.com/data-catalog/docs/concepts/about-data-lineage",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "convert_urns_to_lowercase": {
-                    "title": "Convert Urns To Lowercase",
-                    "description": "Convert urns to lowercase.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -5588,6 +5642,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -6289,6 +6349,12 @@
                     "type": "string",
                     "format": "date-time"
                 },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "platform_instance": {
                     "title": "Platform Instance",
                     "description": "The instance of the platform that all assets produced by this recipe belong to",
@@ -6539,6 +6605,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -6757,6 +6829,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -7353,6 +7431,11 @@
                     "default": false,
                     "type": "boolean"
                 },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -7618,11 +7701,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "convert_urns_to_lowercase": {
-                    "title": "Convert Urns To Lowercase",
-                    "default": true,
-                    "type": "boolean"
-                },
                 "include_usage_stats": {
                     "title": "Include Usage Stats",
                     "description": "If enabled, populates the snowflake usage statistics. Requires appropriate grants given to the role.",
@@ -7747,6 +7825,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -8178,6 +8262,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -8631,6 +8721,12 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "platform_instance": {
                     "title": "Platform Instance",
@@ -9266,6 +9362,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -9410,6 +9512,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
@@ -10313,6 +10421,12 @@
                     "type": "string",
                     "format": "date-time"
                 },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "platform_instance": {
                     "title": "Platform Instance",
                     "description": "The instance of the platform that all assets produced by this recipe belong to",
@@ -10707,6 +10821,12 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "platform_instance": {
                     "title": "Platform Instance",
@@ -11505,6 +11625,12 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "convert_urns_to_lowercase": {
+                    "title": "Convert Urns To Lowercase",
+                    "description": "Whether to convert dataset urns to lowercase.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "env": {
                     "title": "Env",
                     "description": "The environment that all assets produced by this connector belong to",
