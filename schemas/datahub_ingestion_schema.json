@@ -4022,8 +4022,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-13T21:09:15.961314+00:00",
-                        "start_time": "2023-10-12T00:00:00+00:00",
+                        "end_time": "2023-10-17T06:25:56.545517+00:00",
+                        "start_time": "2023-10-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4779,8 +4779,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-13T21:09:07.793477+00:00",
-                        "start_time": "2023-10-12T00:00:00+00:00",
+                        "end_time": "2023-10-17T06:25:46.425763+00:00",
+                        "start_time": "2023-10-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -10974,8 +10974,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-13T21:09:16.255778+00:00",
-                        "start_time": "2023-10-12T00:00:00+00:00",
+                        "end_time": "2023-10-17T06:25:56.907972+00:00",
+                        "start_time": "2023-10-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11005,6 +11005,12 @@
                     "title": "Include Usage Statistics",
                     "description": "Generate usage statistic.",
                     "default": false,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
+                    "default": true,
                     "type": "boolean"
                 },
                 "include_table_lineage": {
