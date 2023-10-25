@@ -246,8 +246,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-24T15:14:31.557199+00:00",
-                        "start_time": "2023-10-23T00:00:00+00:00",
+                        "end_time": "2023-10-25T06:03:50.390829+00:00",
+                        "start_time": "2023-10-24T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -634,8 +634,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-24T15:14:20.242873+00:00",
-                        "start_time": "2023-10-23T00:00:00+00:00",
+                        "end_time": "2023-10-25T06:03:42.317752+00:00",
+                        "start_time": "2023-10-24T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4194,6 +4194,20 @@
                     "description": "Whether to update createdon timestamp and kafka offset despite parse errors. Enable if you want to ignore the errors.",
                     "default": false,
                     "type": "boolean"
+                },
+                "pull_from_datahub_api": {
+                    "title": "Pull From Datahub Api",
+                    "description": "Use the DataHub API to fetch versioned aspects.",
+                    "default": false,
+                    "hidden_from_docs": true,
+                    "type": "boolean"
+                },
+                "max_workers": {
+                    "title": "Max Workers",
+                    "description": "Number of worker threads to use for datahub api ingestion.",
+                    "default": 10,
+                    "hidden_from_docs": true,
+                    "type": "integer"
                 }
             }
         },
@@ -7879,8 +7893,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-24T15:14:31.942286+00:00",
-                        "start_time": "2023-10-23T00:00:00+00:00",
+                        "end_time": "2023-10-25T06:03:50.686592+00:00",
+                        "start_time": "2023-10-24T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
