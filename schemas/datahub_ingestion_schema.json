@@ -471,6 +471,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -584,6 +596,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -780,24 +810,6 @@
                     "default": true,
                     "type": "boolean"
                 },
-                "incremental_lineage": {
-                    "title": "Incremental Lineage",
-                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": true,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "enable_stateful_lineage_ingestion": {
-                    "title": "Enable Stateful Lineage Ingestion",
-                    "description": "Enable stateful lineage ingestion. This will store lineage window timestamps after successful lineage ingestion. and will not run lineage ingestion for same timestamps in subsequent run. ",
-                    "default": true,
-                    "type": "boolean"
-                },
                 "top_n_queries": {
                     "title": "Top N Queries",
                     "description": "Number of top queries to save to each table.",
@@ -853,6 +865,18 @@
                 "apply_view_usage_to_tables": {
                     "title": "Apply View Usage To Tables",
                     "description": "Whether to apply view's usage to its base tables. If set to True, usage is applied to base tables only.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -971,6 +995,24 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "If enabled, populates the snowflake view->table and table->view lineages. Requires appropriate grants given to the role, and include_table_lineage to be True. view->table lineage requires Snowflake Enterprise Edition or above.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates view->view and table->view column lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "profiling": {
                     "title": "Profiling",
                     "default": {
@@ -1086,12 +1128,6 @@
                     "default": true,
                     "type": "boolean"
                 },
-                "include_view_lineage": {
-                    "title": "Include View Lineage",
-                    "description": "If enabled, populates the snowflake view->table and table->view lineages. Requires appropriate grants given to the role, and include_table_lineage to be True. view->table lineage requires Snowflake Enterprise Edition or above.",
-                    "default": true,
-                    "type": "boolean"
-                },
                 "connect_args": {
                     "title": "Connect Args",
                     "description": "Connect args to pass to Snowflake SqlAlchemy driver",
@@ -1141,12 +1177,6 @@
                 "include_column_lineage": {
                     "title": "Include Column Lineage",
                     "description": "Populates table->table and view->table column lineage. Requires appropriate grants given to the role and the Snowflake Enterprise Edition or above.",
-                    "default": true,
-                    "type": "boolean"
-                },
-                "include_view_column_lineage": {
-                    "title": "Include View Column Lineage",
-                    "description": "Populates view->view and table->view column lineage using DataHub's sql parser.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -1801,6 +1831,18 @@
                         "type": "string"
                     }
                 },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -1908,6 +1950,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -2401,6 +2461,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -2516,6 +2588,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -2651,6 +2741,18 @@
                     "type": "string",
                     "format": "date-time"
                 },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -2767,6 +2869,24 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "profiling": {
                     "title": "Profiling",
                     "default": {
@@ -2873,7 +2993,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-26T10:33:22.025699+00:00",
+                        "end_time": "2023-10-26T17:06:57.030432+00:00",
                         "start_time": "2023-10-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -2906,22 +3026,10 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "use_file_backed_cache": {
-                    "title": "Use File Backed Cache",
-                    "description": "Whether to use a file backed cache for the view definitions.",
-                    "default": true,
-                    "type": "boolean"
-                },
                 "include_table_lineage": {
                     "title": "Include Table Lineage",
                     "description": "Whether to include table lineage in the ingestion. This requires to have the table lineage feature enabled.",
                     "default": false,
-                    "type": "boolean"
-                },
-                "include_view_lineage": {
-                    "title": "Include View Lineage",
-                    "description": "Whether to include view lineage in the ingestion. This requires to have the view lineage feature enabled.",
-                    "default": true,
                     "type": "boolean"
                 }
             },
@@ -3639,6 +3747,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -3756,6 +3876,24 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "profiling": {
                     "title": "Profiling",
                     "default": {
@@ -3860,12 +3998,6 @@
                     "description": "Initial database used to query for the list of databases, when ingesting multiple databases. Note: this is not used if `database` or `sqlalchemy_uri` are provided.",
                     "default": "postgres",
                     "type": "string"
-                },
-                "include_view_lineage": {
-                    "title": "Include View Lineage",
-                    "description": "Include table lineage for views",
-                    "default": false,
-                    "type": "boolean"
                 }
             },
             "required": [
@@ -3896,6 +4028,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Enable to convert the SQL Server assets urns to lowercase",
@@ -4009,6 +4153,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -4735,6 +4897,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -4848,6 +5022,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -5196,6 +5388,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -5309,6 +5513,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -5713,6 +5935,18 @@
                         "type": "string"
                     }
                 },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -5822,6 +6056,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -5976,6 +6228,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -6089,6 +6353,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -6217,6 +6499,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -6315,6 +6609,12 @@
                         "$ref": "#/definitions/AllowDenyPattern"
                     }
                 },
+                "include_views": {
+                    "title": "Include Views",
+                    "description": "Whether views should be ingested.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "include_tables": {
                     "title": "Include Tables",
                     "description": "Whether tables should be ingested.",
@@ -6324,6 +6624,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -6774,6 +7092,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -6890,6 +7220,24 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "If the source supports it, include view lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "profiling": {
                     "title": "Profiling",
                     "default": {
@@ -6997,12 +7345,6 @@
                 "include_models": {
                     "title": "Include Models",
                     "description": "Whether Models should be ingested.",
-                    "default": true,
-                    "type": "boolean"
-                },
-                "include_view_lineage": {
-                    "title": "Include View Lineage",
-                    "description": "If the source supports it, include view lineage to the underlying storage location.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -7191,6 +7533,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -7304,6 +7658,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -7559,6 +7931,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -7672,6 +8056,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -7798,6 +8200,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -7911,6 +8325,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -8349,6 +8781,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -8462,6 +8906,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -8652,6 +9114,18 @@
                     "type": "string",
                     "format": "date-time"
                 },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -8760,6 +9234,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -9506,7 +9998,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-26T10:33:21.663906+00:00",
+                        "end_time": "2023-10-26T17:06:56.597893+00:00",
                         "start_time": "2023-10-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -10117,24 +10609,6 @@
                     "default": true,
                     "type": "boolean"
                 },
-                "incremental_lineage": {
-                    "title": "Incremental Lineage",
-                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.  This config works with rest-sink only.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "enable_stateful_lineage_ingestion": {
-                    "title": "Enable Stateful Lineage Ingestion",
-                    "description": "Enable stateful lineage ingestion. This will store lineage window timestamps after successful lineage ingestion. and will not run lineage ingestion for same timestamps in subsequent run. ",
-                    "default": true,
-                    "type": "boolean"
-                },
                 "bucket_duration": {
                     "description": "Size of the time window to aggregate usage stats.",
                     "default": "DAY",
@@ -10240,6 +10714,18 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.  This config works with rest-sink only.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
@@ -10349,6 +10835,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -10762,24 +11266,6 @@
                     "default": true,
                     "type": "boolean"
                 },
-                "incremental_lineage": {
-                    "title": "Incremental Lineage",
-                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": true,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "enable_stateful_lineage_ingestion": {
-                    "title": "Enable Stateful Lineage Ingestion",
-                    "description": "Enable stateful lineage ingestion. This will store lineage window timestamps after successful lineage ingestion. and will not run lineage ingestion for same timestamps in subsequent run. ",
-                    "default": true,
-                    "type": "boolean"
-                },
                 "bucket_duration": {
                     "description": "Size of the time window to aggregate usage stats.",
                     "default": "DAY",
@@ -10805,6 +11291,18 @@
                     "title": "Enable Stateful Usage Ingestion",
                     "description": "Enable stateful lineage ingestion. This will store usage window timestamps after successful usage ingestion. and will not run usage ingestion for same timestamps in subsequent run. ",
                     "default": true,
+                    "type": "boolean"
+                },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
                     "type": "boolean"
                 },
                 "convert_urns_to_lowercase": {
@@ -10923,6 +11421,24 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "profiling": {
                     "title": "Profiling",
                     "default": {
@@ -11034,7 +11550,7 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-10-26T10:33:11.607036+00:00",
+                        "end_time": "2023-10-26T17:06:45.232560+00:00",
                         "start_time": "2023-10-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -11295,6 +11811,18 @@
                     "type": "string",
                     "format": "date-time"
                 },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -11402,6 +11930,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -11622,6 +12168,18 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -11735,6 +12293,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -11863,6 +12439,18 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "incremental_lineage": {
+                    "title": "Incremental Lineage",
+                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parser_use_external_process": {
+                    "title": "Sql Parser Use External Process",
+                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
+                    "default": false,
+                    "type": "boolean"
+                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -11976,6 +12564,24 @@
                 "include_table_location_lineage": {
                     "title": "Include Table Location Lineage",
                     "description": "If the source supports it, include table lineage to the underlying storage location.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_lineage": {
+                    "title": "Include View Lineage",
+                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "include_view_column_lineage": {
+                    "title": "Include View Column Lineage",
+                    "description": "Populates column-level lineage for  view->view and table->view lineage using DataHub's sql parser. Requires `include_view_lineage` to be enabled.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "use_file_backed_cache": {
+                    "title": "Use File Backed Cache",
+                    "description": "Whether to use a file backed cache for the view definitions.",
                     "default": true,
                     "type": "boolean"
                 },
