@@ -1364,8 +1364,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-07T01:37:57.955004+00:00",
-                        "start_time": "2023-11-06T00:00:00+00:00",
+                        "end_time": "2023-11-14T00:43:22.230806+00:00",
+                        "start_time": "2023-11-13T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3447,7 +3447,7 @@
             "properties": {
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
-                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "description": "When enabled, emits incremental/patch lineage for non-dbt entities. When disabled, re-states lineage on each run.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -3544,11 +3544,23 @@
                     "default": {},
                     "type": "object"
                 },
+                "enable_meta_mapping": {
+                    "title": "Enable Meta Mapping",
+                    "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "query_tag_mapping": {
                     "title": "Query Tag Mapping",
                     "description": "mapping rules that will be executed against dbt query_tag meta properties. Refer to the section below on dbt meta automated mappings.",
                     "default": {},
                     "type": "object"
+                },
+                "enable_query_tag_mapping": {
+                    "title": "Enable Query Tag Mapping",
+                    "description": "When enabled, applies the mappings that are defined through the `query_tag_mapping` directives.",
+                    "default": true,
+                    "type": "boolean"
                 },
                 "write_semantics": {
                     "title": "Write Semantics",
@@ -3597,16 +3609,16 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "enable_meta_mapping": {
-                    "title": "Enable Meta Mapping",
-                    "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
+                "infer_dbt_schemas": {
+                    "title": "Infer Dbt Schemas",
+                    "description": "When enabled, schemas will be inferred from the dbt node definition.",
                     "default": true,
                     "type": "boolean"
                 },
-                "enable_query_tag_mapping": {
-                    "title": "Enable Query Tag Mapping",
-                    "description": "When enabled, applies the mappings that are defined through the `query_tag_mapping` directives.",
-                    "default": true,
+                "include_column_lineage": {
+                    "title": "Include Column Lineage",
+                    "description": "When enabled, column-level lineage will be extracted from the dbt node definition. Requires `infer_dbt_schemas` to be enabled. If you run into issues where the column name casing does not match up with properly, providing a datahub_api or using the rest sink will improve accuracy.",
+                    "default": false,
                     "type": "boolean"
                 },
                 "metadata_endpoint": {
@@ -5491,8 +5503,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-07T01:37:57.619392+00:00",
-                        "start_time": "2023-11-06T00:00:00+00:00",
+                        "end_time": "2023-11-14T00:43:21.906518+00:00",
+                        "start_time": "2023-11-13T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -5943,6 +5955,113 @@
                     "$ref": "#/definitions/CollapseUrns"
                 }
             },
+            "additionalProperties": false
+        },
+        "fivetran": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "fivetran"
+                    ]
+                },
+                "config": {
+                    "$ref": "#/definitions/fivetran_config"
+                }
+            },
+            "required": [
+                "type",
+                "config"
+            ]
+        },
+        "fivetran_config": {
+            "title": "FivetranSourceConfig",
+            "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
+            "type": "object",
+            "properties": {
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by this connector belong to",
+                    "default": "PROD",
+                    "type": "string"
+                },
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
+                    "type": "string"
+                },
+                "stateful_ingestion": {
+                    "title": "Stateful Ingestion",
+                    "description": "Airbyte Stateful Ingestion Config.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StatefulStaleMetadataRemovalConfig"
+                        }
+                    ]
+                },
+                "fivetran_log_config": {
+                    "title": "Fivetran Log Config",
+                    "description": "Fivetran log connector destination server configurations.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/FivetranLogConfig"
+                        }
+                    ]
+                },
+                "connector_patterns": {
+                    "title": "Connector Patterns",
+                    "description": "Regex patterns for connectors to filter in ingestion.",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
+                "include_column_lineage": {
+                    "title": "Include Column Lineage",
+                    "description": "Populates table->table column lineage.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "sources_to_database": {
+                    "title": "Sources To Database",
+                    "description": "A mapping of the connector's all sources to its database. Use connector id as key.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "sources_to_platform_instance": {
+                    "title": "Sources To Platform Instance",
+                    "description": "A mapping of the connector's all sources dataset to platform instance. Use connector id as key.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/PlatformDetail"
+                    }
+                },
+                "destination_to_platform_instance": {
+                    "title": "Destination To Platform Instance",
+                    "description": "A mapping of destination dataset to platform instance. Use destination id as key.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/PlatformDetail"
+                    }
+                }
+            },
+            "required": [
+                "fivetran_log_config"
+            ],
             "additionalProperties": false
         },
         "mssql": {
@@ -8776,8 +8895,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-07T01:37:49.669424+00:00",
-                        "start_time": "2023-11-06T00:00:00+00:00",
+                        "end_time": "2023-11-14T00:43:13.981195+00:00",
+                        "start_time": "2023-11-13T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9013,6 +9132,11 @@
                     "description": "The instance of the platform that all assets produced by this recipe belong to",
                     "type": "string"
                 },
+                "platform": {
+                    "title": "Platform",
+                    "default": "salesforce",
+                    "type": "string"
+                },
                 "auth": {
                     "default": "USERNAME_PASSWORD",
                     "allOf": [
@@ -9124,11 +9248,6 @@
                             "$ref": "#/definitions/AllowDenyPattern"
                         }
                     ]
-                },
-                "platform": {
-                    "title": "Platform",
-                    "default": "salesforce",
-                    "type": "string"
                 }
             },
             "additionalProperties": false
@@ -9874,6 +9993,18 @@
                     "default": "datahub.ingestion.source.confluent_schema_registry.ConfluentSchemaRegistry",
                     "type": "string"
                 },
+                "schema_tags_field": {
+                    "title": "Schema Tags Field",
+                    "description": "The field name in the schema metadata that contains the tags to be added to the dataset.",
+                    "default": "tags",
+                    "type": "string"
+                },
+                "enable_meta_mapping": {
+                    "title": "Enable Meta Mapping",
+                    "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "meta_mapping": {
                     "title": "Meta Mapping",
                     "description": "mapping rules that will be executed against top-level schema properties. Refer to the section below on meta automated mappings.",
@@ -9908,18 +10039,6 @@
                     "title": "Disable Topic Record Naming Strategy",
                     "description": "Disables the utilization of the TopicRecordNameStrategy for Schema Registry subjects. For more information, visit: https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#handling-differences-between-preregistered-and-client-derived-schemas:~:text=io.confluent.kafka.serializers.subject.TopicRecordNameStrategy",
                     "default": false,
-                    "type": "boolean"
-                },
-                "schema_tags_field": {
-                    "title": "Schema Tags Field",
-                    "description": "The field name in the schema metadata that contains the tags to be added to the dataset.",
-                    "default": "tags",
-                    "type": "string"
-                },
-                "enable_meta_mapping": {
-                    "title": "Enable Meta Mapping",
-                    "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
-                    "default": true,
                     "type": "boolean"
                 }
             },
@@ -10269,7 +10388,7 @@
             "properties": {
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
-                    "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
+                    "description": "When enabled, emits incremental/patch lineage for non-dbt entities. When disabled, re-states lineage on each run.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -10366,11 +10485,23 @@
                     "default": {},
                     "type": "object"
                 },
+                "enable_meta_mapping": {
+                    "title": "Enable Meta Mapping",
+                    "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "query_tag_mapping": {
                     "title": "Query Tag Mapping",
                     "description": "mapping rules that will be executed against dbt query_tag meta properties. Refer to the section below on dbt meta automated mappings.",
                     "default": {},
                     "type": "object"
+                },
+                "enable_query_tag_mapping": {
+                    "title": "Enable Query Tag Mapping",
+                    "description": "When enabled, applies the mappings that are defined through the `query_tag_mapping` directives.",
+                    "default": true,
+                    "type": "boolean"
                 },
                 "write_semantics": {
                     "title": "Write Semantics",
@@ -10419,16 +10550,16 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "enable_meta_mapping": {
-                    "title": "Enable Meta Mapping",
-                    "description": "When enabled, applies the mappings that are defined through the meta_mapping directives.",
+                "infer_dbt_schemas": {
+                    "title": "Infer Dbt Schemas",
+                    "description": "When enabled, schemas will be inferred from the dbt node definition.",
                     "default": true,
                     "type": "boolean"
                 },
-                "enable_query_tag_mapping": {
-                    "title": "Enable Query Tag Mapping",
-                    "description": "When enabled, applies the mappings that are defined through the `query_tag_mapping` directives.",
-                    "default": true,
+                "include_column_lineage": {
+                    "title": "Include Column Lineage",
+                    "description": "When enabled, column-level lineage will be extracted from the dbt node definition. Requires `infer_dbt_schemas` to be enabled. If you run into issues where the column name casing does not match up with properly, providing a datahub_api or using the rest sink will improve accuracy.",
+                    "default": false,
                     "type": "boolean"
                 },
                 "manifest_path": {
@@ -11382,7 +11513,7 @@
                         "max_checkpoint_state_size": 16777216,
                         "state_provider": {
                             "type": "datahub",
-                            "config": null
+                            "config": {}
                         },
                         "ignore_old_state": false,
                         "ignore_new_state": false
@@ -12573,16 +12704,16 @@
                     "description": "Snowflake role.",
                     "type": "string"
                 },
+                "connect_args": {
+                    "title": "Connect Args",
+                    "description": "Connect args to pass to Snowflake SqlAlchemy driver",
+                    "type": "object"
+                },
                 "include_table_lineage": {
                     "title": "Include Table Lineage",
                     "description": "If enabled, populates the snowflake table-to-table and s3-to-snowflake table lineage. Requires appropriate grants given to the role and Snowflake Enterprise Edition or above.",
                     "default": true,
                     "type": "boolean"
-                },
-                "connect_args": {
-                    "title": "Connect Args",
-                    "description": "Connect args to pass to Snowflake SqlAlchemy driver",
-                    "type": "object"
                 },
                 "database_pattern": {
                     "title": "Database Pattern",
@@ -12811,7 +12942,9 @@
                 },
                 "config": {
                     "title": "Config",
-                    "description": "The configuration required for initializing the state provider. Default: The datahub_api config if set at pipeline level. Otherwise, the default DatahubClientConfig. See the defaults (https://github.com/datahub-project/datahub/blob/master/metadata-ingestion/src/datahub/ingestion/graph/client.py#L19)."
+                    "description": "The configuration required for initializing the state provider. Default: The datahub_api config if set at pipeline level. Otherwise, the default DatahubClientConfig. See the defaults (https://github.com/datahub-project/datahub/blob/master/metadata-ingestion/src/datahub/ingestion/graph/client.py#L19).",
+                    "default": {},
+                    "type": "object"
                 }
             },
             "required": [
@@ -13835,6 +13968,194 @@
             },
             "additionalProperties": false
         },
+        "OAuthIdentityProvider": {
+            "title": "OAuthIdentityProvider",
+            "description": "An enumeration.",
+            "enum": [
+                "microsoft",
+                "okta"
+            ]
+        },
+        "OAuthConfiguration": {
+            "title": "OAuthConfiguration",
+            "type": "object",
+            "properties": {
+                "provider": {
+                    "description": "Identity provider for oauth.Supported providers are microsoft and okta.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/OAuthIdentityProvider"
+                        }
+                    ]
+                },
+                "authority_url": {
+                    "title": "Authority Url",
+                    "description": "Authority url of your identity provider",
+                    "type": "string"
+                },
+                "client_id": {
+                    "title": "Client Id",
+                    "description": "client id of your registered application",
+                    "type": "string"
+                },
+                "scopes": {
+                    "title": "Scopes",
+                    "description": "scopes required to connect to snowflake",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "use_certificate": {
+                    "title": "Use Certificate",
+                    "description": "Do you want to use certificate and private key to authenticate using oauth",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "client_secret": {
+                    "title": "Client Secret",
+                    "description": "client secret of the application if use_certificate = false",
+                    "type": "string",
+                    "writeOnly": true,
+                    "format": "password"
+                },
+                "encoded_oauth_public_key": {
+                    "title": "Encoded Oauth Public Key",
+                    "description": "base64 encoded certificate content if use_certificate = true",
+                    "type": "string"
+                },
+                "encoded_oauth_private_key": {
+                    "title": "Encoded Oauth Private Key",
+                    "description": "base64 encoded private key content if use_certificate = true",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "provider",
+                "authority_url",
+                "client_id",
+                "scopes"
+            ],
+            "additionalProperties": false
+        },
+        "DestinationConfig": {
+            "title": "DestinationConfig",
+            "type": "object",
+            "properties": {
+                "options": {
+                    "title": "Options",
+                    "description": "Any options specified here will be passed to [SQLAlchemy.create_engine](https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine) as kwargs.",
+                    "type": "object"
+                },
+                "scheme": {
+                    "title": "Scheme",
+                    "default": "snowflake",
+                    "type": "string"
+                },
+                "username": {
+                    "title": "Username",
+                    "description": "Snowflake username.",
+                    "type": "string"
+                },
+                "password": {
+                    "title": "Password",
+                    "description": "Snowflake password.",
+                    "type": "string",
+                    "writeOnly": true,
+                    "format": "password"
+                },
+                "private_key": {
+                    "title": "Private Key",
+                    "description": "Private key in a form of '-----BEGIN PRIVATE KEY-----\\nprivate-key\\n-----END PRIVATE KEY-----\\n' if using key pair authentication. Encrypted version of private key will be in a form of '-----BEGIN ENCRYPTED PRIVATE KEY-----\\nencrypted-private-key\\n-----END ECNCRYPTED PRIVATE KEY-----\\n' See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "type": "string"
+                },
+                "private_key_path": {
+                    "title": "Private Key Path",
+                    "description": "The path to the private key if using key pair authentication. Ignored if `private_key` is set. See: https://docs.snowflake.com/en/user-guide/key-pair-auth.html",
+                    "type": "string"
+                },
+                "private_key_password": {
+                    "title": "Private Key Password",
+                    "description": "Password for your private key. Required if using key pair authentication with encrypted private key.",
+                    "type": "string",
+                    "writeOnly": true,
+                    "format": "password"
+                },
+                "oauth_config": {
+                    "title": "Oauth Config",
+                    "description": "oauth configuration - https://docs.snowflake.com/en/user-guide/python-connector-example.html#connecting-with-oauth",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/OAuthConfiguration"
+                        }
+                    ]
+                },
+                "authentication_type": {
+                    "title": "Authentication Type",
+                    "description": "The type of authenticator to use when connecting to Snowflake. Supports \"DEFAULT_AUTHENTICATOR\", \"OAUTH_AUTHENTICATOR\", \"EXTERNAL_BROWSER_AUTHENTICATOR\" and \"KEY_PAIR_AUTHENTICATOR\".",
+                    "default": "DEFAULT_AUTHENTICATOR",
+                    "type": "string"
+                },
+                "account_id": {
+                    "title": "Account Id",
+                    "description": "Snowflake account identifier. e.g. xy12345,  xy12345.us-east-2.aws, xy12345.us-central1.gcp, xy12345.central-us.azure, xy12345.us-west-2.privatelink. Refer [Account Identifiers](https://docs.snowflake.com/en/user-guide/admin-account-identifier.html#format-2-legacy-account-locator-in-a-region) for more details.",
+                    "type": "string"
+                },
+                "warehouse": {
+                    "title": "Warehouse",
+                    "description": "Snowflake warehouse.",
+                    "type": "string"
+                },
+                "role": {
+                    "title": "Role",
+                    "description": "Snowflake role.",
+                    "type": "string"
+                },
+                "connect_args": {
+                    "title": "Connect Args",
+                    "description": "Connect args to pass to Snowflake SqlAlchemy driver",
+                    "type": "object"
+                },
+                "database": {
+                    "title": "Database",
+                    "description": "The fivetran connector log database.",
+                    "type": "string"
+                },
+                "log_schema": {
+                    "title": "Log Schema",
+                    "description": "The fivetran connector log schema.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "account_id",
+                "database",
+                "log_schema"
+            ],
+            "additionalProperties": false
+        },
+        "FivetranLogConfig": {
+            "title": "FivetranLogConfig",
+            "type": "object",
+            "properties": {
+                "destination_platform": {
+                    "title": "Destination Platform",
+                    "description": "The destination platform where fivetran connector log tables are dumped.",
+                    "default": "snowflake",
+                    "type": "string"
+                },
+                "destination_config": {
+                    "title": "Destination Config",
+                    "description": "If destination platform is 'snowflake', provide snowflake configuration.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DestinationConfig"
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
         "PlatformDetail": {
             "title": "PlatformDetail",
             "type": "object",
@@ -14590,76 +14911,6 @@
             },
             "additionalProperties": false
         },
-        "OAuthIdentityProvider": {
-            "title": "OAuthIdentityProvider",
-            "description": "An enumeration.",
-            "enum": [
-                "microsoft",
-                "okta"
-            ]
-        },
-        "OAuthConfiguration": {
-            "title": "OAuthConfiguration",
-            "type": "object",
-            "properties": {
-                "provider": {
-                    "description": "Identity provider for oauth.Supported providers are microsoft and okta.",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/OAuthIdentityProvider"
-                        }
-                    ]
-                },
-                "authority_url": {
-                    "title": "Authority Url",
-                    "description": "Authority url of your identity provider",
-                    "type": "string"
-                },
-                "client_id": {
-                    "title": "Client Id",
-                    "description": "client id of your registered application",
-                    "type": "string"
-                },
-                "scopes": {
-                    "title": "Scopes",
-                    "description": "scopes required to connect to snowflake",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "use_certificate": {
-                    "title": "Use Certificate",
-                    "description": "Do you want to use certificate and private key to authenticate using oauth",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "client_secret": {
-                    "title": "Client Secret",
-                    "description": "client secret of the application if use_certificate = false",
-                    "type": "string",
-                    "writeOnly": true,
-                    "format": "password"
-                },
-                "encoded_oauth_public_key": {
-                    "title": "Encoded Oauth Public Key",
-                    "description": "base64 encoded certificate content if use_certificate = true",
-                    "type": "string"
-                },
-                "encoded_oauth_private_key": {
-                    "title": "Encoded Oauth Private Key",
-                    "description": "base64 encoded private key content if use_certificate = true",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "provider",
-                "authority_url",
-                "client_id",
-                "scopes"
-            ],
-            "additionalProperties": false
-        },
         "TagOption": {
             "title": "TagOption",
             "description": "An enumeration.",
@@ -14850,6 +15101,9 @@
                 },
                 {
                     "$ref": "#/definitions/elasticsearch"
+                },
+                {
+                    "$ref": "#/definitions/fivetran"
                 },
                 {
                     "$ref": "#/definitions/mssql"
