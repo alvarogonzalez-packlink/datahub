@@ -5399,7 +5399,7 @@
                 },
                 "include_view_lineage": {
                     "title": "Include View Lineage",
-                    "description": "Populates view->view and table->view lineage using DataHub's sql parser.",
+                    "description": "Whether to include view lineage in the ingestion. This requires to have the view lineage feature enabled.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -5506,6 +5506,48 @@
                             ".*"
                         ],
                         "deny": [
+                            "All",
+                            "Crashdumps",
+                            "Default",
+                            "DemoNow_Monitor",
+                            "EXTUSER",
+                            "External_AP",
+                            "GLOBAL_FUNCTIONS",
+                            "LockLogShredder",
+                            "PUBLIC",
+                            "SQLJ",
+                            "SYSBAR",
+                            "SYSJDBC",
+                            "SYSLIB",
+                            "SYSSPATIAL",
+                            "SYSUDTLIB",
+                            "SYSUIF",
+                            "SysAdmin",
+                            "Sys_Calendar",
+                            "SystemFe",
+                            "TDBCMgmt",
+                            "TDMaps",
+                            "TDPUSER",
+                            "TDQCD",
+                            "TDStats",
+                            "TD_ANALYTICS_DB",
+                            "TD_SERVER_DB",
+                            "TD_SYSFNLIB",
+                            "TD_SYSGPL",
+                            "TD_SYSXML",
+                            "TDaaS_BAR",
+                            "TDaaS_DB",
+                            "TDaaS_Maint",
+                            "TDaaS_Monitor",
+                            "TDaaS_Support",
+                            "TDaaS_TDBCMgmt1",
+                            "TDaaS_TDBCMgmt2",
+                            "dbcmngr",
+                            "mldb",
+                            "system",
+                            "tapidb",
+                            "tdwm",
+                            "val",
                             "dbc"
                         ],
                         "ignoreCase": true
@@ -5516,13 +5558,21 @@
                         }
                     ]
                 },
+                "databases": {
+                    "title": "Databases",
+                    "description": "List of databases to ingest. If not specified, all databases will be ingested. Even if this is specified, databases will still be filtered by `database_pattern`.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "usage": {
                     "title": "Usage",
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-23T14:26:12.463312+00:00",
-                        "start_time": "2023-11-22T00:00:00+00:00",
+                        "end_time": "2023-11-27T09:23:39.659723+00:00",
+                        "start_time": "2023-11-26T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -5551,6 +5601,12 @@
                 "include_usage_statistics": {
                     "title": "Include Usage Statistics",
                     "description": "Generate usage statistic.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "use_qvci": {
+                    "title": "Use Qvci",
+                    "description": "Whether to use QVCI to get column information. This is faster but requires to have QVCI enabled.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -10194,8 +10250,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-23T14:26:11.873773+00:00",
-                        "start_time": "2023-11-22T00:00:00+00:00",
+                        "end_time": "2023-11-27T09:23:39.053859+00:00",
+                        "start_time": "2023-11-26T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11429,8 +11485,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-23T14:26:01.844261+00:00",
-                        "start_time": "2023-11-22T00:00:00+00:00",
+                        "end_time": "2023-11-27T09:23:29.037840+00:00",
+                        "start_time": "2023-11-26T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
