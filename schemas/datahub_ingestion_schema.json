@@ -1190,11 +1190,6 @@
                     "description": "database (catalog)",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -1553,11 +1548,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog)",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "scheme": {
@@ -1933,11 +1923,6 @@
                     "default": "dev",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "scheme": {
                     "title": "Scheme",
                     "default": "redshift+psycopg2",
@@ -2252,11 +2237,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog)",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "sqlalchemy_uri": {
@@ -2631,11 +2611,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog)",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "sqlalchemy_uri": {
@@ -3026,11 +3001,6 @@
                     "description": "database (catalog)",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -3357,11 +3327,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog)",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "scheme": {
@@ -4437,11 +4402,6 @@
                     "description": "database (catalog)",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -4740,11 +4700,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog)",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "scheme": {
@@ -5482,11 +5437,6 @@
                     "description": "database (catalog)",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "scheme": {
                     "title": "Scheme",
                     "description": "database scheme",
@@ -5571,8 +5521,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-27T09:23:39.659723+00:00",
-                        "start_time": "2023-11-26T00:00:00+00:00",
+                        "end_time": "2023-11-30T08:09:17.913996+00:00",
+                        "start_time": "2023-11-29T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -5857,11 +5807,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog). If set to Null, all databases will be considered for ingestion.",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "sqlalchemy_uri": {
@@ -7122,11 +7067,6 @@
                 "database": {
                     "title": "Database",
                     "description": "If using, omit `service_name`.",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "scheme": {
@@ -9503,11 +9443,6 @@
                     "description": "database (catalog)",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "scheme": {
                     "title": "Scheme",
                     "default": "druid",
@@ -9758,11 +9693,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog)",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "scheme": {
@@ -10166,11 +10096,6 @@
                     "description": "The name of the catalog from getting the usage",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -10250,8 +10175,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-27T09:23:39.053859+00:00",
-                        "start_time": "2023-11-26T00:00:00+00:00",
+                        "end_time": "2023-11-30T08:09:17.304455+00:00",
+                        "start_time": "2023-11-29T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -10629,11 +10554,6 @@
                     "description": "database (catalog)",
                     "type": "string"
                 },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -10921,11 +10841,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog). If set to Null, all databases will be considered for ingestion.",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "scheme": {
@@ -11485,8 +11400,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-11-27T09:23:29.037840+00:00",
-                        "start_time": "2023-11-26T00:00:00+00:00",
+                        "end_time": "2023-11-30T08:09:07.119053+00:00",
+                        "start_time": "2023-11-29T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -12907,11 +12822,6 @@
                 "database": {
                     "title": "Database",
                     "description": "database (catalog)",
-                    "type": "string"
-                },
-                "database_alias": {
-                    "title": "Database Alias",
-                    "description": "[Deprecated] Alias to apply to database when ingesting.",
                     "type": "string"
                 },
                 "scheme": {
