@@ -1747,13 +1747,12 @@
                 },
                 "schema_pattern": {
                     "title": "Schema Pattern",
+                    "description": "Regex patterns for schemas to filter in ingestion. Specify regex to only match the schema name. e.g. to match all tables in schema analytics, use the regex 'analytics'",
                     "default": {
                         "allow": [
                             ".*"
                         ],
-                        "deny": [
-                            "information_schema"
-                        ],
+                        "deny": [],
                         "ignoreCase": true
                     },
                     "allOf": [
@@ -1925,7 +1924,7 @@
                 },
                 "scheme": {
                     "title": "Scheme",
-                    "default": "redshift+psycopg2",
+                    "default": "redshift+redshift_connector",
                     "hidden_from_schema": true,
                     "type": "string"
                 },
@@ -4888,7 +4887,7 @@
                 "include_views": {
                     "title": "Include Views",
                     "description": "Whether views should be ingested.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "include_tables": {
@@ -5521,8 +5520,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-05T09:15:13.370887+00:00",
-                        "start_time": "2023-12-04T00:00:00+00:00",
+                        "end_time": "2023-12-06T11:26:17.143024+00:00",
+                        "start_time": "2023-12-05T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -10175,8 +10174,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-05T09:15:12.809687+00:00",
-                        "start_time": "2023-12-04T00:00:00+00:00",
+                        "end_time": "2023-12-06T11:26:16.768860+00:00",
+                        "start_time": "2023-12-05T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11400,8 +11399,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-05T09:15:05.215017+00:00",
-                        "start_time": "2023-12-04T00:00:00+00:00",
+                        "end_time": "2023-12-06T11:26:08.452961+00:00",
+                        "start_time": "2023-12-05T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
