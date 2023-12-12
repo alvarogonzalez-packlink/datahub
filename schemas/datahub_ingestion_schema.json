@@ -1874,8 +1874,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-11T22:28:28.324773+00:00",
-                        "start_time": "2023-12-10T00:00:00+00:00",
+                        "end_time": "2023-12-12T17:53:31.262614+00:00",
+                        "start_time": "2023-12-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3520,6 +3520,12 @@
                     "title": "Platform Instance",
                     "description": "The instance of the platform that all assets produced by this recipe belong to",
                     "type": "string"
+                },
+                "max_retries": {
+                    "title": "Max Retries",
+                    "description": "Number of retries for failed requests.",
+                    "default": 3,
+                    "type": "integer"
                 },
                 "ssl_verify": {
                     "title": "Ssl Verify",
@@ -7517,8 +7523,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-11T22:28:19.846515+00:00",
-                        "start_time": "2023-12-10T00:00:00+00:00",
+                        "end_time": "2023-12-12T17:53:23.049520+00:00",
+                        "start_time": "2023-12-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -12314,8 +12320,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-11T22:28:27.714861+00:00",
-                        "start_time": "2023-12-10T00:00:00+00:00",
+                        "end_time": "2023-12-12T17:53:30.657792+00:00",
+                        "start_time": "2023-12-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
