@@ -1097,8 +1097,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-15T08:22:21.783874+00:00",
-                        "start_time": "2023-12-14T00:00:00+00:00",
+                        "end_time": "2023-12-18T12:28:03.475340+00:00",
+                        "start_time": "2023-12-17T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3161,8 +3161,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-15T08:22:13.239407+00:00",
-                        "start_time": "2023-12-14T00:00:00+00:00",
+                        "end_time": "2023-12-18T12:27:55.124916+00:00",
+                        "start_time": "2023-12-17T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4577,7 +4577,7 @@
                 "include_column_lineage": {
                     "title": "Include Column Lineage",
                     "description": "When enabled, column-level lineage will be extracted from the dbt node definition. Requires `infer_dbt_schemas` to be enabled. If you run into issues where the column name casing does not match up with properly, providing a datahub_api or using the rest sink will improve accuracy.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "manifest_path": {
@@ -7485,7 +7485,7 @@
                 "include_column_lineage": {
                     "title": "Include Column Lineage",
                     "description": "When enabled, column-level lineage will be extracted from the dbt node definition. Requires `infer_dbt_schemas` to be enabled. If you run into issues where the column name casing does not match up with properly, providing a datahub_api or using the rest sink will improve accuracy.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "metadata_endpoint": {
@@ -11789,8 +11789,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-15T08:22:21.445068+00:00",
-                        "start_time": "2023-12-14T00:00:00+00:00",
+                        "end_time": "2023-12-18T12:28:03.143838+00:00",
+                        "start_time": "2023-12-17T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
