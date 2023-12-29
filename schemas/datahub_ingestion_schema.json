@@ -1097,8 +1097,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-22T22:20:36.979475+00:00",
-                        "start_time": "2023-12-21T00:00:00+00:00",
+                        "end_time": "2023-12-29T08:07:22.805498+00:00",
+                        "start_time": "2023-12-28T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -2876,6 +2876,12 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "enable_stateful_lineage_ingestion": {
+                    "title": "Enable Stateful Lineage Ingestion",
+                    "description": "Enable stateful lineage ingestion. This will store lineage window timestamps after successful lineage ingestion. and will not run lineage ingestion for same timestamps in subsequent run. ",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "bucket_duration": {
                     "description": "Size of the time window to aggregate usage stats.",
                     "default": "DAY",
@@ -3156,13 +3162,19 @@
                         }
                     ]
                 },
+                "include_schema_metadata": {
+                    "title": "Include Schema Metadata",
+                    "description": "Whether to ingest the BigQuery schema, i.e. projects, schemas, tables, and views.",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "usage": {
                     "title": "Usage",
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-22T22:20:28.706627+00:00",
-                        "start_time": "2023-12-21T00:00:00+00:00",
+                        "end_time": "2023-12-29T08:07:14.099180+00:00",
+                        "start_time": "2023-12-28T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4952,6 +4964,11 @@
                     "title": "Password",
                     "default": "",
                     "type": "string"
+                },
+                "proxies": {
+                    "title": "Proxies",
+                    "description": "Eg. `{'http': 'http://10.10.1.10:3128', 'https': 'http://10.10.1.10:1080'}`.If authentication is required, add it to the proxy url directly e.g. `http://user:pass@10.10.1.10:3128/`.",
+                    "type": "object"
                 },
                 "forced_examples": {
                     "title": "Forced Examples",
@@ -6843,6 +6860,12 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "enable_stateful_lineage_ingestion": {
+                    "title": "Enable Stateful Lineage Ingestion",
+                    "description": "Enable stateful lineage ingestion. This will store lineage window timestamps after successful lineage ingestion. and will not run lineage ingestion for same timestamps in subsequent run. ",
+                    "default": true,
+                    "type": "boolean"
+                },
                 "top_n_queries": {
                     "title": "Top N Queries",
                     "description": "Number of top queries to save to each table.",
@@ -7647,7 +7670,7 @@
                 },
                 "schemaSamplingSize": {
                     "title": "Schemasamplingsize",
-                    "description": "Number of documents to use when inferring schema size. If set to `0`, all documents will be scanned.",
+                    "description": "Number of documents to use when inferring schema size. If set to `null`, all documents will be scanned.",
                     "default": 1000,
                     "exclusiveMinimum": 0,
                     "type": "integer"
@@ -9067,6 +9090,12 @@
                 "enable_stateful_profiling": {
                     "title": "Enable Stateful Profiling",
                     "description": "Enable stateful profiling. This will store profiling timestamps per dataset after successful profiling. and will not run profiling again in subsequent run if table has not been updated. ",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "enable_stateful_lineage_ingestion": {
+                    "title": "Enable Stateful Lineage Ingestion",
+                    "description": "Enable stateful lineage ingestion. This will store lineage window timestamps after successful lineage ingestion. and will not run lineage ingestion for same timestamps in subsequent run. ",
                     "default": true,
                     "type": "boolean"
                 },
@@ -11791,8 +11820,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2023-12-22T22:20:36.641600+00:00",
-                        "start_time": "2023-12-21T00:00:00+00:00",
+                        "end_time": "2023-12-29T08:07:22.224542+00:00",
+                        "start_time": "2023-12-28T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
