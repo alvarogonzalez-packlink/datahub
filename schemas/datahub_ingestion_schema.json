@@ -1097,8 +1097,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-03T14:24:25.954438+00:00",
-                        "start_time": "2024-01-02T00:00:00+00:00",
+                        "end_time": "2024-01-04T21:45:00.166045+00:00",
+                        "start_time": "2024-01-03T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3173,8 +3173,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-03T14:24:17.526985+00:00",
-                        "start_time": "2024-01-02T00:00:00+00:00",
+                        "end_time": "2024-01-04T21:44:51.524527+00:00",
+                        "start_time": "2024-01-03T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4061,11 +4061,6 @@
                     "description": "When enabled, extracts ownership from Looker directly. When disabled, ownership is left empty for dashboards and charts.",
                     "default": true,
                     "type": "boolean"
-                },
-                "actor": {
-                    "title": "Actor",
-                    "description": "This config is deprecated in favor of `extract_owners`. Previously, was the actor to use in ownership properties of ingested metadata.",
-                    "type": "string"
                 },
                 "strip_user_ids_from_email": {
                     "title": "Strip User Ids From Email",
@@ -11820,8 +11815,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-03T14:24:25.351595+00:00",
-                        "start_time": "2024-01-02T00:00:00+00:00",
+                        "end_time": "2024-01-04T21:44:59.488850+00:00",
+                        "start_time": "2024-01-03T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
