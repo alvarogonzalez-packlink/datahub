@@ -1081,7 +1081,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-12T05:45:02.799611+00:00",
+                        "end_time": "2024-01-12T19:50:58.668249+00:00",
                         "start_time": "2024-01-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -3141,7 +3141,7 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-12T05:44:54.423223+00:00",
+                        "end_time": "2024-01-12T19:50:50.369391+00:00",
                         "start_time": "2024-01-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -3985,6 +3985,12 @@
                             "$ref": "#/definitions/TransportOptionsConfig"
                         }
                     ]
+                },
+                "max_retries": {
+                    "title": "Max Retries",
+                    "description": "Number of retries for Looker API calls",
+                    "default": 3,
+                    "type": "integer"
                 },
                 "dashboard_pattern": {
                     "title": "Dashboard Pattern",
@@ -11719,7 +11725,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-12T05:45:02.208281+00:00",
+                        "end_time": "2024-01-12T19:50:58.090294+00:00",
                         "start_time": "2024-01-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -14663,6 +14669,12 @@
                             "$ref": "#/definitions/TransportOptionsConfig"
                         }
                     ]
+                },
+                "max_retries": {
+                    "title": "Max Retries",
+                    "description": "Number of retries for Looker API calls",
+                    "default": 3,
+                    "type": "integer"
                 }
             },
             "required": [
