@@ -1081,8 +1081,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-12T19:50:58.668249+00:00",
-                        "start_time": "2024-01-11T00:00:00+00:00",
+                        "end_time": "2024-01-17T07:28:27.648295+00:00",
+                        "start_time": "2024-01-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3141,8 +3141,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-12T19:50:50.369391+00:00",
-                        "start_time": "2024-01-11T00:00:00+00:00",
+                        "end_time": "2024-01-17T07:28:19.538754+00:00",
+                        "start_time": "2024-01-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -7466,10 +7466,17 @@
                     "default": true,
                     "type": "boolean"
                 },
+                "access_url": {
+                    "title": "Access Url",
+                    "description": "The base URL of the dbt Cloud instance to use. This should be the URL you use to access the dbt Cloud UI. It should include the scheme (http/https) and not include a trailing slash. See the access url for your dbt Cloud region here: https://docs.getdbt.com/docs/cloud/about-cloud/regions-ip-addresses",
+                    "default": "https://cloud.getdbt.com",
+                    "type": "string"
+                },
                 "metadata_endpoint": {
                     "title": "Metadata Endpoint",
-                    "description": "The dbt Cloud metadata API endpoint.",
+                    "description": "The dbt Cloud metadata API endpoint. This is deprecated, and will be removed in a future release. Please use access_url instead.",
                     "default": "https://metadata.cloud.getdbt.com/graphql",
+                    "deprecated": true,
                     "type": "string"
                 },
                 "token": {
@@ -11725,8 +11732,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-12T19:50:58.090294+00:00",
-                        "start_time": "2024-01-11T00:00:00+00:00",
+                        "end_time": "2024-01-17T07:28:27.085717+00:00",
+                        "start_time": "2024-01-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
