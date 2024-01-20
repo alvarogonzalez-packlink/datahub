@@ -1081,8 +1081,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-17T07:28:27.648295+00:00",
-                        "start_time": "2024-01-16T00:00:00+00:00",
+                        "end_time": "2024-01-20T17:22:04.252794+00:00",
+                        "start_time": "2024-01-19T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3141,8 +3141,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-17T07:28:19.538754+00:00",
-                        "start_time": "2024-01-16T00:00:00+00:00",
+                        "end_time": "2024-01-20T17:21:55.835422+00:00",
+                        "start_time": "2024-01-19T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -8495,7 +8495,7 @@
                 "include_hive_metastore": {
                     "title": "Include Hive Metastore",
                     "description": "Whether to ingest legacy `hive_metastore` catalog. This requires executing queries on SQL warehouse.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "workspace_name": {
@@ -8505,8 +8505,8 @@
                 },
                 "include_metastore": {
                     "title": "Include Metastore",
-                    "description": "Whether to ingest the workspace's metastore as a container and include it in all urns. Changing this will affect the urns of all entities in the workspace. This will be disabled by default in the future, so it is recommended to set this to `False` for new ingestions. If you have an existing unity catalog ingestion, you'll want to avoid duplicates by soft deleting existing data. If stateful ingestion is enabled, running with `include_metastore: false` should be sufficient. Otherwise, we recommend deleting via the cli: `datahub delete --platform databricks` and re-ingesting with `include_metastore: false`.",
-                    "default": true,
+                    "description": "Whether to ingest the workspace's metastore as a container and include it in all urns. Changing this will affect the urns of all entities in the workspace. This config is deprecated and will be removed in the future, so it is recommended to not set this to `True` for new ingestions. If you have an existing unity catalog ingestion, you'll want to avoid duplicates by soft deleting existing data. If stateful ingestion is enabled, running with `include_metastore: false` should be sufficient. Otherwise, we recommend deleting via the cli: `datahub delete --platform databricks` and re-ingesting with `include_metastore: false`.",
+                    "default": false,
                     "type": "boolean"
                 },
                 "ingest_data_platform_instance_aspect": {
@@ -11732,8 +11732,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-17T07:28:27.085717+00:00",
-                        "start_time": "2024-01-16T00:00:00+00:00",
+                        "end_time": "2024-01-20T17:22:03.670460+00:00",
+                        "start_time": "2024-01-19T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
