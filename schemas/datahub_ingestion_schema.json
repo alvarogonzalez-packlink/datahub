@@ -1081,8 +1081,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-20T17:22:04.252794+00:00",
-                        "start_time": "2024-01-19T00:00:00+00:00",
+                        "end_time": "2024-01-24T07:25:04.108746+00:00",
+                        "start_time": "2024-01-23T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -1735,6 +1735,15 @@
                     "type": "string",
                     "writeOnly": true,
                     "format": "password"
+                },
+                "domain": {
+                    "title": "Domain",
+                    "description": "regex patterns for tables to filter to assign domain_key. ",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/AllowDenyPattern"
+                    }
                 },
                 "include_table_item": {
                     "title": "Include Table Item",
@@ -3141,8 +3150,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-20T17:21:55.835422+00:00",
-                        "start_time": "2024-01-19T00:00:00+00:00",
+                        "end_time": "2024-01-24T07:24:54.798395+00:00",
+                        "start_time": "2024-01-23T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -4908,29 +4917,35 @@
             "properties": {
                 "name": {
                     "title": "Name",
+                    "description": "Name of ingestion.",
                     "type": "string"
                 },
                 "url": {
                     "title": "Url",
+                    "description": "Endpoint URL. e.g. https://example.com",
                     "type": "string"
                 },
                 "swagger_file": {
                     "title": "Swagger File",
+                    "description": "Route for access to the swagger file. e.g. openapi.json",
                     "type": "string"
                 },
                 "ignore_endpoints": {
                     "title": "Ignore Endpoints",
+                    "description": "List of endpoints to ignore during ingestion.",
                     "default": [],
                     "type": "array",
                     "items": {}
                 },
                 "username": {
                     "title": "Username",
+                    "description": "Username used for basic HTTP authentication.",
                     "default": "",
                     "type": "string"
                 },
                 "password": {
                     "title": "Password",
+                    "description": "Password used for basic HTTP authentication.",
                     "default": "",
                     "type": "string"
                 },
@@ -4941,15 +4956,18 @@
                 },
                 "forced_examples": {
                     "title": "Forced Examples",
+                    "description": "If no example is provided for a route, it is possible to create one using forced_example.",
                     "default": {},
                     "type": "object"
                 },
                 "token": {
                     "title": "Token",
+                    "description": "Token for endpoint authentication.",
                     "type": "string"
                 },
                 "get_token": {
                     "title": "Get Token",
+                    "description": "Retrieving a token from the endpoint.",
                     "default": {},
                     "type": "object"
                 }
@@ -4984,6 +5002,17 @@
             "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
             "type": "object",
             "properties": {
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
+                    "type": "string"
+                },
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by this connector belong to",
+                    "default": "PROD",
+                    "type": "string"
+                },
                 "stateful_ingestion": {
                     "title": "Stateful Ingestion",
                     "description": "Superset Stateful Ingestion Config.",
@@ -5003,6 +5032,15 @@
                     "title": "Display Uri",
                     "description": "optional URL to use in links (if `connect_uri` is only for ingestion)",
                     "type": "string"
+                },
+                "domain": {
+                    "title": "Domain",
+                    "description": "regex patterns for tables to filter to assign domain_key. ",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/AllowDenyPattern"
+                    }
                 },
                 "username": {
                     "title": "Username",
@@ -5024,12 +5062,6 @@
                     "title": "Options",
                     "default": {},
                     "type": "object"
-                },
-                "env": {
-                    "title": "Env",
-                    "description": "Environment to use in namespace when constructing URNs",
-                    "default": "PROD",
-                    "type": "string"
                 },
                 "database_alias": {
                     "title": "Database Alias",
@@ -11732,8 +11764,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-01-20T17:22:03.670460+00:00",
-                        "start_time": "2024-01-19T00:00:00+00:00",
+                        "end_time": "2024-01-24T07:25:03.471619+00:00",
+                        "start_time": "2024-01-23T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
