@@ -27,8 +27,8 @@ Cypress.Commands.add('login', () => {
       method: 'POST',
       url: '/logIn',
       body: {
-        username: Cypress.env('ADMIN_USERNAME'),
-        password: Cypress.env('ADMIN_PASSWORD'),
+        username: "datahub",
+        password:"datahub",
       },
       retryOnStatusCodeFailure: true,
     });
@@ -40,8 +40,8 @@ Cypress.Commands.add("loginWithCredentials", (username, password) => {
     cy.get('input[data-testid=username]').type(username);
     cy.get('input[data-testid=password]').type(password);
   } else {
-    cy.get('input[data-testid=username]').type(Cypress.env('ADMIN_USERNAME'));
-    cy.get('input[data-testid=password]').type(Cypress.env('ADMIN_PASSWORD'));
+    cy.get('input[data-testid=username]').type('datahub');
+    cy.get('input[data-testid=password]').type('datahub');
   }
   cy.contains('Sign In').click();
   cy.contains('Welcome back');
@@ -160,11 +160,20 @@ Cypress.Commands.add("goToStarSearchList", () => {
 })
 
 Cypress.Commands.add("openThreeDotDropdown", () => {
+  cy.clickOptionWithTestId("three-dot-menu")
+});
+
+Cypress.Commands.add("openThreeDotMenu", () => {
   cy.clickOptionWithTestId("entity-header-dropdown")
 });
 
 Cypress.Commands.add("clickOptionWithText", (text) => {
   cy.contains(text).should('be.visible').click();
+});
+
+
+Cypress.Commands.add("clickFirstOptionWithText", (text) => {
+  cy.contains(text).first().click();
 });
 
 Cypress.Commands.add("clickOptionWithTextToScrollintoView", (text) => {
@@ -222,6 +231,13 @@ Cypress.Commands.add("getWithTestId", (id) => {
   return cy.get(selectorWithtestId(id));
 });
 
+Cypress.Commands.add("clickOptionWithId", (id) => {
+  cy.get(id).click()
+})
+
+Cypress.Commands.add("enterTextInSpecificTestId", (id, value, text) => {
+  cy.get(selectorWithtestId(id)).eq(value).type(text);
+})
 Cypress.Commands.add("enterTextInTestId", (id, text) => {
   cy.get(selectorWithtestId(id)).type(text);
 })
@@ -236,6 +252,21 @@ Cypress.Commands.add("clickFirstOptionWithTestId", (id) => {
   cy.get(selectorWithtestId(id)).first().click({
     force: true,
   });
+})
+
+Cypress.Commands.add("clickFirstOptionWithSpecificTestId", (id,value) => {
+  cy.get(selectorWithtestId(id)).eq(value).click({
+    force: true,
+  });
+})
+
+Cypress.Commands.add("clickOptionWithSpecificClass", (locator, value) => {
+  cy.get(locator).should('be.visible')
+  cy.get(locator).eq(value).click();
+})
+
+Cypress.Commands.add("clickTextOptionWithClass", (locator, text) => {
+  cy.get(locator).should('be.visible').contains(text).click({force:true})
 })
 
 Cypress.Commands.add("hideOnboardingTour", () => {
