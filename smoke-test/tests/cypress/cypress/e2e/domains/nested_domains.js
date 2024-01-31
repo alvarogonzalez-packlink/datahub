@@ -149,7 +149,7 @@ describe("Verify nested domains test functionalities", () => {
     })
     
     it('Verify entities tab with addeding and deleting assets and performimg some actions', () => {
-        cy.clickFirstOptionWithText('Marketing')
+        cy.clickFirstOptionWithText('Marketing');
         cy.clickOptionWithText('Add assets');
         cy.waitTextVisible("Add assets to Domain");
         cy.enterTextInSpecificTestId("search-bar", 3, 'Baz Chart 1')
