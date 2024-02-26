@@ -3043,7 +3043,7 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-26T08:33:03.300902+00:00",
+                        "end_time": "2024-02-26T22:28:38.160605+00:00",
                         "start_time": "2024-02-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -4954,6 +4954,97 @@
                 "name",
                 "url",
                 "swagger_file"
+            ],
+            "additionalProperties": false
+        },
+        "qlik-sense": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "qlik-sense"
+                    ]
+                },
+                "config": {
+                    "$ref": "#/definitions/qlik-sense_config"
+                }
+            },
+            "required": [
+                "type",
+                "config"
+            ]
+        },
+        "qlik-sense_config": {
+            "title": "QlikSourceConfig",
+            "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
+            "type": "object",
+            "properties": {
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by this connector belong to",
+                    "default": "PROD",
+                    "type": "string"
+                },
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
+                    "type": "string"
+                },
+                "stateful_ingestion": {
+                    "title": "Stateful Ingestion",
+                    "description": "Stateful Ingestion Config",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StatefulIngestionConfig"
+                        }
+                    ]
+                },
+                "tenant_hostname": {
+                    "title": "Tenant Hostname",
+                    "description": "Qlik Tenant hostname",
+                    "type": "string"
+                },
+                "api_key": {
+                    "title": "Api Key",
+                    "description": "Qlik API Key",
+                    "type": "string"
+                },
+                "space_pattern": {
+                    "title": "Space Pattern",
+                    "description": "Regex patterns to filter Qlik spaces in ingestion.Mention 'personal_space' if entities of personal space need to ingest",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
+                "ingest_owner": {
+                    "title": "Ingest Owner",
+                    "description": "Ingest Owner from source. This will override Owner info entered from UI",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "data_connection_to_platform_instance": {
+                    "title": "Data Connection To Platform Instance",
+                    "description": "A mapping of the Qlik app dataset upstream tables from data connection to platform instance.Use 'data_connection_name' as key.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/PlatformDetail"
+                    }
+                }
+            },
+            "required": [
+                "tenant_hostname",
+                "api_key"
             ],
             "additionalProperties": false
         },
@@ -10516,7 +10607,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-26T08:33:11.714146+00:00",
+                        "end_time": "2024-02-26T22:28:47.081612+00:00",
                         "start_time": "2024-02-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -11772,7 +11863,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-26T08:33:11.367655+00:00",
+                        "end_time": "2024-02-26T22:28:46.712921+00:00",
                         "start_time": "2024-02-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -12991,17 +13082,18 @@
         },
         "PlatformDetail": {
             "title": "PlatformDetail",
+            "description": "Any source that connects to a platform should inherit this class",
             "type": "object",
             "properties": {
-                "platform_instance": {
-                    "title": "Platform Instance",
-                    "description": "DataHub platform instance name. To generate correct urn for upstream dataset, this should match with platform instance name used in ingestion recipe of other datahub sources.",
-                    "type": "string"
-                },
                 "env": {
                     "title": "Env",
-                    "description": "The environment that all assets produced by DataHub platform ingestion source belong to",
+                    "description": "The environment that all assets produced by this connector belong to",
                     "default": "PROD",
+                    "type": "string"
+                },
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
                     "type": "string"
                 }
             },
@@ -13709,6 +13801,20 @@
             },
             "additionalProperties": false
         },
+        "StatefulIngestionConfig": {
+            "title": "StatefulIngestionConfig",
+            "description": "Basic Stateful Ingestion Specific Configuration for any source.",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "title": "Enabled",
+                    "description": "The type of the ingestion state provider registered with datahub.",
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
         "DynamicTypedClassifierConfig": {
             "title": "DynamicTypedClassifierConfig",
             "type": "object",
@@ -13929,20 +14035,6 @@
                     "items": {
                         "type": "string"
                     }
-                }
-            },
-            "additionalProperties": false
-        },
-        "StatefulIngestionConfig": {
-            "title": "StatefulIngestionConfig",
-            "description": "Basic Stateful Ingestion Specific Configuration for any source.",
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "The type of the ingestion state provider registered with datahub.",
-                    "default": false,
-                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -14895,6 +14987,9 @@
                 },
                 {
                     "$ref": "#/definitions/openapi"
+                },
+                {
+                    "$ref": "#/definitions/qlik-sense"
                 },
                 {
                     "$ref": "#/definitions/snowflake"
