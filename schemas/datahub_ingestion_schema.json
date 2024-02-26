@@ -1393,12 +1393,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -1986,12 +1980,6 @@
                     "default": true,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "env": {
                     "title": "Env",
                     "description": "Environment to use in namespace when constructing URNs.",
@@ -2280,12 +2268,6 @@
                     "default": true,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "env": {
                     "title": "Env",
                     "description": "Environment to use in namespace when constructing URNs.",
@@ -2522,12 +2504,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -2815,12 +2791,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -3073,8 +3043,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-16T12:57:54.945115+00:00",
-                        "start_time": "2024-02-15T00:00:00+00:00",
+                        "end_time": "2024-02-26T08:33:03.300902+00:00",
+                        "start_time": "2024-02-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3770,12 +3740,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -4099,12 +4063,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -4382,12 +4340,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -5166,12 +5118,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "default": true,
@@ -5939,12 +5885,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -6340,12 +6280,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -6543,12 +6477,6 @@
                     "default": "dev",
                     "type": "string"
                 },
-                "scheme": {
-                    "title": "Scheme",
-                    "default": "redshift+redshift_connector",
-                    "hidden_from_schema": true,
-                    "type": "string"
-                },
                 "sqlalchemy_uri": {
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
@@ -6559,6 +6487,12 @@
                     "description": "The default schema to use if the sql parser fails to parse the schema with `sql_based` lineage collector",
                     "default": "public",
                     "type": "string"
+                },
+                "use_lineage_v2": {
+                    "title": "Use Lineage V2",
+                    "description": "Whether to use the new SQL-based lineage and usage collector.",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "include_table_lineage": {
                     "title": "Include Table Lineage",
@@ -6587,12 +6521,12 @@
                 "include_table_rename_lineage": {
                     "title": "Include Table Rename Lineage",
                     "description": "Whether we should follow `alter table ... rename to` statements when computing lineage. ",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "table_lineage_mode": {
                     "description": "Which table lineage collector mode to use. Available modes are: [stl_scan_based, sql_based, mixed]",
-                    "default": "stl_scan_based",
+                    "default": "mixed",
                     "allOf": [
                         {
                             "$ref": "#/definitions/LineageMode"
@@ -6619,7 +6553,7 @@
                 "resolve_temp_table_in_lineage": {
                     "title": "Resolve Temp Table In Lineage",
                     "description": "Whether to resolve temp table appear in lineage to upstream permanent tables.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 }
             },
@@ -6654,12 +6588,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -6902,12 +6830,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -7179,12 +7101,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -7804,12 +7720,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -8557,12 +8467,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -8912,12 +8816,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -9124,6 +9022,27 @@
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
                     "type": "string"
+                },
+                "catalog_to_connector_details": {
+                    "title": "Catalog To Connector Details",
+                    "description": "A mapping of trino catalog to its connector details like connector database, env and platform instance.This configuration is used to build lineage to the underlying connector. Use catalog name as key.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ConnectorDetail"
+                    }
+                },
+                "ingest_lineage_to_connectors": {
+                    "title": "Ingest Lineage To Connectors",
+                    "description": "Whether lineage of datasets to connectors should be ingested",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "trino_as_primary": {
+                    "title": "Trino As Primary",
+                    "description": "Experimental feature. Whether trino dataset should be primary entity of the set of siblings",
+                    "default": true,
+                    "type": "boolean"
                 },
                 "email_domain": {
                     "title": "Email Domain",
@@ -9339,12 +9258,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -9912,12 +9825,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "options": {
                     "title": "Options",
                     "description": "Any options specified here will be passed to [SQLAlchemy.create_engine](https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine) as kwargs.",
@@ -10339,12 +10246,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -10615,8 +10516,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-16T12:58:03.524416+00:00",
-                        "start_time": "2024-02-15T00:00:00+00:00",
+                        "end_time": "2024-02-26T08:33:11.714146+00:00",
+                        "start_time": "2024-02-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11274,12 +11175,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -11545,12 +11440,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -11757,10 +11646,32 @@
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
                     "type": "string"
+                },
+                "catalog_to_connector_details": {
+                    "title": "Catalog To Connector Details",
+                    "description": "A mapping of trino catalog to its connector details like connector database, env and platform instance.This configuration is used to build lineage to the underlying connector. Use catalog name as key.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ConnectorDetail"
+                    }
+                },
+                "ingest_lineage_to_connectors": {
+                    "title": "Ingest Lineage To Connectors",
+                    "description": "Whether lineage of datasets to connectors should be ingested",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "trino_as_primary": {
+                    "title": "Trino As Primary",
+                    "description": "Experimental feature. Whether trino dataset should be primary entity of the set of siblings",
+                    "default": true,
+                    "type": "boolean"
                 }
             },
             "required": [
-                "host_port"
+                "host_port",
+                "database"
             ],
             "additionalProperties": false
         },
@@ -11861,8 +11772,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-16T12:58:03.179098+00:00",
-                        "start_time": "2024-02-15T00:00:00+00:00",
+                        "end_time": "2024-02-26T08:33:11.367655+00:00",
+                        "start_time": "2024-02-25T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11970,12 +11881,6 @@
                 "incremental_lineage": {
                     "title": "Incremental Lineage",
                     "description": "When enabled, emits lineage as incremental to existing lineage already in DataHub. When disabled, re-states lineage on each run.",
-                    "default": false,
-                    "type": "boolean"
-                },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -12205,12 +12110,6 @@
                     "default": false,
                     "type": "boolean"
                 },
-                "sql_parser_use_external_process": {
-                    "title": "Sql Parser Use External Process",
-                    "description": "When enabled, sql parser will run in isolated in a separate process. This can affect processing time but can protect from sql parser's mem leak.",
-                    "default": false,
-                    "type": "boolean"
-                },
                 "convert_urns_to_lowercase": {
                     "title": "Convert Urns To Lowercase",
                     "description": "Whether to convert dataset urns to lowercase.",
@@ -12417,10 +12316,32 @@
                     "title": "Sqlalchemy Uri",
                     "description": "URI of database to connect to. See https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls. Takes precedence over other connection parameters.",
                     "type": "string"
+                },
+                "catalog_to_connector_details": {
+                    "title": "Catalog To Connector Details",
+                    "description": "A mapping of trino catalog to its connector details like connector database, env and platform instance.This configuration is used to build lineage to the underlying connector. Use catalog name as key.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ConnectorDetail"
+                    }
+                },
+                "ingest_lineage_to_connectors": {
+                    "title": "Ingest Lineage To Connectors",
+                    "description": "Whether lineage of datasets to connectors should be ingested",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "trino_as_primary": {
+                    "title": "Trino As Primary",
+                    "description": "Experimental feature. Whether trino dataset should be primary entity of the set of siblings",
+                    "default": true,
+                    "type": "boolean"
                 }
             },
             "required": [
-                "host_port"
+                "host_port",
+                "database"
             ],
             "additionalProperties": false
         },
@@ -14326,6 +14247,34 @@
                 "client_secret",
                 "base_url"
             ],
+            "additionalProperties": false
+        },
+        "ConnectorDetail": {
+            "title": "ConnectorDetail",
+            "description": "Any source that connects to a platform should inherit this class",
+            "type": "object",
+            "properties": {
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by this connector belong to",
+                    "default": "PROD",
+                    "type": "string"
+                },
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
+                    "type": "string"
+                },
+                "connector_database": {
+                    "title": "Connector Database",
+                    "type": "string"
+                },
+                "connector_platform": {
+                    "title": "Connector Platform",
+                    "description": "A connector's actual platform name. If not provided, will take from metadata tablesEg: hive catalog can have a connector platform as 'hive' or 'glue' or some other metastore.",
+                    "type": "string"
+                }
+            },
             "additionalProperties": false
         },
         "GlueProfilingConfig": {
