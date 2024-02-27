@@ -3043,8 +3043,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-26T22:28:38.160605+00:00",
-                        "start_time": "2024-02-25T00:00:00+00:00",
+                        "end_time": "2024-02-27T11:05:18.664501+00:00",
+                        "start_time": "2024-02-26T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -7612,6 +7612,42 @@
                     "type": "string",
                     "writeOnly": true,
                     "format": "password"
+                },
+                "enrich_user_metadata": {
+                    "title": "Enrich User Metadata",
+                    "description": "Whether to enrich user metadata.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "api_requests_per_min": {
+                    "title": "Api Requests Per Min",
+                    "description": "Number of API requests per minute. Low-level config. Do not tweak unless you are facing any issues.",
+                    "default": 10,
+                    "type": "integer"
+                },
+                "ingest_public_channels": {
+                    "title": "Ingest Public Channels",
+                    "description": "Whether to ingest public channels. If set to true needs `channels:read` scope.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "channels_iteration_limit": {
+                    "title": "Channels Iteration Limit",
+                    "description": "Limit the number of channels to be ingested in a iteration. Low-level config. Do not tweak unless you are facing any issues.",
+                    "default": 200,
+                    "type": "integer"
+                },
+                "channel_min_members": {
+                    "title": "Channel Min Members",
+                    "description": "Ingest channels with at least this many members.",
+                    "default": 2,
+                    "type": "integer"
+                },
+                "should_ingest_archived_channels": {
+                    "title": "Should Ingest Archived Channels",
+                    "description": "Whether to ingest archived channels.",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -10607,8 +10643,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-26T22:28:47.081612+00:00",
-                        "start_time": "2024-02-25T00:00:00+00:00",
+                        "end_time": "2024-02-27T11:05:33.666323+00:00",
+                        "start_time": "2024-02-26T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11863,8 +11899,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-02-26T22:28:46.712921+00:00",
-                        "start_time": "2024-02-25T00:00:00+00:00",
+                        "end_time": "2024-02-27T11:05:33.228551+00:00",
+                        "start_time": "2024-02-26T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
