@@ -1438,8 +1438,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-07T09:18:48.175453+00:00",
-                        "start_time": "2024-03-06T00:00:00+00:00",
+                        "end_time": "2024-03-12T07:12:33.134854+00:00",
+                        "start_time": "2024-03-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -2424,8 +2424,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-07T09:19:03.102941+00:00",
-                        "start_time": "2024-03-06T00:00:00+00:00",
+                        "end_time": "2024-03-12T07:12:48.386146+00:00",
+                        "start_time": "2024-03-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -5314,8 +5314,14 @@
                 },
                 "use_lineage_v2": {
                     "title": "Use Lineage V2",
-                    "description": "Whether to use the new SQL-based lineage and usage collector.",
+                    "description": "Whether to use the new SQL-based lineage collector.",
                     "default": false,
+                    "type": "boolean"
+                },
+                "lineage_v2_generate_queries": {
+                    "title": "Lineage V2 Generate Queries",
+                    "description": "Whether to generate queries entities for the new SQL-based lineage collector.",
+                    "default": true,
                     "type": "boolean"
                 },
                 "include_table_lineage": {
@@ -5371,6 +5377,12 @@
                 "extract_column_level_lineage": {
                     "title": "Extract Column Level Lineage",
                     "description": "Whether to extract column level lineage. This config works with rest-sink only.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "patch_custom_properties": {
+                    "title": "Patch Custom Properties",
+                    "description": "Whether to patch custom properties on existing datasets rather than replace.",
                     "default": true,
                     "type": "boolean"
                 },
@@ -7974,8 +7986,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-07T09:19:02.364521+00:00",
-                        "start_time": "2024-03-06T00:00:00+00:00",
+                        "end_time": "2024-03-12T07:12:47.652671+00:00",
+                        "start_time": "2024-03-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
