@@ -748,8 +748,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-20T08:30:55.520231+00:00",
-                        "start_time": "2024-03-19T00:00:00+00:00",
+                        "end_time": "2024-03-21T09:56:30.912543+00:00",
+                        "start_time": "2024-03-20T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -2129,6 +2129,12 @@
                             "$ref": "#/definitions/DBTEntitiesEnabled"
                         }
                     ]
+                },
+                "skip_sources_in_lineage": {
+                    "title": "Skip Sources In Lineage",
+                    "description": "[Experimental] When enabled, dbt sources will not be included in the lineage graph. Requires that `entities_enabled.sources` is set to `NO`. This is mainly useful when you have multiple, interdependent dbt projects. ",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "tag_prefix": {
                     "title": "Tag Prefix",
@@ -4216,6 +4222,12 @@
                             "$ref": "#/definitions/DBTEntitiesEnabled"
                         }
                     ]
+                },
+                "skip_sources_in_lineage": {
+                    "title": "Skip Sources In Lineage",
+                    "description": "[Experimental] When enabled, dbt sources will not be included in the lineage graph. Requires that `entities_enabled.sources` is set to `NO`. This is mainly useful when you have multiple, interdependent dbt projects. ",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "tag_prefix": {
                     "title": "Tag Prefix",
@@ -9670,6 +9682,37 @@
             },
             "additionalProperties": false
         },
+        "datahub-gc": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "datahub-gc"
+                    ]
+                },
+                "config": {
+                    "$ref": "#/definitions/datahub-gc_config"
+                }
+            },
+            "required": [
+                "type",
+                "config"
+            ]
+        },
+        "datahub-gc_config": {
+            "title": "DataHubGcSourceConfig",
+            "type": "object",
+            "properties": {
+                "cleanup_expired_tokens": {
+                    "title": "Cleanup Expired Tokens",
+                    "description": "Whether to clean up expired tokens or not",
+                    "default": true,
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
         "bigquery": {
             "type": "object",
             "properties": {
@@ -10025,8 +10068,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-20T08:30:41.639848+00:00",
-                        "start_time": "2024-03-19T00:00:00+00:00",
+                        "end_time": "2024-03-21T09:56:16.651563+00:00",
+                        "start_time": "2024-03-20T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -10174,7 +10217,7 @@
                 },
                 "extract_column_lineage": {
                     "title": "Extract Column Lineage",
-                    "description": "If enabled, generate column level lineage. Requires lineage_use_sql_parser to be enabled. This and `incremental_lineage` cannot both be enabled.",
+                    "description": "If enabled, generate column level lineage. Requires lineage_use_sql_parser to be enabled.",
                     "default": false,
                     "type": "boolean"
                 },
@@ -11307,8 +11350,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-20T08:30:55.975760+00:00",
-                        "start_time": "2024-03-19T00:00:00+00:00",
+                        "end_time": "2024-03-21T09:56:31.650961+00:00",
+                        "start_time": "2024-03-20T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11864,7 +11907,7 @@
                 "use_lineage_v2": {
                     "title": "Use Lineage V2",
                     "description": "Whether to use the new SQL-based lineage collector.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "lineage_v2_generate_queries": {
@@ -11939,6 +11982,12 @@
                     "title": "Resolve Temp Table In Lineage",
                     "description": "Whether to resolve temp table appear in lineage to upstream permanent tables.",
                     "default": true,
+                    "type": "boolean"
+                },
+                "skip_external_tables": {
+                    "title": "Skip External Tables",
+                    "description": "Whether to skip EXTERNAL tables.",
+                    "default": false,
                     "type": "boolean"
                 }
             },
@@ -12162,6 +12211,18 @@
                 "extract_lineage_from_unsupported_custom_sql_queries": {
                     "title": "Extract Lineage From Unsupported Custom Sql Queries",
                     "description": "[Experimental] Whether to extract lineage from unsupported custom sql queries using SQL parsing",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "force_extraction_of_lineage_from_custom_sql_queries": {
+                    "title": "Force Extraction Of Lineage From Custom Sql Queries",
+                    "description": "[Experimental] Force extraction of lineage from custom sql queries using SQL parsing, ignoring Tableau metadata",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "sql_parsing_disable_schema_awareness": {
+                    "title": "Sql Parsing Disable Schema Awareness",
+                    "description": "[Experimental] Ignore pre ingested tables schemas during parsing of SQL queries (allows to workaround ingestion errors when pre ingested schema and queries are out of sync)",
                     "default": false,
                     "type": "boolean"
                 }
@@ -15875,6 +15936,9 @@
                 },
                 {
                     "$ref": "#/definitions/kafka-connect"
+                },
+                {
+                    "$ref": "#/definitions/datahub-gc"
                 },
                 {
                     "$ref": "#/definitions/bigquery"
