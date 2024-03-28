@@ -748,8 +748,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-26T21:50:03.648000+00:00",
-                        "start_time": "2024-03-25T00:00:00+00:00",
+                        "end_time": "2024-03-28T05:32:25.911943+00:00",
+                        "start_time": "2024-03-27T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -1979,6 +1979,41 @@
             "description": "Any source that is a primary producer of Dataset metadata should inherit this class",
             "type": "object",
             "properties": {
+                "classification": {
+                    "title": "Classification",
+                    "description": "For details, refer [Classification](../../../../metadata-ingestion/docs/dev_guides/classification.md).",
+                    "default": {
+                        "enabled": false,
+                        "sample_size": 100,
+                        "max_workers": 4,
+                        "table_pattern": {
+                            "allow": [
+                                ".*"
+                            ],
+                            "deny": [],
+                            "ignoreCase": true
+                        },
+                        "column_pattern": {
+                            "allow": [
+                                ".*"
+                            ],
+                            "deny": [],
+                            "ignoreCase": true
+                        },
+                        "info_type_to_term": {},
+                        "classifiers": [
+                            {
+                                "type": "datahub",
+                                "config": null
+                            }
+                        ]
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/ClassificationConfig"
+                        }
+                    ]
+                },
                 "stateful_ingestion": {
                     "$ref": "#/definitions/StatefulStaleMetadataRemovalConfig"
                 },
@@ -2122,7 +2157,8 @@
                         "seeds": "YES",
                         "snapshots": "YES",
                         "test_definitions": "YES",
-                        "test_results": "YES"
+                        "test_results": "YES",
+                        "model_performance": "NO"
                     },
                     "allOf": [
                         {
@@ -4215,7 +4251,8 @@
                         "seeds": "YES",
                         "snapshots": "YES",
                         "test_definitions": "YES",
-                        "test_results": "YES"
+                        "test_results": "YES",
+                        "model_performance": "NO"
                     },
                     "allOf": [
                         {
@@ -4355,10 +4392,14 @@
                     "description": "Path to dbt sources JSON. See https://docs.getdbt.com/reference/artifacts/sources-json. If not specified, last-modified fields will not be populated. Note this can be a local file or a URI.",
                     "type": "string"
                 },
-                "test_results_path": {
-                    "title": "Test Results Path",
-                    "description": "Path to output of dbt test run as run_results file in JSON format. See https://docs.getdbt.com/reference/artifacts/run-results-json. If not specified, test execution results will not be populated in DataHub.",
-                    "type": "string"
+                "run_results_paths": {
+                    "title": "Run Results Paths",
+                    "description": "Path to output of dbt test run as run_results files in JSON format. If invoking dbt multiple times, you can provide paths to multiple run result files.See https://docs.getdbt.com/reference/artifacts/run-results-json. If not specified, test execution results will not be populated in DataHub.",
+                    "default": [],
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "aws_connection": {
                     "title": "Aws Connection",
@@ -10068,8 +10109,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-26T21:49:48.701178+00:00",
-                        "start_time": "2024-03-25T00:00:00+00:00",
+                        "end_time": "2024-03-28T05:32:11.427718+00:00",
+                        "start_time": "2024-03-27T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11350,8 +11391,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-03-26T21:50:04.441042+00:00",
-                        "start_time": "2024-03-25T00:00:00+00:00",
+                        "end_time": "2024-03-28T05:32:26.663583+00:00",
+                        "start_time": "2024-03-27T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -14338,6 +14379,15 @@
                 "test_results": {
                     "description": "Emit metadata for test results when set to Yes or Only",
                     "default": "YES",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/EmitDirective"
+                        }
+                    ]
+                },
+                "model_performance": {
+                    "description": "Emit model performance metadata when set to Yes or Only. Only supported with dbt core.",
+                    "default": "NO",
                     "allOf": [
                         {
                             "$ref": "#/definitions/EmitDirective"
