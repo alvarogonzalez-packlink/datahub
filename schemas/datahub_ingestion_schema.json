@@ -748,8 +748,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-01T05:10:45.629917+00:00",
-                        "start_time": "2024-03-31T00:00:00+00:00",
+                        "end_time": "2024-04-03T08:53:46.195819+00:00",
+                        "start_time": "2024-04-02T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -2158,7 +2158,7 @@
                         "snapshots": "YES",
                         "test_definitions": "YES",
                         "test_results": "YES",
-                        "model_performance": "NO"
+                        "model_performance": "YES"
                     },
                     "allOf": [
                         {
@@ -2280,7 +2280,7 @@
                 "include_compiled_code": {
                     "title": "Include Compiled Code",
                     "description": "When enabled, includes the compiled code in the emitted metadata.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "access_url": {
@@ -4252,7 +4252,7 @@
                         "snapshots": "YES",
                         "test_definitions": "YES",
                         "test_results": "YES",
-                        "model_performance": "NO"
+                        "model_performance": "YES"
                     },
                     "allOf": [
                         {
@@ -4374,7 +4374,7 @@
                 "include_compiled_code": {
                     "title": "Include Compiled Code",
                     "description": "When enabled, includes the compiled code in the emitted metadata.",
-                    "default": false,
+                    "default": true,
                     "type": "boolean"
                 },
                 "manifest_path": {
@@ -4394,7 +4394,7 @@
                 },
                 "run_results_paths": {
                     "title": "Run Results Paths",
-                    "description": "Path to output of dbt test run as run_results files in JSON format. If invoking dbt multiple times, you can provide paths to multiple run result files.See https://docs.getdbt.com/reference/artifacts/run-results-json. If not specified, test execution results will not be populated in DataHub.",
+                    "description": "Path to output of dbt test run as run_results files in JSON format. If not specified, test execution results and model performance metadata will not be populated in DataHub.If invoking dbt multiple times, you can provide paths to multiple run result files. See https://docs.getdbt.com/reference/artifacts/run-results-json.",
                     "default": [],
                     "type": "array",
                     "items": {
@@ -9750,6 +9750,30 @@
                     "description": "Whether to clean up expired tokens or not",
                     "default": true,
                     "type": "boolean"
+                },
+                "truncate_indices": {
+                    "title": "Truncate Indices",
+                    "description": "Whether to truncate elasticsearch indices or not which can be safely truncated",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "truncate_index_older_than_days": {
+                    "title": "Truncate Index Older Than Days",
+                    "description": "Indices older than this number of days will be truncated",
+                    "default": 30,
+                    "type": "integer"
+                },
+                "truncation_watch_until": {
+                    "title": "Truncation Watch Until",
+                    "description": "Wait for truncation of indices until this number of documents are left",
+                    "default": 10000,
+                    "type": "integer"
+                },
+                "truncation_sleep_between_seconds": {
+                    "title": "Truncation Sleep Between Seconds",
+                    "description": "Sleep between truncation monitoring.",
+                    "default": 30,
+                    "type": "integer"
                 }
             },
             "additionalProperties": false
@@ -10109,8 +10133,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-01T05:10:30.857406+00:00",
-                        "start_time": "2024-03-31T00:00:00+00:00",
+                        "end_time": "2024-04-03T08:53:31.205963+00:00",
+                        "start_time": "2024-04-02T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11391,8 +11415,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-01T05:10:46.115010+00:00",
-                        "start_time": "2024-03-31T00:00:00+00:00",
+                        "end_time": "2024-04-03T08:53:46.676186+00:00",
+                        "start_time": "2024-04-02T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -14387,7 +14411,7 @@
                 },
                 "model_performance": {
                     "description": "Emit model performance metadata when set to Yes or Only. Only supported with dbt core.",
-                    "default": "NO",
+                    "default": "YES",
                     "allOf": [
                         {
                             "$ref": "#/definitions/EmitDirective"
