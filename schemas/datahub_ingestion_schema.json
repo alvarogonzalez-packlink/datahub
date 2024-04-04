@@ -748,8 +748,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-03T12:16:28.592835+00:00",
-                        "start_time": "2024-04-02T00:00:00+00:00",
+                        "end_time": "2024-04-04T08:31:05.565399+00:00",
+                        "start_time": "2024-04-03T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -1023,7 +1023,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -1452,7 +1453,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -1766,7 +1768,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -2765,7 +2768,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -3065,7 +3069,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -3760,7 +3765,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -4108,7 +4114,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -4663,7 +4670,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -5294,7 +5302,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -5661,7 +5670,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -6222,7 +6232,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -6746,7 +6757,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -7368,7 +7380,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -7801,7 +7814,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -8836,6 +8850,7 @@
                         "use_sampling": true,
                         "sample_size": 10000,
                         "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null,
                         "method": "ge",
                         "warehouse_id": null,
                         "pattern": {
@@ -9370,7 +9385,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -10053,7 +10069,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -10133,8 +10150,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-03T12:16:14.195930+00:00",
-                        "start_time": "2024-04-02T00:00:00+00:00",
+                        "end_time": "2024-04-04T08:30:50.010086+00:00",
+                        "start_time": "2024-04-03T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -10654,7 +10671,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -11301,7 +11319,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -11415,8 +11434,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-03T12:16:29.057512+00:00",
-                        "start_time": "2024-04-02T00:00:00+00:00",
+                        "end_time": "2024-04-04T08:31:06.071972+00:00",
+                        "start_time": "2024-04-03T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -11921,7 +11940,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -13010,7 +13030,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -13273,7 +13294,8 @@
                         "partition_datetime": null,
                         "use_sampling": true,
                         "sample_size": 10000,
-                        "profile_external_tables": false
+                        "profile_external_tables": false,
+                        "tags_to_ignore_sampling": null
                     },
                     "allOf": [
                         {
@@ -14326,6 +14348,14 @@
                     "description": "Whether to profile external tables. Only Snowflake and Redshift supports this.",
                     "default": false,
                     "type": "boolean"
+                },
+                "tags_to_ignore_sampling": {
+                    "title": "Tags To Ignore Sampling",
+                    "description": "Fixed list of tags to ignore sampling. If not specified, tables will be sampled based on `use_sampling`.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "additionalProperties": false
@@ -15187,6 +15217,14 @@
                     "description": "Whether to profile external tables. Only Snowflake and Redshift supports this.",
                     "default": false,
                     "type": "boolean"
+                },
+                "tags_to_ignore_sampling": {
+                    "title": "Tags To Ignore Sampling",
+                    "description": "Fixed list of tags to ignore sampling. If not specified, tables will be sampled based on `use_sampling`.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "method": {
                     "title": "Method",
