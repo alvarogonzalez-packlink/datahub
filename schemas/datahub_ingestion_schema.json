@@ -6700,7 +6700,7 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-12T07:06:29.285094+00:00",
+                        "end_time": "2024-04-12T23:44:49.170928+00:00",
                         "start_time": "2024-04-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -8578,7 +8578,7 @@
                     "title": "Explore Browse Pattern",
                     "description": "Pattern for providing browse paths to explores. Allowed variables are ['platform', 'env', 'project', 'model', 'name']",
                     "default": {
-                        "pattern": "/Explore/{project}/{model}"
+                        "pattern": "/Explore/{model}"
                     },
                     "allOf": [
                         {
@@ -8588,7 +8588,7 @@
                 },
                 "view_naming_pattern": {
                     "title": "View Naming Pattern",
-                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
+                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path', 'folder_path']",
                     "default": {
                         "pattern": "{project}.view.{name}"
                     },
@@ -8600,9 +8600,9 @@
                 },
                 "view_browse_pattern": {
                     "title": "View Browse Pattern",
-                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
+                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path', 'folder_path']",
                     "default": {
-                        "pattern": "/Develop/{project}/{file_path}"
+                        "pattern": "/Develop/{project}/{folder_path}"
                     },
                     "allOf": [
                         {
@@ -8959,7 +8959,7 @@
                     "title": "Explore Browse Pattern",
                     "description": "Pattern for providing browse paths to explores. Allowed variables are ['platform', 'env', 'project', 'model', 'name']",
                     "default": {
-                        "pattern": "/Explore/{project}/{model}"
+                        "pattern": "/Explore/{model}"
                     },
                     "allOf": [
                         {
@@ -8969,7 +8969,7 @@
                 },
                 "view_naming_pattern": {
                     "title": "View Naming Pattern",
-                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
+                    "description": "Pattern for providing dataset names to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path', 'folder_path']",
                     "default": {
                         "pattern": "{project}.view.{name}"
                     },
@@ -8981,9 +8981,9 @@
                 },
                 "view_browse_pattern": {
                     "title": "View Browse Pattern",
-                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path']",
+                    "description": "Pattern for providing browse paths to views. Allowed variables are ['platform', 'env', 'project', 'model', 'name', 'file_path', 'folder_path']",
                     "default": {
-                        "pattern": "/Develop/{project}/{file_path}"
+                        "pattern": "/Develop/{project}/{folder_path}"
                     },
                     "allOf": [
                         {
@@ -10037,7 +10037,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-12T07:06:44.382814+00:00",
+                        "end_time": "2024-04-12T23:45:04.176251+00:00",
                         "start_time": "2024-04-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
@@ -10334,7 +10334,7 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-12T07:06:43.917682+00:00",
+                        "end_time": "2024-04-12T23:45:03.702585+00:00",
                         "start_time": "2024-04-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
