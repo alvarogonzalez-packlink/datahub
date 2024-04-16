@@ -6700,8 +6700,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-15T15:33:33.223667+00:00",
-                        "start_time": "2024-04-14T00:00:00+00:00",
+                        "end_time": "2024-04-16T03:23:34.674962+00:00",
+                        "start_time": "2024-04-15T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -8525,6 +8525,103 @@
             ],
             "additionalProperties": false
         },
+        "sigma": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "sigma"
+                    ]
+                },
+                "config": {
+                    "$ref": "#/definitions/sigma_config"
+                }
+            },
+            "required": [
+                "type",
+                "config"
+            ]
+        },
+        "sigma_config": {
+            "title": "SigmaSourceConfig",
+            "description": "Base configuration class for stateful ingestion for source configs to inherit from.",
+            "type": "object",
+            "properties": {
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by this connector belong to",
+                    "default": "PROD",
+                    "type": "string"
+                },
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
+                    "type": "string"
+                },
+                "stateful_ingestion": {
+                    "title": "Stateful Ingestion",
+                    "description": "Stateful Ingestion Config",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StatefulIngestionConfig"
+                        }
+                    ]
+                },
+                "api_url": {
+                    "title": "Api Url",
+                    "description": "Sigma API hosted URL.",
+                    "default": "https://aws-api.sigmacomputing.com/v2",
+                    "type": "string"
+                },
+                "client_id": {
+                    "title": "Client Id",
+                    "description": "Sigma Client ID",
+                    "type": "string"
+                },
+                "client_secret": {
+                    "title": "Client Secret",
+                    "description": "Sigma Client Secret",
+                    "type": "string"
+                },
+                "workspace_pattern": {
+                    "title": "Workspace Pattern",
+                    "description": "Regex patterns to filter Sigma workspaces in ingestion.Mention 'User Folder' if entities of 'My documents' need to ingest.",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
+                "ingest_owner": {
+                    "title": "Ingest Owner",
+                    "description": "Ingest Owner from source. This will override Owner info entered from UI",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "chart_sources_platform_mapping": {
+                    "title": "Chart Sources Platform Mapping",
+                    "description": "A mapping of the sigma workspace/workbook/chart folder path to all chart's data sources platform details present inside that folder path.",
+                    "default": {},
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/PlatformDetail"
+                    }
+                }
+            },
+            "required": [
+                "client_id",
+                "client_secret"
+            ],
+            "additionalProperties": false
+        },
         "lookml": {
             "type": "object",
             "properties": {
@@ -10037,8 +10134,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-15T15:33:48.469457+00:00",
-                        "start_time": "2024-04-14T00:00:00+00:00",
+                        "end_time": "2024-04-16T03:23:49.447132+00:00",
+                        "start_time": "2024-04-15T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -10334,8 +10431,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-04-15T15:33:47.998616+00:00",
-                        "start_time": "2024-04-14T00:00:00+00:00",
+                        "end_time": "2024-04-16T03:23:48.704548+00:00",
+                        "start_time": "2024-04-15T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -15459,6 +15556,38 @@
             ],
             "additionalProperties": false
         },
+        "StatefulIngestionConfig": {
+            "title": "StatefulIngestionConfig",
+            "description": "Basic Stateful Ingestion Specific Configuration for any source.",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "title": "Enabled",
+                    "description": "Whether or not to enable stateful ingest. Default: True if a pipeline_name is set and either a datahub-rest sink or `datahub_api` is specified, otherwise False",
+                    "default": false,
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PlatformDetail": {
+            "title": "PlatformDetail",
+            "type": "object",
+            "properties": {
+                "platform_instance": {
+                    "title": "Platform Instance",
+                    "description": "The instance of the platform that all assets produced by this recipe belong to",
+                    "type": "string"
+                },
+                "env": {
+                    "title": "Env",
+                    "description": "The environment that all assets produced by DataHub platform ingestion source belong to",
+                    "default": "PROD",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
         "LookerNamingPattern": {
             "title": "LookerNamingPattern",
             "type": "object",
@@ -15769,20 +15898,6 @@
             ],
             "additionalProperties": false
         },
-        "StatefulIngestionConfig": {
-            "title": "StatefulIngestionConfig",
-            "description": "Basic Stateful Ingestion Specific Configuration for any source.",
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not to enable stateful ingest. Default: True if a pipeline_name is set and either a datahub-rest sink or `datahub_api` is specified, otherwise False",
-                    "default": false,
-                    "type": "boolean"
-                }
-            },
-            "additionalProperties": false
-        },
         "SQLAlchemyConnectionConfig": {
             "title": "SQLAlchemyConnectionConfig",
             "type": "object",
@@ -15829,24 +15944,6 @@
                 "host_port",
                 "scheme"
             ],
-            "additionalProperties": false
-        },
-        "PlatformDetail": {
-            "title": "PlatformDetail",
-            "type": "object",
-            "properties": {
-                "platform_instance": {
-                    "title": "Platform Instance",
-                    "description": "The instance of the platform that all assets produced by this recipe belong to",
-                    "type": "string"
-                },
-                "env": {
-                    "title": "Env",
-                    "description": "The environment that all assets produced by DataHub platform ingestion source belong to",
-                    "default": "PROD",
-                    "type": "string"
-                }
-            },
             "additionalProperties": false
         },
         "BaseUsageConfig": {
@@ -16392,6 +16489,9 @@
                 },
                 {
                     "$ref": "#/definitions/oracle"
+                },
+                {
+                    "$ref": "#/definitions/sigma"
                 },
                 {
                     "$ref": "#/definitions/lookml"
