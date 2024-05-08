@@ -7993,8 +7993,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-03T08:00:00.166582+00:00",
-                        "start_time": "2024-05-02T00:00:00+00:00",
+                        "end_time": "2024-05-08T09:24:26.048295+00:00",
+                        "start_time": "2024-05-07T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -8935,8 +8935,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-03T08:00:00.660094+00:00",
-                        "start_time": "2024-05-02T00:00:00+00:00",
+                        "end_time": "2024-05-08T09:24:26.529906+00:00",
+                        "start_time": "2024-05-07T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9994,8 +9994,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-03T07:59:45.108120+00:00",
-                        "start_time": "2024-05-02T00:00:00+00:00",
+                        "end_time": "2024-05-08T09:24:10.770219+00:00",
+                        "start_time": "2024-05-07T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -10634,6 +10634,7 @@
                 },
                 "workspace": {
                     "title": "Workspace",
+                    "description": "The Mode workspace name. Find it in Settings > Workspace > Details.",
                     "type": "string"
                 },
                 "default_schema": {
@@ -10641,6 +10642,24 @@
                     "description": "Default schema to use when schema is not provided in an SQL query",
                     "default": "public",
                     "type": "string"
+                },
+                "space_pattern": {
+                    "title": "Space Pattern",
+                    "description": "Regex patterns for mode spaces to filter in ingestion (Spaces named as 'Personal' are filtered by default.) Specify regex to only match the space name. e.g. to only ingest space named analytics, use the regex 'analytics'",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [
+                            "^Personal$"
+                        ],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
                 },
                 "owner_username_instead_of_email": {
                     "title": "Owner Username Instead Of Email",
@@ -10677,7 +10696,8 @@
             },
             "required": [
                 "token",
-                "password"
+                "password",
+                "workspace"
             ],
             "additionalProperties": false
         },
