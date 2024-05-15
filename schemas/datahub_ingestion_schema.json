@@ -3728,8 +3728,8 @@
                 },
                 "enable_properties_merge": {
                     "title": "Enable Properties Merge",
-                    "description": "By default, the connector overwrites properties every time. Set this to True to enable merging of properties with what exists on the server.",
-                    "default": false,
+                    "description": "By default, the connector enables merging of properties with what exists on the server. Set this to False to enable the default connector behavior of overwriting properties on each ingestion.",
+                    "default": true,
                     "type": "boolean"
                 },
                 "simplify_nested_field_paths": {
@@ -4356,8 +4356,8 @@
                 },
                 "enable_properties_merge": {
                     "title": "Enable Properties Merge",
-                    "description": "By default, the connector overwrites properties every time. Set this to True to enable merging of properties with what exists on the server.",
-                    "default": false,
+                    "description": "By default, the connector enables merging of properties with what exists on the server. Set this to False to enable the default connector behavior of overwriting properties on each ingestion.",
+                    "default": true,
                     "type": "boolean"
                 },
                 "simplify_nested_field_paths": {
@@ -7993,8 +7993,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-09T16:25:16.671720+00:00",
-                        "start_time": "2024-05-08T00:00:00+00:00",
+                        "end_time": "2024-05-15T13:57:41.132659+00:00",
+                        "start_time": "2024-05-14T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -8935,8 +8935,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-09T16:25:17.158327+00:00",
-                        "start_time": "2024-05-08T00:00:00+00:00",
+                        "end_time": "2024-05-15T13:57:41.627213+00:00",
+                        "start_time": "2024-05-14T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9994,8 +9994,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-09T16:25:01.615288+00:00",
-                        "start_time": "2024-05-08T00:00:00+00:00",
+                        "end_time": "2024-05-15T13:57:26.293012+00:00",
+                        "start_time": "2024-05-14T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
