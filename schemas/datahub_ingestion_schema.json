@@ -946,8 +946,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-30T01:42:43.125262+00:00",
-                        "start_time": "2024-05-29T00:00:00+00:00",
+                        "end_time": "2024-06-05T10:09:48.524043+00:00",
+                        "start_time": "2024-06-04T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3662,6 +3662,12 @@
                     "title": "Email As User Identifier",
                     "description": "Format user urns as an email, if the snowflake user's email is set. If `email_domain` is provided, generates email addresses for snowflake users with unset emails, based on their username.",
                     "default": true,
+                    "type": "boolean"
+                },
+                "include_assertion_results": {
+                    "title": "Include Assertion Results",
+                    "description": "Whether to ingest assertion run results for assertions created using Datahub assertions CLI in snowflake",
+                    "default": false,
                     "type": "boolean"
                 }
             },
@@ -8336,8 +8342,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-30T01:42:42.598117+00:00",
-                        "start_time": "2024-05-29T00:00:00+00:00",
+                        "end_time": "2024-06-05T10:09:48.033070+00:00",
+                        "start_time": "2024-06-04T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9150,8 +9156,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-05-30T01:42:26.766278+00:00",
-                        "start_time": "2024-05-29T00:00:00+00:00",
+                        "end_time": "2024-06-05T10:09:32.705502+00:00",
+                        "start_time": "2024-06-04T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9556,7 +9562,8 @@
                     "description": "Common config for S3 lineage generation",
                     "default": {
                         "path_specs": [],
-                        "strip_urls": true
+                        "strip_urls": true,
+                        "ignore_non_path_spec_path": false
                     },
                     "allOf": [
                         {
@@ -10003,12 +10010,14 @@
                 },
                 "catalog": {
                     "title": "Catalog",
-                    "description": "Catalog configuration where to find Iceberg tables.  See [pyiceberg's catalog configuration details](https://py.iceberg.apache.org/configuration/).",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/IcebergCatalogConfig"
+                    "description": "Catalog configuration where to find Iceberg tables.  Only one catalog specification is supported.  The format is the same as [pyiceberg's catalog configuration](https://py.iceberg.apache.org/configuration/), where the catalog name is specified as the object name and attributes are set as key-value pairs.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
                         }
-                    ]
+                    }
                 },
                 "table_pattern": {
                     "title": "Table Pattern",
@@ -16033,6 +16042,12 @@
                     "description": "Strip filename from s3 url. It only applies if path_specs are not specified.",
                     "default": true,
                     "type": "boolean"
+                },
+                "ignore_non_path_spec_path": {
+                    "title": "Ignore Non Path Spec Path",
+                    "description": "Ignore paths that are not match in path_specs. It only applies if path_specs are specified.",
+                    "default": false,
+                    "type": "boolean"
                 }
             },
             "additionalProperties": false
@@ -16066,37 +16081,6 @@
             "required": [
                 "hmac_access_id",
                 "hmac_access_secret"
-            ],
-            "additionalProperties": false
-        },
-        "IcebergCatalogConfig": {
-            "title": "IcebergCatalogConfig",
-            "description": "Iceberg catalog config.\n\nhttps://py.iceberg.apache.org/configuration/",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "title": "Name",
-                    "description": "Name of catalog",
-                    "default": "default",
-                    "type": "string"
-                },
-                "type": {
-                    "title": "Type",
-                    "description": "Type of catalog.  See [PyIceberg](https://py.iceberg.apache.org/configuration/) for list of possible values.",
-                    "type": "string"
-                },
-                "config": {
-                    "title": "Config",
-                    "description": "Catalog specific configuration.  See [PyIceberg documentation](https://py.iceberg.apache.org/configuration/) for details.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "type",
-                "config"
             ],
             "additionalProperties": false
         },
