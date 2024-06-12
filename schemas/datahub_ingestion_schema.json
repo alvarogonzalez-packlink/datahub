@@ -946,8 +946,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-10T09:59:33.613930+00:00",
-                        "start_time": "2024-06-09T00:00:00+00:00",
+                        "end_time": "2024-06-12T07:02:59.712123+00:00",
+                        "start_time": "2024-06-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -8342,8 +8342,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-10T09:59:33.124841+00:00",
-                        "start_time": "2024-06-09T00:00:00+00:00",
+                        "end_time": "2024-06-12T07:02:59.227856+00:00",
+                        "start_time": "2024-06-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9156,8 +9156,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-10T09:59:18.462022+00:00",
-                        "start_time": "2024-06-09T00:00:00+00:00",
+                        "end_time": "2024-06-12T07:02:44.465073+00:00",
+                        "start_time": "2024-06-11T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -13611,6 +13611,12 @@
                     "additionalProperties": {
                         "$ref": "#/definitions/PlatformDetail"
                     }
+                },
+                "history_sync_lookback_period": {
+                    "title": "History Sync Lookback Period",
+                    "description": "The number of days to look back when extracting connectors' sync history.",
+                    "default": 7,
+                    "type": "integer"
                 }
             },
             "required": [
