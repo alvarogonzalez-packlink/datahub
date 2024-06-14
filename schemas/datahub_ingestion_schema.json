@@ -946,8 +946,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-12T13:02:04.884564+00:00",
-                        "start_time": "2024-06-11T00:00:00+00:00",
+                        "end_time": "2024-06-14T11:33:52.274814+00:00",
+                        "start_time": "2024-06-13T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -3276,7 +3276,7 @@
                 },
                 "email_domain": {
                     "title": "Email Domain",
-                    "description": "Email domain of your organisation so users can be displayed on UI appropriately.",
+                    "description": "Email domain of your organization so users can be displayed on UI appropriately.",
                     "type": "string"
                 },
                 "apply_view_usage_to_tables": {
@@ -8342,8 +8342,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-12T13:02:04.385374+00:00",
-                        "start_time": "2024-06-11T00:00:00+00:00",
+                        "end_time": "2024-06-14T11:33:51.826440+00:00",
+                        "start_time": "2024-06-13T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9156,8 +9156,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-12T13:01:48.980665+00:00",
-                        "start_time": "2024-06-11T00:00:00+00:00",
+                        "end_time": "2024-06-14T11:33:37.945974+00:00",
+                        "start_time": "2024-06-13T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9333,6 +9333,12 @@
                     "title": "Enable Legacy Sharded Table Support",
                     "description": "Use the legacy sharded table urn suffix added.",
                     "default": true,
+                    "type": "boolean"
+                },
+                "extract_policy_tags_from_catalog": {
+                    "title": "Extract Policy Tags From Catalog",
+                    "description": "This flag enables the extraction of policy tags from the Google Data Catalog API. When enabled, the extractor will fetch policy tags associated with BigQuery table columns. For more information about policy tags and column-level security, refer to the documentation: https://cloud.google.com/bigquery/docs/column-level-security-intro",
+                    "default": false,
                     "type": "boolean"
                 },
                 "scheme": {
