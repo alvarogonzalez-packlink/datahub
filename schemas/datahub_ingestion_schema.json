@@ -946,8 +946,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-14T13:27:34.024466+00:00",
-                        "start_time": "2024-06-13T00:00:00+00:00",
+                        "end_time": "2024-06-17T13:12:27.611081+00:00",
+                        "start_time": "2024-06-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -8237,7 +8237,13 @@
                     "type": "string"
                 },
                 "stateful_ingestion": {
-                    "$ref": "#/definitions/StatefulStaleMetadataRemovalConfig"
+                    "title": "Stateful Ingestion",
+                    "description": "Sigma Stateful Ingestion Config.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/StatefulStaleMetadataRemovalConfig"
+                        }
+                    ]
                 },
                 "api_url": {
                     "title": "Api Url",
@@ -8257,7 +8263,7 @@
                 },
                 "workspace_pattern": {
                     "title": "Workspace Pattern",
-                    "description": "Regex patterns to filter Sigma workspaces in ingestion.Mention 'User Folder' if entities of 'My documents' need to ingest.",
+                    "description": "Regex patterns to filter Sigma workspaces in ingestion.Mention 'My documents' if personal entities also need to ingest.",
                     "default": {
                         "allow": [
                             ".*"
@@ -8273,9 +8279,37 @@
                 },
                 "ingest_owner": {
                     "title": "Ingest Owner",
-                    "description": "Ingest Owner from source. This will override Owner info entered from UI",
+                    "description": "Ingest Owner from source. This will override Owner info entered from UI.",
                     "default": true,
                     "type": "boolean"
+                },
+                "ingest_shared_entities": {
+                    "title": "Ingest Shared Entities",
+                    "description": "Whether to ingest the shared entities or not.",
+                    "default": false,
+                    "type": "boolean"
+                },
+                "extract_lineage": {
+                    "title": "Extract Lineage",
+                    "description": "Whether to extract lineage of workbook's elements and datasets or not.",
+                    "default": true,
+                    "type": "boolean"
+                },
+                "workbook_lineage_pattern": {
+                    "title": "Workbook Lineage Pattern",
+                    "description": "Regex patterns to filter workbook's elements and datasets lineage in ingestion.Requires extract_lineage to be enabled.",
+                    "default": {
+                        "allow": [
+                            ".*"
+                        ],
+                        "deny": [],
+                        "ignoreCase": true
+                    },
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
                 },
                 "chart_sources_platform_mapping": {
                     "title": "Chart Sources Platform Mapping",
@@ -8342,8 +8376,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-14T13:27:33.504218+00:00",
-                        "start_time": "2024-06-13T00:00:00+00:00",
+                        "end_time": "2024-06-17T13:12:27.109375+00:00",
+                        "start_time": "2024-06-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9156,8 +9190,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-14T13:27:17.600590+00:00",
-                        "start_time": "2024-06-13T00:00:00+00:00",
+                        "end_time": "2024-06-17T13:12:11.194996+00:00",
+                        "start_time": "2024-06-16T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9189,6 +9223,19 @@
                 "capture_table_label_as_tag": {
                     "title": "Capture Table Label As Tag",
                     "description": "Capture BigQuery table labels as DataHub tag",
+                    "default": false,
+                    "anyOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "$ref": "#/definitions/AllowDenyPattern"
+                        }
+                    ]
+                },
+                "capture_view_label_as_tag": {
+                    "title": "Capture View Label As Tag",
+                    "description": "Capture BigQuery view labels as DataHub tag",
                     "default": false,
                     "anyOf": [
                         {
