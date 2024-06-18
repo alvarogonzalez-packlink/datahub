@@ -946,8 +946,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-17T13:12:27.611081+00:00",
-                        "start_time": "2024-06-16T00:00:00+00:00",
+                        "end_time": "2024-06-18T08:05:53.283636+00:00",
+                        "start_time": "2024-06-17T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -8376,8 +8376,8 @@
                     "description": "The usage config to use when generating usage statistics",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-17T13:12:27.109375+00:00",
-                        "start_time": "2024-06-16T00:00:00+00:00",
+                        "end_time": "2024-06-18T08:05:52.796506+00:00",
+                        "start_time": "2024-06-17T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9190,8 +9190,8 @@
                     "description": "Usage related configs",
                     "default": {
                         "bucket_duration": "DAY",
-                        "end_time": "2024-06-17T13:12:11.194996+00:00",
-                        "start_time": "2024-06-16T00:00:00+00:00",
+                        "end_time": "2024-06-18T08:05:38.088931+00:00",
+                        "start_time": "2024-06-17T00:00:00+00:00",
                         "queries_character_limit": 24000,
                         "top_n_queries": 10,
                         "user_email_pattern": {
@@ -9326,6 +9326,12 @@
                     "description": "Number of partitioned table queried in batch when getting metadata. This is a low level config property which should be touched with care. This restriction is needed because we query partitions system view which throws error if we try to touch too many tables.",
                     "default": 200,
                     "type": "integer"
+                },
+                "use_tables_list_query_v2": {
+                    "title": "Use Tables List Query V2",
+                    "description": "List tables using an improved query that extracts partitions and last modified timestamps more accurately. Requires the ability to read table data. Automatically enabled when profiling is enabled.",
+                    "default": false,
+                    "type": "boolean"
                 },
                 "column_limit": {
                     "title": "Column Limit",
